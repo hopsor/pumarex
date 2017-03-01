@@ -53,6 +53,12 @@ exports.config = {
       elmFolder: "elm",
       mainModules: ["Main.elm"],
       outputFolder: "../js"
+    },
+    sass:{
+      mode: 'native',
+      options: {
+        includePaths: ['node_modules'],
+      }      
     }
   },
 
