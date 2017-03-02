@@ -9,7 +9,7 @@ main =
   , nav []
     [ ul []
       [ li [] [ text "Movies" ]
-      , li [] [ text "Rooms" ]
+      , li [ class "current" ] [ text "Rooms" ]
       , li [] [ text "Screenings" ]
       , li [] [ text "Box Office" ]
       ]

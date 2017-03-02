@@ -1,3 +1,51 @@
 // - - - - - - - - - - - - - - - - - - -
 // - - layout
 // global layout classes - height, width, padding, margin, etc.
+
+html,
+body,
+#app,
+.wrapper {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+nav{
+  background: $sidebarBackground;
+  flex: 0 150px;
+  color: $navbarTextColor;
+
+  ul{
+    margin: 0;
+    padding: 0;
+
+    li{
+      text-align: center;
+      list-style-type: none;
+      color: white;
+      padding: 50px 0;
+      font-weight: bold;
+      border-bottom: 1px solid $navbarBorderColor;
+      &:hover{
+        background-color: lighten($sidebarBackground, 3%);
+      }
+      &.current{
+        background-color: $globalBackground;
+        color: $sidebarBackground;
+        border-left: 6px solid $orange;
+        border-bottom: 0px;
+      }
+    }
+  }
+}
+
+main{
+  flex: 1;
+  background: $globalBackground;
+}
