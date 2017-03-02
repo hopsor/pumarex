@@ -1,33 +1,32 @@
 module Main exposing (..)
 
-import Html exposing (div, header, h1, nav, main_, ul, li, text)
-import Html.Attributes exposing (..)
+import Navigation
+import View exposing (view)
+import Model exposing (..)
+import Update exposing (..)
+import Types exposing (Msg(..))
+import Routing exposing (..)
 
+
+init : Navigation.Location -> ( Model, Cmd Msg )
+init location =
+    let
+        currentRoute =
+            Routing.parseLocation location
+    in
+      (initialModel currentRoute, Cmd.none)
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
+
+
+main : Program Never Model Msg
 main =
-  div [ class "wrapper" ]
-  [ header [] [ h1 [] [ text "Pumarex"] ]
-  , div [ class "subwrapper" ]
-    [ nav []
-      [ ul []
-        [ li []
-          [ div [ class "icon icon-video" ] []
-          , text "Movies"
-          ]
-        , li [ class "current" ]
-          [ div [ class "icon icon-layout" ] []
-          , text "Rooms"
-          ]
-        , li []
-          [ div [ class "icon icon-calendar" ] []
-          , text "Screenings"
-          ]
-        , li []
-          [ div [ class "icon icon-ticket" ] []
-          , text "Box Office"
-          ]
-        ]
-      ]
-    , main_ []
-      [ text "It works" ]
-    ]
-  ]
+    Navigation.program OnLocationChange
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
