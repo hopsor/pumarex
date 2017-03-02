@@ -9,10 +9,22 @@ main =
   , div [ class "subwrapper" ]
     [ nav []
       [ ul []
-        [ li [] [ text "Movies" ]
-        , li [ class "current" ] [ text "Rooms" ]
-        , li [] [ text "Screenings" ]
-        , li [] [ text "Box Office" ]
+        [ li []
+          [ div [ class "icon icon-video" ] []
+          , text "Movies"
+          ]
+        , li [ class "current" ]
+          [ div [ class "icon icon-layout" ] []
+          , text "Rooms"
+          ]
+        , li []
+          [ div [ class "icon icon-calendar" ] []
+          , text "Screenings"
+          ]
+        , li []
+          [ div [ class "icon icon-ticket" ] []
+          , text "Box Office"
+          ]
         ]
       ]
     , main_ []

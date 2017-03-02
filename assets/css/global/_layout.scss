@@ -46,14 +46,20 @@ nav{
       padding: 50px 0;
       font-weight: bold;
       border-bottom: 1px solid $navbarBorderColor;
+
       &:hover{
         background-color: lighten($sidebarBackground, 3%);
       }
+
       &.current{
         background-color: $globalBackground;
         color: $sidebarBackground;
         border-left: 6px solid $orange;
         border-bottom: 0px;
+      }
+
+      .icon{
+        font-size: 30px;
       }
     }
   }
