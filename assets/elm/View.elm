@@ -6,42 +6,22 @@ import Html.Events exposing (..)
 import Model exposing (..)
 import Messages exposing (..)
 import Routing exposing (toPath, Route(..))
+import SideNav.View exposing (sideNavView)
 import Home.View exposing (homeView)
 import MovieList.View exposing (indexView)
 import Navigation
 
-view model =
-  let
-    moviesNavClass = classList [("current", model.route == Routing.MoviesRoute)]
 
-  in
+view model =
     div [ class "wrapper" ]
-    [ header [] [ h1 [] [ text "Pumarex"] ]
-    , div [ class "subwrapper" ]
-      [ nav []
-        [ ul []
-          [ li [ moviesNavClass ]
-            [ div [ class "icon icon-video" ] []
-            , text "Movies"
+        [ header [] [ h1 [] [ text "Pumarex" ] ]
+        , div [ class "subwrapper" ]
+            [ sideNavView model
+            , main_ []
+                [ page model ]
             ]
-          , li []
-            [ div [ class "icon icon-layout" ] []
-            , text "Rooms"
-            ]
-          , li []
-            [ div [ class "icon icon-calendar" ] []
-            , text "Screenings"
-            ]
-          , li []
-            [ div [ class "icon icon-ticket" ] []
-            , text "Box Office"
-            ]
-          ]
         ]
-      , main_ []
-        [ page model ]
-      ]
-    ]
+
 
 page : Model -> Html Msg
 page model =
