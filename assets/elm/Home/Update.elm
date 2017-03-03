@@ -1,6 +1,6 @@
 module Home.Update exposing (..)
 
-import Home.Types exposing (..)
+import Home.Messages exposing (..)
 import Model exposing (..)
 import Navigation
 

@@ -1,6 +1,6 @@
 module Home.View exposing (..)
 
-import Home.Types exposing (..)
+import Home.Messages exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model exposing (..)

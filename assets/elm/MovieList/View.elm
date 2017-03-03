@@ -1,6 +1,6 @@
 module MovieList.View exposing (..)
 
-import MovieList.Types exposing (..)
+import MovieList.Messages exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model exposing (..)

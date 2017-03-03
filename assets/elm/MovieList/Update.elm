@@ -1,6 +1,6 @@
 module MovieList.Update exposing (..)
 
-import MovieList.Types exposing (..)
+import MovieList.Messages exposing (..)
 import Model exposing (..)
 import Navigation
 import Routing exposing (toPath, Route(..))

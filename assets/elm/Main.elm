@@ -4,7 +4,7 @@ import Navigation
 import View exposing (view)
 import Model exposing (..)
 import Update exposing (..)
-import Types exposing (Msg(..))
+import Messages exposing (Msg(..))
 import Routing exposing (..)
 
 
