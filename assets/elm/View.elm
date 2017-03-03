@@ -2,11 +2,13 @@ module View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Model exposing (..)
 import Types exposing (..)
 import Routing exposing (Route(..))
 import Home.View exposing (homeView)
 import MovieList.View exposing (indexView)
+import MovieList.Types exposing (Msg(..))
 
 view model =
   let
@@ -18,7 +20,7 @@ view model =
     , div [ class "subwrapper" ]
       [ nav []
         [ ul []
-          [ li [ moviesNavClass ]
+          [ li [ moviesNavClass onClick ShowMovies ]
             [ div [ class "icon icon-video" ] []
             , text "Movies"
             ]

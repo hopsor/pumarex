@@ -10,6 +10,19 @@ type Route
     | NotFoundRoute
 
 
+toPath : Route -> String
+toPath route =
+    case route of
+        RootRoute ->
+            "/"
+
+        MoviesRoute ->
+            "/movies"
+
+        NotFoundRoute ->
+            "/not-found"
+
+
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
