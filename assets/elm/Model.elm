@@ -3,9 +3,9 @@ module Model exposing (..)
 import Routing exposing (Route)
 
 type alias Model =
-  { movieList : MovieList
-  , route : Route
-  }
+    { movieList : MovieList
+    , route : Route
+    }
 
 
 type alias MovieList =
@@ -15,11 +15,17 @@ type alias MovieList =
     , total_pages : Int
     }
 
+
 type alias Movie =
-  { id : Int
-  , title : String
-  , year : Int
-  }
+    { id : Int
+    , title : String
+    , year : Int
+    , duration : Int
+    , director : String
+    , cast : String
+    , overview : String
+    , poster : String
+    }
 
 
 initialMovieList : MovieList
@@ -29,6 +35,7 @@ initialMovieList =
     , total_entries = 0
     , total_pages = 0
     }
+
 
 initialModel : Routing.Route -> Model
 initialModel route =
