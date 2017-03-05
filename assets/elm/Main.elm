@@ -14,7 +14,7 @@ init location =
         currentRoute =
             Routing.parseLocation location
     in
-      (initialModel currentRoute, Cmd.none)
+        urlUpdate currentRoute (initialModel currentRoute)
 
 
 subscriptions : Model -> Sub Msg
