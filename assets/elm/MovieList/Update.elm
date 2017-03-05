@@ -11,3 +11,9 @@ update msg model =
     case msg of
         NoOp ->
             model ! []
+
+        FetchMovies (Ok response) ->
+            { model | movieList = Success response } ! []
+
+        FetchMovies (Err error) ->
+            { model | movieList = Failure "Something went wrong..." } ! []

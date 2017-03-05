@@ -2,8 +2,16 @@ module Model exposing (..)
 
 import Routing exposing (Route)
 
+
+type RemoteData e a
+    = NotRequested
+    | Requesting
+    | Failure e
+    | Success a
+
+
 type alias Model =
-    { movieList : MovieList
+    { movieList : RemoteData String MovieList
     , route : Route
     }
 
@@ -28,17 +36,8 @@ type alias Movie =
     }
 
 
-initialMovieList : MovieList
-initialMovieList =
-    { entries = []
-    , page_number = 1
-    , total_entries = 0
-    , total_pages = 0
-    }
-
-
 initialModel : Routing.Route -> Model
 initialModel route =
-    { movieList = initialMovieList
+    { movieList = NotRequested
     , route = route
     }

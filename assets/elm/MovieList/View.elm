@@ -10,17 +10,33 @@ indexView : Model -> Html Msg
 indexView model =
     div [ id "movie_list" ]
         [ h1 [] [ text "Movie List" ]
-        , movieList model
+        , contentView model
         ]
 
 
-movieList : Model -> Html Msg
-movieList model =
-    if List.isEmpty model.movieList.entries then
+contentView : Model -> Html Msg
+contentView model =
+    case model.movieList of
+        NotRequested ->
+            p [] [ text "Movies not loaded" ]
+
+        Requesting ->
+            div [ class "loading" ] [ text "Loading ..." ]
+
+        Failure error ->
+            div [ class "error" ] [ text error ]
+
+        Success result ->
+            movieList result
+
+
+movieList : MovieList -> Html Msg
+movieList resultset =
+    if List.isEmpty resultset.entries then
         p [] [ text "There isn't any movie" ]
     else
         ul []
-            (List.map movieItem model.movieList.entries)
+            (List.map movieItem resultset.entries)
 
 
 movieItem : Movie -> Html Msg
