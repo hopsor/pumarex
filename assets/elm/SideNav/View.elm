@@ -2,9 +2,12 @@ module SideNav.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Messages exposing (..)
+import Html.Events exposing (..)
+import SideNav.Messages exposing (..)
 import Routing exposing (toPath, Route(..))
 import Model exposing (..)
+import Navigation
+import Routing exposing (toPath, Route(..))
 
 
 sideNavView : Model -> Html Msg
@@ -15,7 +18,7 @@ sideNavView model =
     in
         nav []
             [ ul []
-                [ li [ moviesNavClass ]
+                [ li [ moviesNavClass, onClick GoToMovies ]
                     [ div [ class "icon icon-video" ] []
                     , text "Movies"
                     ]

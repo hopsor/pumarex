@@ -4,6 +4,7 @@ import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Routing exposing (parseLocation)
 import Home.Update
+import SideNav.Update
 import MovieList.Update
 
 
@@ -24,6 +25,15 @@ update msg model =
             in
                 ( newModel
                 , Cmd.map HomeMsg cmd
+                )
+
+        SideNavMsg subMsg ->
+            let
+                ( newModel, cmd ) =
+                    SideNav.Update.update subMsg model
+            in
+                ( newModel
+                , Cmd.map SideNavMsg cmd
                 )
 
         MovieListMsg subMsg ->

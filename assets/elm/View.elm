@@ -16,11 +16,16 @@ view model =
     div [ class "wrapper" ]
         [ header [] [ h1 [] [ text "Pumarex" ] ]
         , div [ class "subwrapper" ]
-            [ sideNavView model
+            [ sideNav model
             , main_ []
                 [ page model ]
             ]
         ]
+
+
+sideNav : Model -> Html Msg
+sideNav model =
+    Html.map SideNavMsg <| sideNavView model
 
 
 page : Model -> Html Msg

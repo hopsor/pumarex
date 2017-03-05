@@ -1,6 +1,6 @@
-module MovieList.Update exposing (..)
+module SideNav.Update exposing (..)
 
-import MovieList.Messages exposing (..)
+import SideNav.Messages exposing (..)
 import Model exposing (..)
 import Navigation
 import Routing exposing (toPath, Route(..))
@@ -11,3 +11,6 @@ update msg model =
     case msg of
         NoOp ->
             model ! []
+
+        GoToMovies ->
+            model ! [ Navigation.newUrl (toPath MoviesRoute) ]
