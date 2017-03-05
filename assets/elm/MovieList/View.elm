@@ -9,9 +9,7 @@ import Model exposing (..)
 indexView : Model -> Html Msg
 indexView model =
     div [ id "movie_list" ]
-        [ h1 [] [ text "Movie List" ]
-        , contentView model
-        ]
+        [ contentView model ]
 
 
 contentView : Model -> Html Msg
@@ -41,5 +39,13 @@ movieList resultset =
 
 movieItem : Movie -> Html Msg
 movieItem movie =
-    li []
-        [ text movie.title ]
+    let
+        posterStyle =
+            style [ ( "backgroundImage", "url(" ++ movie.poster ++ ")" ) ]
+    in
+        li [ class "movie-item" ]
+            [ a [ href "#" ]
+                [ div [ class "poster", posterStyle ] []
+                , span [] [ text movie.title ]
+                ]
+            ]

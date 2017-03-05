@@ -47,7 +47,7 @@ nav{
       font-weight: bold;
       border-bottom: 1px solid $sidebarBorderColor;
       cursor: pointer;
-      
+
       &:hover{
         background-color: lighten($sidebarBackground, 3%);
       }
@@ -70,4 +70,5 @@ main{
   flex: 1;
   background: $globalBackground;
   padding: 50px;
+  overflow: scroll;
 }

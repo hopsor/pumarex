@@ -1,0 +1,27 @@
+#movie_list{
+  ul{
+    padding: 0;
+    margin: 0;
+
+    .movie-item{
+      list-style-type: none;
+      display: inline-block;
+      margin: 0 15px 30px;
+
+      .poster {
+        width: 150px;
+        height: 225px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 5px;
+      }
+
+      span{
+        display: block;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+    }
+  }
+}
