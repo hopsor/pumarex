@@ -3,7 +3,12 @@ defmodule Pumarex.Web.MovieView do
   alias Pumarex.Web.MovieView
 
   def render("index.json", %{movies: movies}) do
-    %{data: render_many(movies, MovieView, "movie.json")}
+    %{
+      entries: render_many(movies, MovieView, "movie.json"),
+      total_entries: length(movies),
+      total_pages: 1,
+      page_number: 1
+    }
   end
 
   def render("show.json", %{movie: movie}) do
