@@ -8,7 +8,8 @@ import Messages exposing (..)
 import Routing exposing (toPath, Route(..))
 import SideNav.View exposing (sideNavView)
 import Home.View exposing (homeView)
-import MovieList.View exposing (indexView)
+import MovieList.View
+import RoomList.View
 import Navigation
 
 
@@ -35,7 +36,10 @@ page model =
             Html.map HomeMsg <| homeView model
 
         MoviesRoute ->
-            Html.map MovieListMsg <| indexView model
+            Html.map MovieListMsg <| MovieList.View.indexView model
+
+        RoomsRoute ->
+            Html.map RoomListMsg <| RoomList.View.indexView model
 
         NotFoundRoute ->
             notFoundView

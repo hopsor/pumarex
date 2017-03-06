@@ -6,6 +6,7 @@ import Routing exposing (parseLocation, Route(..))
 import Home.Update
 import SideNav.Update
 import MovieList.Update
+import RoomList.Update
 import MovieList.Commands exposing (fetchMovies)
 
 
@@ -44,6 +45,15 @@ update msg model =
             in
                 ( newModel
                 , Cmd.map MovieListMsg cmd
+                )
+
+        RoomListMsg subMsg ->
+            let
+                ( newModel, cmd ) =
+                    RoomList.Update.update subMsg model
+            in
+                ( newModel
+                , Cmd.map RoomListMsg cmd
                 )
 
 

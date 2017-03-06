@@ -15,6 +15,9 @@ sideNavView model =
     let
         moviesNavClass =
             classList [ ( "current", model.route == Routing.MoviesRoute ) ]
+
+        roomsNavClass =
+            classList [ ( "current", model.route == Routing.RoomsRoute ) ]
     in
         nav []
             [ ul []
@@ -22,7 +25,7 @@ sideNavView model =
                     [ div [ class "icon icon-video" ] []
                     , text "Movies"
                     ]
-                , li []
+                , li [ roomsNavClass, onClick GoToRooms ]
                     [ div [ class "icon icon-layout" ] []
                     , text "Rooms"
                     ]

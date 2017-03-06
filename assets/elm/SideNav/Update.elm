@@ -14,3 +14,6 @@ update msg model =
 
         GoToMovies ->
             model ! [ Navigation.newUrl (toPath MoviesRoute) ]
+
+        GoToRooms ->
+            model ! [ Navigation.newUrl (toPath RoomsRoute) ]
