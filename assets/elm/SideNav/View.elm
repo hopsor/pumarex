@@ -13,8 +13,11 @@ import Routing exposing (toPath, Route(..))
 sideNavView : Model -> Html Msg
 sideNavView model =
     let
+        isMovieRoute =
+            (model.route == Routing.MoviesRoute || model.route == Routing.NewMovieRoute)
+
         moviesNavClass =
-            classList [ ( "current", model.route == Routing.MoviesRoute ) ]
+            classList [ ( "current", isMovieRoute ) ]
 
         roomsNavClass =
             classList [ ( "current", model.route == Routing.RoomsRoute ) ]

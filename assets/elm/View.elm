@@ -8,6 +8,7 @@ import Messages exposing (..)
 import Routing exposing (toPath, Route(..))
 import SideNav.View exposing (sideNavView)
 import Home.View exposing (homeView)
+import MovieForm.View
 import MovieList.View
 import RoomList.View
 import Navigation
@@ -34,6 +35,9 @@ page model =
     case model.route of
         RootRoute ->
             Html.map HomeMsg <| homeView model
+
+        NewMovieRoute ->
+            Html.map MovieFormMsg <| MovieForm.View.formView model
 
         MoviesRoute ->
             Html.map MovieListMsg <| MovieList.View.indexView model
