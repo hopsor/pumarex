@@ -17,3 +17,6 @@ update msg model =
 
         FetchMovies (Err error) ->
             { model | movieList = Failure "Something went wrong..." } ! []
+
+        GoToNewMovie ->
+            model ! [ Navigation.newUrl (toPath NewMovieRoute) ]

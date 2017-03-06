@@ -3,6 +3,7 @@ module MovieList.View exposing (..)
 import MovieList.Messages exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Model exposing (..)
 
 
@@ -30,11 +31,8 @@ contentView model =
 
 movieList : MovieList -> Html Msg
 movieList resultset =
-    if List.isEmpty resultset.entries then
-        p [] [ text "There isn't any movie" ]
-    else
-        ul []
-            (List.map movieItem resultset.entries)
+    ul []
+        ((List.map movieItem resultset.entries) ++ [ addItemButton ])
 
 
 movieItem : Movie -> Html Msg
@@ -49,3 +47,11 @@ movieItem movie =
                 , span [] [ text movie.title ]
                 ]
             ]
+
+
+addItemButton : Html Msg
+addItemButton =
+    li [ class "add-movie-item" ]
+        [ button [ onClick GoToNewMovie ]
+            [ span [] [ text "Add new movie" ] ]
+        ]

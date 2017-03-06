@@ -7,3 +7,4 @@ import Model exposing (MovieList)
 type Msg
     = NoOp
     | FetchMovies (Result Http.Error MovieList)
+    | GoToNewMovie

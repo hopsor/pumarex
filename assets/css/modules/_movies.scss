@@ -3,11 +3,14 @@
     padding: 0;
     margin: 0;
 
-    .movie-item{
+    .movie-item, .add-movie-item{
       list-style-type: none;
       display: inline-block;
       margin: 0 15px 30px;
+      vertical-align: top;
+    }
 
+    .movie-item{
       .poster {
         width: 150px;
         height: 225px;
@@ -21,6 +24,34 @@
         display: block;
         margin-top: 10px;
         font-size: 14px;
+      }
+    }
+
+    .add-movie-item{
+      button{
+        display: table;
+        width: 150px;
+        height: 225px;
+        border-radius: 5px;
+        background: darken($globalBackground, 5%);
+        border: 2px solid darken($globalBackground, 10%);
+        box-sizing: border-box;
+        position: relative;
+        text-align: center;
+        color: darken($globalBackground, 20%);
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+
+        &:hover{
+          background: darken($globalBackground, 8%);
+        }
+
+        span{
+          display: table-cell;
+          vertical-align: middle;
+        }
       }
     }
   }
