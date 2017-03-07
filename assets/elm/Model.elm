@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Routing exposing (Route)
+import Dict exposing (Dict)
 
 
 type RemoteData e a
@@ -12,6 +13,7 @@ type RemoteData e a
 
 type alias Model =
     { movieList : RemoteData String MovieList
+    , movieForm : Dict String String
     , route : Route
     }
 
@@ -39,5 +41,6 @@ type alias Movie =
 initialModel : Routing.Route -> Model
 initialModel route =
     { movieList = NotRequested
+    , movieForm = Dict.empty
     , route = route
     }
