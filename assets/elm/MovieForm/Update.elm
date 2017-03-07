@@ -18,5 +18,11 @@ update msg model =
             in
                 { model | movieForm = updatedMovieForm } ! []
 
+        MovieCreated (Ok response) ->
+            model ! []
+
+        MovieCreated (Err error) ->
+            model ! []
+
         Save ->
             model ! []
