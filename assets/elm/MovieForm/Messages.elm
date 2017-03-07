@@ -3,4 +3,5 @@ module MovieForm.Messages exposing (..)
 
 type Msg
     = NoOp
-    | FieldChange String String 
+    | FieldChange String String
+    | Save

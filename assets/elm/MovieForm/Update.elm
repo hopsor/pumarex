@@ -10,8 +10,13 @@ update msg model =
     case msg of
         NoOp ->
             model ! []
+
         FieldChange field value ->
             let
-              updatedMovieForm = Dict.insert field value model.movieForm
+                updatedMovieForm =
+                    Dict.insert field value model.movieForm
             in
-              { model | movieForm = updatedMovieForm } ! []
+                { model | movieForm = updatedMovieForm } ! []
+
+        Save ->
+            model ! []
