@@ -12,7 +12,6 @@ type RemoteData e a
 
 type alias Model =
     { movieList : RemoteData String MovieList
-    , movie : Movie
     , route : Route
     }
 
@@ -26,10 +25,10 @@ type alias MovieList =
 
 
 type alias Movie =
-    { id : Maybe Int
+    { id : Int
     , title : String
-    , year : Maybe Int
-    , duration : Maybe Int
+    , year : Int
+    , duration : Int
     , director : String
     , cast : String
     , overview : String
@@ -40,6 +39,5 @@ type alias Movie =
 initialModel : Routing.Route -> Model
 initialModel route =
     { movieList = NotRequested
-    , movie = Movie Nothing "" Nothing Nothing "" "" "" ""
     , route = route
     }
