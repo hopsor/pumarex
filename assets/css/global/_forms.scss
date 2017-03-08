@@ -1,0 +1,22 @@
+form{
+  fieldset{
+    border: none;
+  }
+
+  .field{
+    margin-bottom: 20px;
+
+    label{
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea{
+      border: 1px solid $formInputBorder;
+      border-radius: 5px;
+      padding: 8px 12px;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+button, .button{
+  border-radius: 5px;
+  border: none;
+  background: $orange;
+  color: white;
+  font-size: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: darken($orange, 10%);
+  }
+}

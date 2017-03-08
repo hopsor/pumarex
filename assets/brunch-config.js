@@ -52,13 +52,14 @@ exports.config = {
     elmBrunch: {
       elmFolder: "elm",
       mainModules: ["Main.elm"],
-      outputFolder: "../js"
+      outputFolder: "../js",
+      makeParameters: ['--debug']      
     },
     sass:{
       mode: 'native',
       options: {
         includePaths: ['node_modules'],
-      }      
+      }
     }
   },
 

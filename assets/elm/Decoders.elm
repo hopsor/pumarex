@@ -1,7 +1,7 @@
 module Decoders exposing (..)
 
 import Json.Decode as JD exposing (..)
-import Json.Decode.Extra exposing ((|:), optionalField)
+import Json.Decode.Extra exposing ((|:))
 import Model exposing (..)
 
 
@@ -25,10 +25,10 @@ movieDecoder : JD.Decoder Movie
 movieDecoder =
     succeed
         Movie
-        |: (optionalField "id" int)
+        |: (field "id" int)
         |: (field "title" string)
-        |: (optionalField "year" int)
-        |: (optionalField "duration" int)
+        |: (field "year" int)
+        |: (field "duration" int)
         |: (field "director" string)
         |: (field "cast" string)
         |: (field "overview" string)

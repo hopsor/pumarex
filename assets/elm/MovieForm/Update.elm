@@ -1,7 +1,11 @@
 module MovieForm.Update exposing (..)
 
 import MovieForm.Messages exposing (..)
+import MovieForm.Commands exposing (createMovie)
 import Model exposing (..)
+import Navigation
+import Routing exposing (toPath, Route(..))
+import Dict
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -10,30 +14,18 @@ update msg model =
         NoOp ->
             model ! []
 
-        Title title ->
-            --- { model | movie = { model.movie | title = title } }
+        FieldChange field value ->
+            let
+                updatedMovieForm =
+                    Dict.insert field value model.movieForm
+            in
+                { model | movieForm = updatedMovieForm } ! []
+
+        MovieCreated (Ok response) ->
+            model ! [ Navigation.newUrl (toPath MoviesRoute) ]
+
+        MovieCreated (Err error) ->
             model ! []
 
-        Year year ->
-            -- { model | movie = { movie | year = year } }
-            model ! []
-
-        Duration duration ->
-            -- { model | movie = { movie | duration = duration } }
-            model ! []
-
-        Director director ->
-            -- { model | movie = { movie | director = director } }
-            model ! []
-
-        Cast cast ->
-            -- { model | movie = { movie | cast = cast } }
-            model ! []
-
-        Overview overview ->
-            -- { model | movie = { movie | overview = overview } }
-            model ! []
-
-        Poster poster ->
-            -- { model | movie = { movie | poster = poster } }
-            model ! []
+        Save ->
+            model ! [ createMovie model.movieForm ]
