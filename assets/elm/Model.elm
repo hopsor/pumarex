@@ -13,7 +13,7 @@ type RemoteData e a
 
 type alias Model =
     { movieList : RemoteData String MovieList
-    , movieForm : Dict String String
+    , movieForm : MovieForm
     , route : Route
     }
 
@@ -36,6 +36,9 @@ type alias Movie =
     , overview : String
     , poster : String
     }
+
+type alias MovieForm =
+  Dict String String
 
 
 initialModel : Routing.Route -> Model

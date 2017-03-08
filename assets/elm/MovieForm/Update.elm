@@ -1,7 +1,10 @@
 module MovieForm.Update exposing (..)
 
 import MovieForm.Messages exposing (..)
+import MovieForm.Commands exposing (createMovie)
 import Model exposing (..)
+import Navigation
+import Routing exposing (toPath, Route(..))
 import Dict
 
 
@@ -19,10 +22,10 @@ update msg model =
                 { model | movieForm = updatedMovieForm } ! []
 
         MovieCreated (Ok response) ->
-            model ! []
+            model ! [Navigation.newUrl (toPath MoviesRoute)]
 
         MovieCreated (Err error) ->
             model ! []
 
         Save ->
-            model ! []
+            model ! [createMovie model.movieForm]

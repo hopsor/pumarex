@@ -17,7 +17,7 @@ defmodule Pumarex.Web.Router do
   scope "/api", Pumarex.Web do
     pipe_through :api
 
-    resources "/movies", MovieController, only: [:index]
+    resources "/movies", MovieController, only: [:index, :create, :show]
   end
 
   scope "/", Pumarex.Web do
