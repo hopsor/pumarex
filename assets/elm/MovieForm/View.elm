@@ -34,7 +34,7 @@ regularField : String -> String -> Html Msg
 regularField fieldName fieldType =
     div [ class "field" ]
         [ label [ for fieldName ] [ text (humanize fieldName) ]
-        , input [ type_ fieldType, class fieldName, name fieldName, onInput (FieldChange fieldName) ] []
+        , input [ type_ fieldType, class fieldName, name fieldName, required True, onInput (FieldChange fieldName) ] []
         ]
 
 
@@ -42,5 +42,5 @@ textareaField : String -> Html Msg
 textareaField fieldName =
     div [ class "field" ]
         [ label [ for fieldName ] [ text (humanize fieldName) ]
-        , textarea [ class fieldName, name fieldName, onInput (FieldChange fieldName) ] []
+        , textarea [ class fieldName, name fieldName, required True, onInput (FieldChange fieldName) ] []
         ]

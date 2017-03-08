@@ -22,10 +22,10 @@ update msg model =
                 { model | movieForm = updatedMovieForm } ! []
 
         MovieCreated (Ok response) ->
-            model ! [Navigation.newUrl (toPath MoviesRoute)]
+            model ! [ Navigation.newUrl (toPath MoviesRoute) ]
 
         MovieCreated (Err error) ->
             model ! []
 
         Save ->
-            model ! [createMovie model.movieForm]
+            model ! [ createMovie model.movieForm ]
