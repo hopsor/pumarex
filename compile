@@ -1,0 +1,13 @@
+cd assets/elm
+elm-make --yes --debug --output ../js/main.js ./Main.elm
+
+cd ..
+brunch build --production
+
+cd $phoenix_dir
+
+mix "${phoenix_ex}.digest"
+
+if mix help "${phoenix_ex}.digest.clean" 1>/dev/null 2>&1; then
+  mix "${phoenix_ex}.digest.clean"
+fi
