@@ -1,4 +1,4 @@
-cd assets/elm
+cd elm
 elm-make --yes --debug --output ../js/main.js ./Main.elm
 
 cd ..
