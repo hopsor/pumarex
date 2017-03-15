@@ -7,7 +7,7 @@
   "fs": {:hex, :fs, "0.9.2", "ed17036c26c3f70ac49781ed9220a50c36775c6ca2cf8182d123b6566e49ec59", [:rebar], []},
   "gettext": {:hex, :gettext, "0.13.1", "5e0daf4e7636d771c4c71ad5f3f53ba09a9ae5c250e1ab9c42ba9edccc476263", [:mix], []},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [:mix], []},
-  "phoenix": {:git, "https://github.com/phoenixframework/phoenix.git", "d6f9c87cb305cd4df48ef2ed79c05ab9899961c8", []},
+  "phoenix": {:git, "https://github.com/phoenixframework/phoenix.git", "24c0d68ec14bd6c186e92b8191ae9fb9c6ef5a11", []},
   "phoenix_ecto": {:hex, :phoenix_ecto, "3.2.2", "2e51c57614528b130d54019e78349f83a5b5d53b3b2ef775dbc30df7e1fecb45", [:mix], [{:ecto, "~> 2.1", [hex: :ecto, optional: false]}, {:phoenix_html, "~> 2.9", [hex: :phoenix_html, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}]},
   "phoenix_html": {:hex, :phoenix_html, "2.9.3", "1b5a2122cbf743aa242f54dced8a4f1cc778b8bd304f4b4c0043a6250c58e258", [:mix], [{:plug, "~> 1.0", [hex: :plug, optional: false]}]},
   "phoenix_live_reload": {:hex, :phoenix_live_reload, "1.0.8", "4333f9c74190f485a74866beff2f9304f069d53f047f5fbb0fb8d1ee4c495f73", [:mix], [{:fs, "~> 0.9.1", [hex: :fs, optional: false]}, {:phoenix, "~> 1.0 or ~> 1.2-rc", [hex: :phoenix, optional: false]}]},
