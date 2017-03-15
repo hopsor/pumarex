@@ -10,7 +10,9 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-Pumarex.Repo.insert_all(Pumarex.Theater.Movie, [
+alias Pumarex.{Repo, Theater}
+
+Repo.insert_all(Theater.Movie, [
   %{
     title: "Manchester by the Sea",
     year: 2016,
@@ -111,3 +113,14 @@ Pumarex.Repo.insert_all(Pumarex.Theater.Movie, [
     updated_at: Ecto.DateTime.utc
   }
 ])
+
+seats =
+  1..15
+  |> Enum.flat_map(fn (row) ->
+    Enum.map(1..15, fn (column) ->
+      %{row: row, column: column}
+    end)
+  end)
+  |> Enum.reject(fn (seat) -> seat.row == 7 end)
+
+Theater.create_room(%{name: "Room 1", seats: seats})

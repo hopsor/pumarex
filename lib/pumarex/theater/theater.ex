@@ -208,7 +208,7 @@ defmodule Pumarex.Theater do
     room
     |> cast(params, [:name])
     |> validate_required(:name)
-    |> cast_assoc(:seats, required: true)
+    |> cast_assoc(:seats, required: true, with: &seat_changeset/2)
   end
 
   alias Pumarex.Theater.Seat
