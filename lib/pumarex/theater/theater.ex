@@ -204,9 +204,112 @@ defmodule Pumarex.Theater do
     room_changeset(room, %{})
   end
 
-  defp room_changeset(%Room{} = room, attrs) do
+  defp room_changeset(%Room{} = room, params) do
     room
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(params, [:name])
+    |> validate_required(:name)
+    |> cast_assoc(:seats, required: true)
+  end
+
+  alias Pumarex.Theater.Seat
+
+  @doc """
+  Returns the list of seats.
+
+  ## Examples
+
+      iex> list_seats()
+      [%Seat{}, ...]
+
+  """
+  def list_seats do
+    Repo.all(Seat)
+  end
+
+  @doc """
+  Gets a single seat.
+
+  Raises `Ecto.NoResultsError` if the Seat does not exist.
+
+  ## Examples
+
+      iex> get_seat!(123)
+      %Seat{}
+
+      iex> get_seat!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_seat!(id), do: Repo.get!(Seat, id)
+
+  @doc """
+  Creates a seat.
+
+  ## Examples
+
+      iex> create_seat(%{field: value})
+      {:ok, %Seat{}}
+
+      iex> create_seat(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_seat(attrs \\ %{}) do
+    %Seat{}
+    |> seat_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a seat.
+
+  ## Examples
+
+      iex> update_seat(seat, %{field: new_value})
+      {:ok, %Seat{}}
+
+      iex> update_seat(seat, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_seat(%Seat{} = seat, attrs) do
+    seat
+    |> seat_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Seat.
+
+  ## Examples
+
+      iex> delete_seat(seat)
+      {:ok, %Seat{}}
+
+      iex> delete_seat(seat)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_seat(%Seat{} = seat) do
+    Repo.delete(seat)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking seat changes.
+
+  ## Examples
+
+      iex> change_seat(seat)
+      %Ecto.Changeset{source: %Seat{}}
+
+  """
+  def change_seat(%Seat{} = seat) do
+    seat_changeset(seat, %{})
+  end
+
+  defp seat_changeset(%Seat{} = seat, attrs) do
+    seat
+    |> cast(attrs, [:row, :column])
+    |> validate_required([:row, :column])
   end
 end
