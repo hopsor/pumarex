@@ -120,7 +120,11 @@ defmodule Pumarex.Theater do
 
   """
   def list_rooms do
-    Repo.all(Room)
+    Repo.all(from r in Room,
+      left_join: s in assoc(r, :seats),
+      group_by: r.id,
+      select: %{id: r.id, name: r.name, seats_count: count(s.id)}
+    )
   end
 
   @doc """
@@ -137,7 +141,7 @@ defmodule Pumarex.Theater do
       ** (Ecto.NoResultsError)
 
   """
-  def get_room!(id), do: Repo.get!(Room, id)
+  def get_room!(id), do: Repo.get!(Room, id) |> Repo.preload(:seats)
 
   @doc """
   Creates a room.
