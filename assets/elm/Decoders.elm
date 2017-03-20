@@ -1,7 +1,7 @@
 module Decoders exposing (..)
 
 import Json.Decode as JD exposing (..)
-import Json.Decode.Extra exposing ((|:))
+import Json.Decode.Extra exposing ((|:), optionalField)
 import Model exposing (..)
 
 
@@ -33,3 +33,26 @@ movieDecoder =
         |: (field "cast" string)
         |: (field "overview" string)
         |: (field "poster" string)
+
+
+roomListDecoder : JD.Decoder RoomList
+roomListDecoder =
+    list roomDecoder
+
+
+roomDecoder : JD.Decoder Room
+roomDecoder =
+    succeed
+        Room
+        |: (field "id" int)
+        |: (field "name" string)
+        |: (optionalField "seats" (list seatDecoder))
+
+
+seatDecoder : JD.Decoder Seat
+seatDecoder =
+    succeed
+        Seat
+        |: (field "id" int)
+        |: (field "row" int)
+        |: (field "column" int)

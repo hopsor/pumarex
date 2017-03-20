@@ -14,6 +14,7 @@ type RemoteData e a
 type alias Model =
     { movieList : RemoteData String MovieList
     , movieForm : MovieForm
+    , roomList : RemoteData String RoomList
     , route : Route
     }
 
@@ -37,13 +38,37 @@ type alias Movie =
     , poster : String
     }
 
+
 type alias MovieForm =
-  Dict String String
+    Dict String String
+
+
+type alias RoomList =
+    List Room
+
+
+type alias Room =
+    { id : Int
+    , name : String
+    , seats : Maybe SeatList
+    }
+
+
+type alias Seat =
+    { id : Int
+    , row : Int
+    , column : Int
+    }
+
+
+type alias SeatList =
+    List Seat
 
 
 initialModel : Routing.Route -> Model
 initialModel route =
     { movieList = NotRequested
     , movieForm = Dict.empty
+    , roomList = NotRequested
     , route = route
     }

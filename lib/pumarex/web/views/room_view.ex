@@ -3,7 +3,7 @@ defmodule Pumarex.Web.RoomView do
   alias Pumarex.Web.{RoomView, SeatView}
 
   def render("index.json", %{rooms: rooms}) do
-    %{data: render_many(rooms, RoomView, "room.json")}
+    render_many(rooms, RoomView, "room.json")
   end
 
   def render("show.json", %{room: room}) do

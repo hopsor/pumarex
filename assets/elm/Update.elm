@@ -9,6 +9,7 @@ import MovieForm.Update
 import MovieList.Update
 import RoomList.Update
 import MovieList.Commands exposing (fetchMovies)
+import RoomList.Commands exposing (fetchRooms)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -73,6 +74,11 @@ urlUpdate currentRoute model =
         MoviesRoute ->
             ( { model | route = currentRoute, movieList = Requesting }
             , Cmd.map MovieListMsg (fetchMovies)
+            )
+
+        RoomsRoute ->
+            ( { model | route = currentRoute, roomList = Requesting }
+            , Cmd.map RoomListMsg (fetchRooms)
             )
 
         _ ->

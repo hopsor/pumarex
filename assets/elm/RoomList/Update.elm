@@ -9,3 +9,9 @@ update msg model =
     case msg of
         NoOp ->
             model ! []
+
+        FetchRooms (Ok response) ->
+            { model | roomList = Success response } ! []
+
+        FetchRooms (Err error) ->
+            { model | roomList = Failure "Something went wrong" } ! []
