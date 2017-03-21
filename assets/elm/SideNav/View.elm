@@ -20,7 +20,7 @@ sideNavView model =
             classList [ ( "current", isMovieRoute ) ]
 
         roomsNavClass =
-            classList [ ( "current", model.route == Routing.RoomsRoute ) ]
+            classList [ ( "current", model.route == Routing.RoomsRoute || model.route == Routing.NewRoomRoute ) ]
     in
         nav []
             [ ul []

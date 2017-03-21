@@ -2,6 +2,8 @@ module RoomList.Update exposing (..)
 
 import RoomList.Messages exposing (..)
 import Model exposing (..)
+import Navigation
+import Routing exposing (toPath, Route(..))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -15,3 +17,6 @@ update msg model =
 
         FetchRooms (Err error) ->
             { model | roomList = Failure "Something went wrong" } ! []
+
+        GoToNewRoom ->
+            model ! [ Navigation.newUrl (toPath NewRoomRoute) ]

@@ -7,6 +7,7 @@ import Home.Update
 import SideNav.Update
 import MovieForm.Update
 import MovieList.Update
+import RoomForm.Update
 import RoomList.Update
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
@@ -56,6 +57,15 @@ update msg model =
             in
                 ( newModel
                 , Cmd.map MovieListMsg cmd
+                )
+
+        RoomFormMsg subMsg ->
+            let
+                ( newModel, cmd ) =
+                    RoomForm.Update.update subMsg model
+            in
+                ( newModel
+                , Cmd.map RoomFormMsg cmd
                 )
 
         RoomListMsg subMsg ->

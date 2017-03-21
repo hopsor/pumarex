@@ -10,6 +10,7 @@ import SideNav.View exposing (sideNavView)
 import Home.View exposing (homeView)
 import MovieForm.View
 import MovieList.View
+import RoomForm.View
 import RoomList.View
 import Navigation
 
@@ -41,6 +42,9 @@ page model =
 
         MoviesRoute ->
             Html.map MovieListMsg <| MovieList.View.indexView model
+
+        NewRoomRoute ->
+            Html.map RoomFormMsg <| RoomForm.View.formView model
 
         RoomsRoute ->
             Html.map RoomListMsg <| RoomList.View.indexView model

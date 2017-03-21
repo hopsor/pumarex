@@ -2,6 +2,7 @@ module RoomList.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import RoomList.Messages exposing (..)
 import Model exposing (..)
 
@@ -31,9 +32,17 @@ contentView model =
 roomList : RoomList -> Html Msg
 roomList resultset =
     ul []
-        ((List.map roomItem resultset))
+        ((List.map roomItem resultset) ++ [ addItemButton ])
 
 
 roomItem : Room -> Html Msg
 roomItem room =
     li [] [ text room.name ]
+
+
+addItemButton : Html Msg
+addItemButton =
+    li []
+        [ button [ onClick GoToNewRoom ]
+            [ text "New Room" ]
+        ]
