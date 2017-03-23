@@ -20,16 +20,21 @@ formView model =
         ]
 
 
-rowView : List Bool -> Html Msg
-rowView row =
+rowView : Int -> List Bool -> Html Msg
+rowView rowIndex row =
     row
-        |> List.map seatSpotView
+        |> List.map (\r -> ( rowIndex, r ))
+        |> List.indexedMap seatSpotView
         |> div [ class "row" ]
 
 
-seatSpotView : Bool -> Html Msg
-seatSpotView spot =
-    div [ class "seat-spot" ] []
+seatSpotView : Int -> ( Int, Bool ) -> Html Msg
+seatSpotView colIndex ( rowIndex, spot ) =
+    let
+        seatClass =
+            classList [ ( "seat-spot", True ), ( "has-seat", spot ) ]
+    in
+        div [ seatClass, onClick (HandleSeatSpotClick rowIndex colIndex) ] []
 
 
 matrixView : Model -> Html Msg
@@ -37,6 +42,6 @@ matrixView model =
     let
         rows =
             model.roomForm.matrix
-                |> List.map rowView
+                |> List.indexedMap rowView
     in
         div [ class "matrix" ] (rows)
