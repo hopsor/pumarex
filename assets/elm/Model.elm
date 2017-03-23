@@ -15,6 +15,7 @@ type alias Model =
     { movieList : RemoteData String MovieList
     , movieForm : MovieForm
     , roomList : RemoteData String RoomList
+    , roomForm : RoomForm
     , route : Route
     }
 
@@ -54,6 +55,13 @@ type alias Room =
     }
 
 
+type alias RoomForm =
+    { rows : Int
+    , columns : Int
+    , matrix : List (List Bool)
+    }
+
+
 type alias Seat =
     { id : Int
     , row : Int
@@ -70,5 +78,6 @@ initialModel route =
     { movieList = NotRequested
     , movieForm = Dict.empty
     , roomList = NotRequested
+    , roomForm = { rows = 0, columns = 0, matrix = [] }
     , route = route
     }
