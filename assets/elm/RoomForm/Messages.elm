@@ -6,3 +6,6 @@ type Msg
     | HandleRowsChanged String
     | HandleColumnsChanged String
     | HandleSeatSpotClick Int Int
+    | HandleFillRowButtonClick Int
+    | HandleEmptyRowButtonClick Int
+    | HandleFillRoomButtonClick

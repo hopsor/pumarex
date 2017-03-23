@@ -11,10 +11,12 @@ formView : Model -> Html Msg
 formView model =
     Html.form
         [ id "room_form" ]
-        [ div
+        [ h1 [] [ text "Room Designer" ]
+        , div
             []
             [ input [ type_ "number", value (toString model.roomForm.rows), onInput HandleRowsChanged ] []
             , input [ type_ "number", value (toString model.roomForm.columns), onInput HandleColumnsChanged ] []
+            , button [ type_ "button", onClick HandleFillRoomButtonClick ] [ text "Fill Room" ]
             ]
         , matrixView model
         ]
@@ -22,10 +24,24 @@ formView model =
 
 rowView : Int -> List Bool -> Html Msg
 rowView rowIndex row =
-    row
-        |> List.map (\r -> ( rowIndex, r ))
-        |> List.indexedMap seatSpotView
-        |> div [ class "row" ]
+    let
+        rowColumns =
+            row
+                |> List.map (\spot -> ( rowIndex, spot ))
+                |> List.indexedMap seatSpotView
+    in
+        div [ class "row" ] (rowColumns ++ rowActionsView rowIndex)
+
+
+rowActionsView : Int -> List (Html Msg)
+rowActionsView rowIndex =
+    [ button
+        [ type_ "button", onClick (HandleFillRowButtonClick rowIndex) ]
+        [ text "Fill Row" ]
+    , button
+        [ type_ "button", onClick (HandleEmptyRowButtonClick rowIndex) ]
+        [ text "Empty Row" ]
+    ]
 
 
 seatSpotView : Int -> ( Int, Bool ) -> Html Msg

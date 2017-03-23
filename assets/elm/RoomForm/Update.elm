@@ -25,7 +25,7 @@ update msg model =
                 updatedRoomForm =
                     { oldRoomForm
                         | rows = newRows
-                        , matrix = (recreateMatrix newRows oldRoomForm.columns)
+                        , matrix = (recreateMatrix newRows oldRoomForm.columns False)
                     }
             in
                 { model | roomForm = updatedRoomForm } ! []
@@ -41,7 +41,7 @@ update msg model =
                 updatedRoomForm =
                     { oldRoomForm
                         | columns = newColumns
-                        , matrix = (recreateMatrix oldRoomForm.rows newColumns)
+                        , matrix = (recreateMatrix oldRoomForm.rows newColumns False)
                     }
             in
                 { model | roomForm = updatedRoomForm } ! []
@@ -61,14 +61,50 @@ update msg model =
             in
                 { model | roomForm = updatedRoomForm } ! []
 
+        HandleFillRowButtonClick rowIndex ->
+            let
+                oldRoomForm =
+                    model.roomForm
+
+                updatedRoomForm =
+                    { oldRoomForm
+                        | matrix = (fillMatrixRow oldRoomForm.matrix oldRoomForm.columns rowIndex)
+                    }
+            in
+                { model | roomForm = updatedRoomForm } ! []
+
+        HandleEmptyRowButtonClick rowIndex ->
+            let
+                oldRoomForm =
+                    model.roomForm
+
+                updatedRoomForm =
+                    { oldRoomForm
+                        | matrix = (emptyMatrixRow oldRoomForm.matrix oldRoomForm.columns rowIndex)
+                    }
+            in
+                { model | roomForm = updatedRoomForm } ! []
+
+        HandleFillRoomButtonClick ->
+            let
+                oldRoomForm =
+                    model.roomForm
+
+                updatedRoomForm =
+                    { oldRoomForm
+                        | matrix = (recreateMatrix oldRoomForm.rows oldRoomForm.columns True)
+                    }
+            in
+                { model | roomForm = updatedRoomForm } ! []
+
 
 
 -- Consider moving `recreateMatrix` function somewhere else
 
 
-recreateMatrix : Int -> Int -> List (List Bool)
-recreateMatrix rows columns =
-    List.repeat rows (List.repeat columns False)
+recreateMatrix : Int -> Int -> Bool -> List (List Bool)
+recreateMatrix rows columns state =
+    List.repeat rows (List.repeat columns state)
 
 
 
@@ -92,3 +128,21 @@ toggleSeat matrix rowIndex colIndex =
                             updateIfIndex (\idx -> idx == colIndex) (\col -> not col) row
                     in
                         updateIfIndex (\idx -> idx == rowIndex) (\row -> updatedRow) matrix
+
+
+fillMatrixRow : List (List Bool) -> Int -> Int -> List (List Bool)
+fillMatrixRow matrix colAmount rowIndex =
+    let
+        updatedRow =
+            List.repeat colAmount True
+    in
+        updateIfIndex (\idx -> idx == rowIndex) (\row -> updatedRow) matrix
+
+
+emptyMatrixRow : List (List Bool) -> Int -> Int -> List (List Bool)
+emptyMatrixRow matrix colAmount rowIndex =
+    let
+        updatedRow =
+            List.repeat colAmount False
+    in
+        updateIfIndex (\idx -> idx == rowIndex) (\row -> updatedRow) matrix
