@@ -10,7 +10,11 @@ import Model exposing (..)
 indexView : Model -> Html Msg
 indexView model =
     div [ id "room_list" ]
-        [ contentView model ]
+        [ div
+            [ class "actions" ]
+            [ addItemButton ]
+        , contentView model
+        ]
 
 
 contentView : Model -> Html Msg
@@ -26,23 +30,30 @@ contentView model =
             div [ class "error" ] [ text error ]
 
         Success result ->
-            roomList result
+            roomTable result
 
 
-roomList : RoomList -> Html Msg
-roomList resultset =
-    ul []
-        ((List.map roomItem resultset) ++ [ addItemButton ])
+roomTable : RoomList -> Html Msg
+roomTable resultset =
+    table []
+        [ thead []
+            [ th [] [ text "Room Name" ]
+            , th [] [ text "Capacity" ]
+            ]
+        , tbody [] (List.map roomTableRow resultset)
+        ]
 
 
-roomItem : Room -> Html Msg
-roomItem room =
-    li [] [ text room.name ]
+roomTableRow : Room -> Html Msg
+roomTableRow room =
+    tr []
+        [ td [] [ text room.name ]
+        , td [] [ text (toString room.capacity) ]
+        ]
 
 
 addItemButton : Html Msg
 addItemButton =
-    li []
-        [ button [ onClick GoToNewRoom ]
-            [ text "New Room" ]
-        ]
+    button
+        [ onClick GoToNewRoom ]
+        [ text "New Room" ]

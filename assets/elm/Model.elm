@@ -52,6 +52,7 @@ type alias Room =
     { id : Int
     , name : String
     , seats : Maybe SeatList
+    , capacity : Int
     }
 
 
