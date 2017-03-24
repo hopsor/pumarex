@@ -123,7 +123,7 @@ defmodule Pumarex.Theater do
     Repo.all(from r in Room,
       left_join: s in assoc(r, :seats),
       group_by: r.id,
-      select: %{id: r.id, name: r.name, seats_count: count(s.id)}
+      select: %{id: r.id, name: r.name, capacity: count(s.id)}
     )
   end
 
