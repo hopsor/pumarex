@@ -17,18 +17,18 @@ formView model =
             [ div
                 [ class "field" ]
                 [ label [] [ text "Rows" ]
-                , input [ type_ "number", value (toString model.roomForm.rows), onInput HandleRowsChanged ] []
+                , input [ type_ "number", Html.Attributes.min "0", value (toString model.roomForm.rows), onInput HandleRowsChanged ] []
                 ]
             , div
                 [ class "field" ]
                 [ label [] [ text "Columns" ]
-                , input [ type_ "number", value (toString model.roomForm.columns), onInput HandleColumnsChanged ] []
+                , input [ type_ "number", Html.Attributes.min "0", value (toString model.roomForm.columns), onInput HandleColumnsChanged ] []
                 ]
             , div
                 [ class "field" ]
                 [ button [ type_ "button", onClick HandleFillRoomButtonClick ] [ text "Fill Room" ] ]
             ]
-        , matrixView model
+        , matrixWrapperView model
         ]
 
 
@@ -67,6 +67,16 @@ seatSpotView colIndex ( rowIndex, spot ) =
             classList [ ( "seat-spot", True ), ( "has-seat", spot ) ]
     in
         div [ seatClass, onClick (HandleSeatSpotClick rowIndex colIndex) ] []
+
+
+matrixWrapperView : Model -> Html Msg
+matrixWrapperView model =
+    if (model.roomForm.rows > 0) && (model.roomForm.columns > 0) then
+        matrixView model
+    else
+        div
+            [ class "matrix-placeholder" ]
+            [ text "Throw some rows and columns in here!" ]
 
 
 matrixView : Model -> Html Msg
