@@ -29,6 +29,7 @@ formView model =
                 [ button [ type_ "button", onClick HandleFillRoomButtonClick ] [ text "Fill Room" ] ]
             ]
         , matrixWrapperView model
+        , seatsCounterView model
         ]
 
 
@@ -105,3 +106,17 @@ matrixFooterView columnCount =
                 |> List.map (\colNumber -> div [ class "column-footer" ] [ text (toString colNumber) ])
     in
         div [ class "matrix-footer" ] (footer)
+
+
+seatsCounterView : Model -> Html Msg
+seatsCounterView model =
+    let
+        seatsCount =
+            List.concat model.roomForm.matrix
+                |> List.filter (\spot -> spot == True)
+                |> List.length
+    in
+        div []
+            [ text (toString seatsCount)
+            , text "seats"
+            ]
