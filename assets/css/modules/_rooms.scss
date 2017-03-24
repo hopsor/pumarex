@@ -1,27 +1,65 @@
+$spotSize: 35px;
+$seatSpotColor: #c56161;
+
 #room_form{
   .size-manager{
     margin-bottom: 20px;
   }
   .matrix{
+    .matrix-footer{
+      margin-left: 30px;
+
+      .column-footer{
+        text-align: center;
+        width: $spotSize;
+        height: 25px;
+        border: 1px solid transparent;
+        display: inline-block;
+        text-align: center;
+        margin: 0px 7px 7px 0px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+
     .row{
-      .seat-spot, button{
+      .row-counter, .seat-spot, button{
         vertical-align: middle;
-        margin: 0px 5px 5px 0px;
+        margin: 0px 7px 7px 0px;
+      }
+
+      .row-counter, .seat-spot{
+        display: inline-block;
+        border-width: 1px;
+      }
+
+      .row-counter{
+        font-weight: bold;
+        font-size: 18px;
+        text-align: right;
+        margin-right: 15px;
+        width: 15px;
       }
 
       .seat-spot{
-        display: inline-block;
-        border: 1px solid #ccc;
-        width: 50px;
-        height: 50px;
+        border-style: solid;
+        border-color: #ccc;
+        border-radius: 4px;
         cursor: pointer;
+        width: $spotSize;
+        height: $spotSize;
 
-        &:hover{
-          background-color: #000;
+        &:hover:not(.has-seat){
+          background-color: darken($globalBackground, 10%);
         }
 
         &.has-seat{
-          background-color: #ff0000 !important;
+          background-color: $seatSpotColor;
+          border-color: $seatSpotColor;
+
+          &:hover {
+            background-color: darken($seatSpotColor, 10%);
+          }
         }
       }
     }

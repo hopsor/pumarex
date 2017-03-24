@@ -35,12 +35,18 @@ formView model =
 rowView : Int -> List Bool -> Html Msg
 rowView rowIndex row =
     let
+        rowCounter =
+            rowCounterView (rowIndex + 1)
+
         rowColumns =
             row
                 |> List.map (\spot -> ( rowIndex, spot ))
                 |> List.indexedMap seatSpotView
+
+        fullRow =
+            [ rowCounter ] ++ rowColumns ++ rowActionsView rowIndex
     in
-        div [ class "row" ] (rowColumns ++ rowActionsView rowIndex)
+        div [ class "row" ] (fullRow)
 
 
 rowActionsView : Int -> List (Html Msg)
@@ -66,8 +72,26 @@ seatSpotView colIndex ( rowIndex, spot ) =
 matrixView : Model -> Html Msg
 matrixView model =
     let
+        footer =
+            matrixFooterView model.roomForm.columns
+
         rows =
             model.roomForm.matrix
                 |> List.indexedMap rowView
     in
-        div [ class "matrix" ] (rows)
+        div [ class "matrix" ] (rows ++ [ footer ])
+
+
+rowCounterView : Int -> Html Msg
+rowCounterView rowNumber =
+    div [ class "row-counter" ] [ text (toString rowNumber) ]
+
+
+matrixFooterView : Int -> Html Msg
+matrixFooterView columnCount =
+    let
+        footer =
+            List.range 1 columnCount
+                |> List.map (\colNumber -> div [ class "column-footer" ] [ text (toString colNumber) ])
+    in
+        div [ class "matrix-footer" ] (footer)

@@ -6,6 +6,7 @@ button, .button{
   font-size: 20px;
   padding: 8px 12px;
   cursor: pointer;
+  outline: none;
 
   &:hover{
     background-color: darken($orange, 10%);
