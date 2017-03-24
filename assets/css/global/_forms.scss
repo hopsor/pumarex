@@ -18,6 +18,10 @@ form{
       border-radius: 5px;
       padding: 8px 12px;
     }
+
+    input[readonly]{
+      color: #ababab;
+    }
   }
 
   &.inline{

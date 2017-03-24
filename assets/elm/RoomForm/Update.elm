@@ -14,6 +14,18 @@ update msg model =
         NoOp ->
             model ! []
 
+        HandleNameChanged newName ->
+            let
+                oldRoomForm =
+                    model.roomForm
+
+                updatedRoomForm =
+                    { oldRoomForm
+                        | name = newName
+                    }
+            in
+                { model | roomForm = updatedRoomForm } ! []
+
         HandleRowsChanged value ->
             let
                 newRows =

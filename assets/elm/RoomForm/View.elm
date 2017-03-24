@@ -16,6 +16,11 @@ formView model =
             [ class "size-manager" ]
             [ div
                 [ class "field" ]
+                [ label [] [ text "Name" ]
+                , input [ type_ "text", required True, value model.roomForm.name, onInput HandleNameChanged ] []
+                ]
+            , div
+                [ class "field" ]
                 [ label [] [ text "Rows" ]
                 , input [ type_ "number", Html.Attributes.min "0", value (toString model.roomForm.rows), onInput HandleRowsChanged ] []
                 ]
@@ -24,12 +29,15 @@ formView model =
                 [ label [] [ text "Columns" ]
                 , input [ type_ "number", Html.Attributes.min "0", value (toString model.roomForm.columns), onInput HandleColumnsChanged ] []
                 ]
+            , seatsCounterView model
             , div
                 [ class "field" ]
                 [ button [ type_ "button", onClick HandleFillRoomButtonClick ] [ text "Fill Room" ] ]
+            , div
+                [ class "field" ]
+                [ button [ type_ "submit" ] [ text "Save Room" ] ]
             ]
         , matrixWrapperView model
-        , seatsCounterView model
         ]
 
 
@@ -116,7 +124,8 @@ seatsCounterView model =
                 |> List.filter (\spot -> spot == True)
                 |> List.length
     in
-        div []
-            [ text (toString seatsCount)
-            , text "seats"
+        div
+            [ class "field" ]
+            [ label [] [ text "Total Seats" ]
+            , input [ type_ "number", readonly True, value (toString seatsCount) ] []
             ]

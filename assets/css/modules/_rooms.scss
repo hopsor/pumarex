@@ -4,10 +4,20 @@ $seatSpotColor: #c56161;
 #room_form{
   .size-manager{
     margin-bottom: 20px;
+
+    input[type="text"]{
+      width: 300px;
+    }
+
+    input[type="number"]{
+      width: 100px;
+    }
   }
 
   .matrix-placeholder{
-    font-size: 20px;
+    font-size: 50px;
+    margin: 200px;
+    text-align: center;
   }
 
   .matrix{

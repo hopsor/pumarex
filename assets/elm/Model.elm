@@ -56,7 +56,8 @@ type alias Room =
 
 
 type alias RoomForm =
-    { rows : Int
+    { name : String
+    , rows : Int
     , columns : Int
     , matrix : List (List Bool)
     }
@@ -78,6 +79,6 @@ initialModel route =
     { movieList = NotRequested
     , movieForm = Dict.empty
     , roomList = NotRequested
-    , roomForm = { rows = 0, columns = 0, matrix = [] }
+    , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , route = route
     }
