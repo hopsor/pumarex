@@ -19,4 +19,11 @@ form{
       padding: 8px 12px;
     }
   }
+
+  &.inline{
+    .field {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
 }

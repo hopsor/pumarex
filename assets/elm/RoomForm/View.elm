@@ -10,13 +10,23 @@ import Model exposing (..)
 formView : Model -> Html Msg
 formView model =
     Html.form
-        [ id "room_form" ]
+        [ id "room_form", class "inline" ]
         [ h1 [] [ text "Room Designer" ]
         , div
-            []
-            [ input [ type_ "number", value (toString model.roomForm.rows), onInput HandleRowsChanged ] []
-            , input [ type_ "number", value (toString model.roomForm.columns), onInput HandleColumnsChanged ] []
-            , button [ type_ "button", onClick HandleFillRoomButtonClick ] [ text "Fill Room" ]
+            [ class "size-manager" ]
+            [ div
+                [ class "field" ]
+                [ label [] [ text "Rows" ]
+                , input [ type_ "number", value (toString model.roomForm.rows), onInput HandleRowsChanged ] []
+                ]
+            , div
+                [ class "field" ]
+                [ label [] [ text "Columns" ]
+                , input [ type_ "number", value (toString model.roomForm.columns), onInput HandleColumnsChanged ] []
+                ]
+            , div
+                [ class "field" ]
+                [ button [ type_ "button", onClick HandleFillRoomButtonClick ] [ text "Fill Room" ] ]
             ]
         , matrixView model
         ]
@@ -36,10 +46,10 @@ rowView rowIndex row =
 rowActionsView : Int -> List (Html Msg)
 rowActionsView rowIndex =
     [ button
-        [ type_ "button", onClick (HandleFillRowButtonClick rowIndex) ]
+        [ type_ "button", class "small", onClick (HandleFillRowButtonClick rowIndex) ]
         [ text "Fill Row" ]
     , button
-        [ type_ "button", onClick (HandleEmptyRowButtonClick rowIndex) ]
+        [ type_ "button", class "small", onClick (HandleEmptyRowButtonClick rowIndex) ]
         [ text "Empty Row" ]
     ]
 

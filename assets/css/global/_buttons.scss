@@ -10,4 +10,9 @@ button, .button{
   &:hover{
     background-color: darken($orange, 10%);
   }
+
+  &.small{
+    font-size: 15px;
+    padding: 6px 10px;
+  }
 }
