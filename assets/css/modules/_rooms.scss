@@ -1,6 +1,30 @@
 $spotSize: 35px;
 $seatSpotColor: #c56161;
 
+#room_list{
+  max-width: 700px;
+
+  .actions{
+    margin-top: 50px;
+    text-align: right;
+  }
+
+  .empty{
+    text-align: center;
+  }
+
+  table{
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 20px;
+
+    .capacity{
+      width: 100px;
+      text-align: right;
+    }
+  }
+}
+
 #room_form{
   .size-manager{
     margin-bottom: 20px;

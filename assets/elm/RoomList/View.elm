@@ -9,12 +9,21 @@ import Model exposing (..)
 
 indexView : Model -> Html Msg
 indexView model =
-    div [ id "room_list" ]
-        [ div
-            [ class "actions" ]
-            [ addItemButton ]
-        , contentView model
+    div [ id "room_list", class "portlet" ]
+        [ header [] [ text "Room listing" ]
+        , div
+            [ class "portlet-body" ]
+            [ contentView model
+            , actionsView
+            ]
         ]
+
+
+actionsView : Html Msg
+actionsView =
+    div
+        [ class "actions" ]
+        [ addItemButton ]
 
 
 contentView : Model -> Html Msg
@@ -35,20 +44,23 @@ contentView model =
 
 roomTable : RoomList -> Html Msg
 roomTable resultset =
-    table []
-        [ thead []
-            [ th [] [ text "Room Name" ]
-            , th [] [ text "Capacity" ]
+    if not (List.isEmpty resultset) then
+        table [ class "table" ]
+            [ thead []
+                [ th [ class "room-name" ] [ text "Room Name" ]
+                , th [ class "capacity" ] [ text "Capacity" ]
+                ]
+            , tbody [] (List.map roomTableRow resultset)
             ]
-        , tbody [] (List.map roomTableRow resultset)
-        ]
+    else
+        p [ class "empty" ] [ text "You haven't added any room yet." ]
 
 
 roomTableRow : Room -> Html Msg
 roomTableRow room =
     tr []
         [ td [] [ text room.name ]
-        , td [] [ text (toString room.capacity) ]
+        , td [ class "capacity" ] [ text (toString room.capacity) ]
         ]
 
 

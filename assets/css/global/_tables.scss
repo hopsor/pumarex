@@ -1,0 +1,26 @@
+$tableBorderColor: $borderColor;
+
+.table{
+  background: $white;
+
+  th{
+    text-align: left;
+    background-color: #CAD3D6;
+    color: $white;
+    font-weight: normal;
+    padding: 10px;
+
+    &:first-child{
+      border-radius: 5px 0px 0px 5px;
+    }
+
+    &:last-child{
+      border-radius: 0px 5px 5px 0px;
+    }
+  }
+
+  td{
+    padding: 20px 10px;
+    border-bottom: 1px solid $tableBorderColor;
+  }
+}

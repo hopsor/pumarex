@@ -1,0 +1,16 @@
+.portlet{
+  background: $white;
+  border: 2px solid $borderColor;
+  border-radius: 5px;
+
+  header {
+    font-size: 20px;
+    padding: 20px 40px;
+    background: transparent;
+    border-bottom: 2px solid $borderColor;
+  }
+
+  .portlet-body{
+    padding: 30px 40px;
+  }
+}
