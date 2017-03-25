@@ -1,6 +1,7 @@
 module RoomForm.Update exposing (..)
 
 import RoomForm.Messages exposing (..)
+import RoomForm.Commands exposing (createRoom)
 import Model exposing (..)
 import Navigation
 import Routing exposing (toPath, Route(..))
@@ -108,6 +109,19 @@ update msg model =
                     }
             in
                 { model | roomForm = updatedRoomForm } ! []
+
+        HandleSubmit ->
+            model ! [ createRoom model.roomForm ]
+
+        RoomCreated (Ok response) ->
+            model ! [ Navigation.newUrl (toPath RoomsRoute) ]
+
+        RoomCreated (Err error) ->
+            let
+                _ =
+                    Debug.log "BRUH" error
+            in
+                model ! []
 
 
 

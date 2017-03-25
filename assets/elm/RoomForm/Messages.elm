@@ -1,5 +1,8 @@
 module RoomForm.Messages exposing (..)
 
+import Http
+import Model exposing (Room)
+
 
 type Msg
     = NoOp
@@ -10,3 +13,5 @@ type Msg
     | HandleFillRowButtonClick Int
     | HandleEmptyRowButtonClick Int
     | HandleFillRoomButtonClick
+    | HandleSubmit
+    | RoomCreated (Result Http.Error Room)

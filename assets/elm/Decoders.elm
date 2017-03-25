@@ -1,7 +1,7 @@
 module Decoders exposing (..)
 
 import Json.Decode as JD exposing (..)
-import Json.Decode.Extra exposing ((|:), optionalField)
+import Json.Decode.Extra exposing ((|:))
 import Model exposing (..)
 
 
@@ -46,7 +46,7 @@ roomDecoder =
         Room
         |: (field "id" int)
         |: (field "name" string)
-        |: (optionalField "seats" (list seatDecoder))
+        |: (maybe (field "seats" (list seatDecoder)))
         |: (field "capacity" int)
 
 

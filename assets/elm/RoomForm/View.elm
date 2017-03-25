@@ -10,7 +10,7 @@ import Model exposing (..)
 formView : Model -> Html Msg
 formView model =
     Html.form
-        [ id "room_form", class "inline" ]
+        [ id "room_form", class "inline", onSubmit HandleSubmit ]
         [ h1 [] [ text "Room Designer" ]
         , div
             [ class "size-manager" ]
