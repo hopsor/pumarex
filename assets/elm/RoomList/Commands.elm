@@ -32,9 +32,9 @@ deleteRoom room =
                 , headers = []
                 , url = apiUrl
                 , body = Http.emptyBody
-                , expect = Http.expectJson (JD.succeed room)
+                , expect = Http.expectString
                 , timeout = Nothing
                 , withCredentials = False
                 }
     in
-        Http.send RoomDeleted request
+        Http.send (RoomDeleted room) request

@@ -26,7 +26,7 @@ update msg model =
         GoToNewRoom ->
             model ! [ Navigation.newUrl (toPath NewRoomRoute) ]
 
-        RoomDeleted (Ok deletedRoom) ->
+        RoomDeleted deletedRoom (Ok _) ->
             let
                 updatedRoomList =
                     case model.roomList of
@@ -38,7 +38,7 @@ update msg model =
             in
                 { model | roomList = Success updatedRoomList } ! []
 
-        RoomDeleted (Err error) ->
+        RoomDeleted deletedRoom (Err error) ->
             let
                 _ =
                     Debug.log "Error deleting room " error

@@ -8,5 +8,5 @@ type Msg
     = NoOp
     | FetchRooms (Result Http.Error RoomList)
     | HandleDeleteRoomClick Room
-    | RoomDeleted (Result Http.Error Room)
+    | RoomDeleted Room (Result Http.Error String)
     | GoToNewRoom
