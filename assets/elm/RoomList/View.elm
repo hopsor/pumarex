@@ -63,7 +63,7 @@ roomTableRow room =
         [ td [] [ text room.name ]
         , td [ class "capacity" ] [ text (toString room.capacity) ]
         , td
-            []
+            [ class "actions" ]
             [ button [ onClick (HandleDeleteRoomClick room) ]
                 [ text "Delete" ]
             ]
