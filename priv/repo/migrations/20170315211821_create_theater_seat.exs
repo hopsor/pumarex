@@ -5,7 +5,7 @@ defmodule Pumarex.Repo.Migrations.CreatePumarex.Theater.Seat do
     create table(:theater_seats) do
       add :row, :integer
       add :column, :integer
-      add :room_id, references(:theater_rooms, on_delete: :nothing)
+      add :room_id, references(:theater_rooms, on_delete: :delete_all)
 
       timestamps()
     end

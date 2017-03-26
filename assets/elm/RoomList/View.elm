@@ -49,6 +49,7 @@ roomTable resultset =
             [ thead []
                 [ th [ class "room-name" ] [ text "Room Name" ]
                 , th [ class "capacity" ] [ text "Capacity" ]
+                , th [] []
                 ]
             , tbody [] (List.map roomTableRow resultset)
             ]
@@ -61,6 +62,11 @@ roomTableRow room =
     tr []
         [ td [] [ text room.name ]
         , td [ class "capacity" ] [ text (toString room.capacity) ]
+        , td
+            []
+            [ button [ onClick (HandleDeleteRoomClick room) ]
+                [ text "Delete" ]
+            ]
         ]
 
 
