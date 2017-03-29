@@ -19,6 +19,7 @@ defmodule Pumarex.Web.Router do
 
     resources "/movies", MovieController, only: [:index, :create, :show]
     resources "/rooms", RoomController, only: [:index, :create, :show, :delete]
+    resources "/screenings", ScreeningController
   end
 
   scope "/", Pumarex.Web do

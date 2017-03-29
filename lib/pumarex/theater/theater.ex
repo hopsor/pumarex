@@ -316,4 +316,106 @@ defmodule Pumarex.Theater do
     |> cast(attrs, [:row, :column])
     |> validate_required([:row, :column])
   end
+
+  alias Pumarex.Theater.Screening
+
+  @doc """
+  Returns the list of screenings.
+
+  ## Examples
+
+      iex> list_screenings()
+      [%Screening{}, ...]
+
+  """
+  def list_screenings do
+    Repo.all(Screening)
+  end
+
+  @doc """
+  Gets a single screening.
+
+  Raises `Ecto.NoResultsError` if the Screening does not exist.
+
+  ## Examples
+
+      iex> get_screening!(123)
+      %Screening{}
+
+      iex> get_screening!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_screening!(id), do: Repo.get!(Screening, id)
+
+  @doc """
+  Creates a screening.
+
+  ## Examples
+
+      iex> create_screening(%{field: value})
+      {:ok, %Screening{}}
+
+      iex> create_screening(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_screening(attrs \\ %{}) do
+    %Screening{}
+    |> screening_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a screening.
+
+  ## Examples
+
+      iex> update_screening(screening, %{field: new_value})
+      {:ok, %Screening{}}
+
+      iex> update_screening(screening, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_screening(%Screening{} = screening, attrs) do
+    screening
+    |> screening_changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Screening.
+
+  ## Examples
+
+      iex> delete_screening(screening)
+      {:ok, %Screening{}}
+
+      iex> delete_screening(screening)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_screening(%Screening{} = screening) do
+    Repo.delete(screening)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking screening changes.
+
+  ## Examples
+
+      iex> change_screening(screening)
+      %Ecto.Changeset{source: %Screening{}}
+
+  """
+  def change_screening(%Screening{} = screening) do
+    screening_changeset(screening, %{})
+  end
+
+  defp screening_changeset(%Screening{} = screening, attrs) do
+    screening
+    |> cast(attrs, [:screened_at])
+    |> validate_required([:screened_at])
+  end
 end
