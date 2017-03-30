@@ -21,6 +21,9 @@ sideNavView model =
 
         roomsNavClass =
             classList [ ( "current", model.route == Routing.RoomsRoute || model.route == Routing.NewRoomRoute ) ]
+
+        screeningsNavClass =
+            classList [ ( "current", model.route == Routing.ScreeningsRoute ) ]
     in
         nav []
             [ ul []
@@ -32,7 +35,7 @@ sideNavView model =
                     [ div [ class "icon icon-layout" ] []
                     , text "Rooms"
                     ]
-                , li []
+                , li [ screeningsNavClass, onClick GoToScreenings ]
                     [ div [ class "icon icon-calendar" ] []
                     , text "Screenings"
                     ]

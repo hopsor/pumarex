@@ -17,3 +17,6 @@ update msg model =
 
         GoToRooms ->
             model ! [ Navigation.newUrl (toPath RoomsRoute) ]
+
+        GoToScreenings ->
+            model ! [ Navigation.newUrl (toPath ScreeningsRoute) ]

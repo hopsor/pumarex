@@ -5,3 +5,4 @@ type Msg
     = NoOp
     | GoToMovies
     | GoToRooms
+    | GoToScreenings

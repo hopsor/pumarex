@@ -6,6 +6,7 @@ import MovieForm.Messages exposing (..)
 import MovieList.Messages exposing (..)
 import RoomForm.Messages exposing (..)
 import RoomList.Messages exposing (..)
+import ScreeningList.Messages exposing (..)
 import Navigation exposing (Location)
 
 
@@ -17,3 +18,4 @@ type Msg
     | MovieListMsg MovieList.Messages.Msg
     | RoomFormMsg RoomForm.Messages.Msg
     | RoomListMsg RoomList.Messages.Msg
+    | ScreeningListMsg ScreeningList.Messages.Msg

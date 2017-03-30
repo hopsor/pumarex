@@ -10,6 +10,7 @@ type Route
     | MoviesRoute
     | NewRoomRoute
     | RoomsRoute
+    | ScreeningsRoute
     | NotFoundRoute
 
 
@@ -31,6 +32,9 @@ toPath route =
         RoomsRoute ->
             "/rooms"
 
+        ScreeningsRoute ->
+            "/screenings"
+
         NotFoundRoute ->
             "/not-found"
 
@@ -43,6 +47,7 @@ matchers =
         , map MoviesRoute <| s "movies"
         , map NewRoomRoute <| s "rooms" </> s "new"
         , map RoomsRoute <| s "rooms"
+        , map ScreeningsRoute <| s "screenings"
         ]
 
 

@@ -1,0 +1,22 @@
+#screening_list{
+  max-width: 700px;
+
+  .actions{
+    margin-top: 50px;
+    text-align: right;
+  }
+
+  .empty{
+    text-align: center;
+  }
+
+  table{
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 20px;
+
+    .actions{
+      text-align: right;
+    }
+  }
+}

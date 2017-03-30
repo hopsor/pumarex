@@ -57,3 +57,18 @@ seatDecoder =
         |: (field "id" int)
         |: (field "row" int)
         |: (field "column" int)
+
+
+screeningListDecoder : JD.Decoder ScreeningList
+screeningListDecoder =
+    list screeningDecoder
+
+
+screeningDecoder : JD.Decoder Screening
+screeningDecoder =
+    succeed
+        Screening
+        |: (field "id" int)
+        |: (field "screened_at" string)
+        |: (field "movie" movieDecoder)
+        |: (field "room" roomDecoder)
