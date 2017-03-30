@@ -330,6 +330,7 @@ defmodule Pumarex.Theater do
   """
   def list_screenings do
     Repo.all(Screening)
+    |> Repo.preload([:movie, :room])
   end
 
   @doc """
@@ -415,7 +416,7 @@ defmodule Pumarex.Theater do
 
   defp screening_changeset(%Screening{} = screening, attrs) do
     screening
-    |> cast(attrs, [:screened_at])
-    |> validate_required([:screened_at])
+    |> cast(attrs, [:screened_at, :movie_id, :room_id])
+    |> validate_required([:screened_at, :movie_id, :room_id])
   end
 end

@@ -22,4 +22,9 @@ defmodule Pumarex.Web.RoomView do
       seats: render_many(room.seats, SeatView, "seat.json"),
       capacity: length(room.seats)}
   end
+
+  def render("lite_room.json", %{room: room}) do
+    %{id: room.id,
+      name: room.name}
+  end
 end

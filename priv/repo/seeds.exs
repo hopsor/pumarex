@@ -123,4 +123,11 @@ seats =
   end)
   |> Enum.reject(fn (seat) -> seat.row == 7 end)
 
-Theater.create_room(%{name: "Room 1", seats: seats})
+{:ok, room} = Theater.create_room(%{name: "Room 1", seats: seats})
+
+# Screenings
+{:ok, screening} = Theater.create_screening(%{
+  screened_at: ~N[2018-01-01 00:00:00],
+  room_id: room.id,
+  movie_id: Repo.all(Theater.Movie) |> Enum.at(0) |> Map.get(:id)
+})
