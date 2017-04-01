@@ -24,9 +24,8 @@ update msg model =
             model ! [ deleteScreening room ]
 
         GoToNewScreening ->
-            model ! []
+            model ! [ Navigation.newUrl (toPath NewScreeningRoute) ]
 
-        -- [ Navigation.newUrl (toPath NewScreeningRoute) ]
         ScreeningDeleted deletedScreening (Ok _) ->
             let
                 updatedScreeningList =

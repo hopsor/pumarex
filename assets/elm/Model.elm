@@ -17,6 +17,7 @@ type alias Model =
     , roomList : RemoteData String RoomList
     , roomForm : RoomForm
     , screeningList : RemoteData String ScreeningList
+    , screeningForm : ScreeningForm
     , route : Route
     }
 
@@ -84,6 +85,10 @@ type alias Screening =
     }
 
 
+type alias ScreeningForm =
+    Dict String String
+
+
 type alias ScreeningList =
     List Screening
 
@@ -95,5 +100,6 @@ initialModel route =
     , roomList = NotRequested
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , screeningList = NotRequested
+    , screeningForm = Dict.empty
     , route = route
     }

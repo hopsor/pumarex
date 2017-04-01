@@ -12,6 +12,7 @@ import MovieForm.View
 import MovieList.View
 import RoomForm.View
 import RoomList.View
+import ScreeningForm.View
 import ScreeningList.View
 import Navigation
 
@@ -49,6 +50,9 @@ page model =
 
         RoomsRoute ->
             Html.map RoomListMsg <| RoomList.View.indexView model
+
+        NewScreeningRoute ->
+            Html.map ScreeningFormMsg <| ScreeningForm.View.formView model
 
         ScreeningsRoute ->
             Html.map ScreeningListMsg <| ScreeningList.View.indexView model

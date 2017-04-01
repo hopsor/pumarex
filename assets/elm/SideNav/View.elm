@@ -23,7 +23,7 @@ sideNavView model =
             classList [ ( "current", model.route == Routing.RoomsRoute || model.route == Routing.NewRoomRoute ) ]
 
         screeningsNavClass =
-            classList [ ( "current", model.route == Routing.ScreeningsRoute ) ]
+            classList [ ( "current", model.route == Routing.ScreeningsRoute || model.route == Routing.NewScreeningRoute ) ]
     in
         nav []
             [ ul []
