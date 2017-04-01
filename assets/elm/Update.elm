@@ -12,6 +12,7 @@ import RoomList.Update
 import ScreeningList.Update
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
+import ScreeningList.Commands exposing (fetchScreenings)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -99,6 +100,11 @@ urlUpdate currentRoute model =
         RoomsRoute ->
             ( { model | route = currentRoute, roomList = Requesting }
             , Cmd.map RoomListMsg (fetchRooms)
+            )
+
+        ScreeningsRoute ->
+            ( { model | route = currentRoute, screeningList = Requesting }
+            , Cmd.map ScreeningListMsg (fetchScreenings)
             )
 
         _ ->

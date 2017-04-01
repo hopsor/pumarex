@@ -47,26 +47,28 @@ screeningTable resultset =
     if not (List.isEmpty resultset) then
         table [ class "table" ]
             [ thead []
-                [ th [ class "room-name" ] [ text "Screening Name" ]
-                , th [ class "capacity" ] [ text "Capacity" ]
+                [ th [ class "movie-name" ] [ text "Movie" ]
+                , th [ class "room-name" ] [ text "Room" ]
+                , th [ class "screened-at" ] [ text "Date" ]
                 , th [] []
                 ]
             , tbody [] (List.map screeningTableRow resultset)
             ]
     else
-        p [ class "empty" ] [ text "You haven't added any room yet." ]
+        p [ class "empty" ] [ text "You haven't added any screening yet." ]
 
 
 screeningTableRow : Screening -> Html Msg
 screeningTableRow screening =
     tr []
-        [ td [] [ text (toString screening.id) ]
-        -- , td [ class "capacity" ] [ text (toString room.capacity) ]
-        -- , td
-        --     [ class "actions" ]
-        --     [ button [ onClick (HandleDeleteScreeningClick room) ]
-        --         [ text "Delete" ]
-        --     ]
+        [ td [] [ text screening.movie.title ]
+        , td [] [ text screening.room.name ]
+        , td [] [ text screening.screenedAt ]
+        , td
+            [ class "actions" ]
+            [ button [ onClick (HandleDeleteScreeningClick screening) ]
+                [ text "Delete" ]
+            ]
         ]
 
 

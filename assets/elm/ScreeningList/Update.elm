@@ -24,8 +24,9 @@ update msg model =
             model ! [ deleteScreening room ]
 
         GoToNewScreening ->
-            model ! [] -- [ Navigation.newUrl (toPath NewScreeningRoute) ]
+            model ! []
 
+        -- [ Navigation.newUrl (toPath NewScreeningRoute) ]
         ScreeningDeleted deletedScreening (Ok _) ->
             let
                 updatedScreeningList =
@@ -41,6 +42,6 @@ update msg model =
         ScreeningDeleted deletedScreening (Err error) ->
             let
                 _ =
-                    Debug.log "Error deleting room " error
+                    Debug.log "Error deleting screening " error
             in
                 model ! []

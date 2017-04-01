@@ -53,7 +53,7 @@ type alias Room =
     { id : Int
     , name : String
     , seats : Maybe SeatList
-    , capacity : Int
+    , capacity : Maybe Int
     }
 
 
@@ -75,15 +75,18 @@ type alias Seat =
 type alias SeatList =
     List Seat
 
+
 type alias Screening =
     { id : Int
-    , screenedAt: String
+    , screenedAt : String
     , movie : Movie
     , room : Room
     }
 
+
 type alias ScreeningList =
-  List Screening
+    List Screening
+
 
 initialModel : Routing.Route -> Model
 initialModel route =

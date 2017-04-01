@@ -47,7 +47,7 @@ roomDecoder =
         |: (field "id" int)
         |: (field "name" string)
         |: (maybe (field "seats" (list seatDecoder)))
-        |: (field "capacity" int)
+        |: (maybe (field "capacity" int))
 
 
 seatDecoder : JD.Decoder Seat

@@ -61,13 +61,25 @@ roomTableRow : Room -> Html Msg
 roomTableRow room =
     tr []
         [ td [] [ text room.name ]
-        , td [ class "capacity" ] [ text (toString room.capacity) ]
+        , td
+            [ class "capacity" ]
+            [ text (capacity room) ]
         , td
             [ class "actions" ]
             [ button [ onClick (HandleDeleteRoomClick room) ]
                 [ text "Delete" ]
             ]
         ]
+
+
+capacity : Room -> String
+capacity room =
+    case room.capacity of
+        Just capacity ->
+            toString capacity
+
+        _ ->
+            "-"
 
 
 addItemButton : Html Msg
