@@ -16,8 +16,14 @@ update msg model =
 
         FieldChange field value ->
             let
+                oldScreeningForm =
+                    model.screeningForm
+
+                updatedFormFields =
+                    Dict.insert field value model.screeningForm.fields
+
                 updatedScreeningForm =
-                    Dict.insert field value model.screeningForm
+                    { oldScreeningForm | fields = updatedFormFields }
             in
                 { model | screeningForm = updatedScreeningForm } ! []
 
@@ -26,6 +32,46 @@ update msg model =
 
         ScreeningCreated (Err error) ->
             model ! []
+
+        FetchRooms (Ok response) ->
+            let
+                oldScreeningForm =
+                    model.screeningForm
+
+                updatedScreeningForm =
+                    { oldScreeningForm | rooms = Success response }
+            in
+                { model | screeningForm = updatedScreeningForm } ! []
+
+        FetchRooms (Err error) ->
+            let
+                oldScreeningForm =
+                    model.screeningForm
+
+                updatedScreeningForm =
+                    { oldScreeningForm | rooms = Failure "Something went wrong" }
+            in
+                { model | screeningForm = updatedScreeningForm } ! []
+
+        FetchMovies (Ok response) ->
+            let
+                oldScreeningForm =
+                    model.screeningForm
+
+                updatedScreeningForm =
+                    { oldScreeningForm | movies = Success response }
+            in
+                { model | screeningForm = updatedScreeningForm } ! []
+
+        FetchMovies (Err error) ->
+            let
+                oldScreeningForm =
+                    model.screeningForm
+
+                updatedScreeningForm =
+                    { oldScreeningForm | movies = Failure "Something went wrong" }
+            in
+                { model | screeningForm = updatedScreeningForm } ! []
 
         Save ->
             model ! [ createScreening model.screeningForm ]

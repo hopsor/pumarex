@@ -14,6 +14,7 @@ import ScreeningList.Update
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
+import ScreeningForm.Commands exposing (loadScreeningForm)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -115,6 +116,11 @@ urlUpdate currentRoute model =
         ScreeningsRoute ->
             ( { model | route = currentRoute, screeningList = Requesting }
             , Cmd.map ScreeningListMsg (fetchScreenings)
+            )
+
+        NewScreeningRoute ->
+            ( { model | route = currentRoute }
+            , Cmd.map ScreeningFormMsg (loadScreeningForm)
             )
 
         _ ->

@@ -1,6 +1,6 @@
 module ScreeningForm.Commands exposing (..)
 
-import Decoders exposing (screeningDecoder)
+import Decoders exposing (screeningDecoder, movieListDecoder, roomListDecoder)
 import Json.Encode as Encode
 import Model exposing (ScreeningForm)
 import Http
@@ -18,7 +18,7 @@ createScreening screeningForm =
             \( key, value ) -> ( key, (Encode.string value) )
 
         encodedParams =
-            List.map encodeTuple (Dict.toList screeningForm)
+            List.map encodeTuple (Dict.toList screeningForm.fields)
                 |> Encode.object
 
         body =
@@ -29,3 +29,32 @@ createScreening screeningForm =
             Http.post apiUrl body screeningDecoder
     in
         Http.send ScreeningCreated request
+
+
+loadScreeningForm : Cmd Msg
+loadScreeningForm =
+    Cmd.batch [ fetchRooms, fetchMovies ]
+
+
+fetchMovies : Cmd Msg
+fetchMovies =
+    let
+        apiUrl =
+            "/api/movies"
+
+        request =
+            Http.get apiUrl movieListDecoder
+    in
+        Http.send FetchMovies request
+
+
+fetchRooms : Cmd Msg
+fetchRooms =
+    let
+        apiUrl =
+            "/api/rooms"
+
+        request =
+            Http.get apiUrl roomListDecoder
+    in
+        Http.send FetchRooms request

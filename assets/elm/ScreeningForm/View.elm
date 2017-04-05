@@ -25,14 +25,14 @@ formView model =
         , div
             [ class "field" ]
             [ select
-                []
+                [ onInput (FieldChange "movie_id") ]
                 (movieOptions model)
             ]
         , div
             [ class "field" ]
             [ select
-                []
-                []
+                [ onInput (FieldChange "room_id") ]
+                (roomOptions model)
             ]
         , div
             [ class "actions" ]
@@ -45,9 +45,12 @@ formView model =
 
 movieOptions : Model -> List (Html Msg)
 movieOptions model =
-    case model.movieList of
+    case model.screeningForm.movies of
         Success result ->
             let
+                emptyOption =
+                    option [ value "" ] [ text "Choose a movie" ]
+
                 movieOption : Movie -> Html Msg
                 movieOption =
                     \movie ->
@@ -55,7 +58,31 @@ movieOptions model =
                             [ value (toString movie.id) ]
                             [ text movie.title ]
             in
-                List.map movieOption result.entries
+                [ emptyOption ] ++ List.map movieOption result.entries
+
+        _ ->
+            [ option
+                [ value "" ]
+                [ text "Not loaded" ]
+            ]
+
+
+roomOptions : Model -> List (Html Msg)
+roomOptions model =
+    case model.screeningForm.rooms of
+        Success result ->
+            let
+                emptyOption =
+                    option [ value "" ] [ text "Choose a room" ]
+
+                roomOption : Room -> Html Msg
+                roomOption =
+                    \room ->
+                        option
+                            [ value (toString room.id) ]
+                            [ text room.name ]
+            in
+                [ emptyOption ] ++ List.map roomOption result
 
         _ ->
             [ option
