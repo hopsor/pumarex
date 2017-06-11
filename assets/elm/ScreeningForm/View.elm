@@ -16,10 +16,10 @@ formView model =
         , div
             [ class "field" ]
             [ input
-                [ type_ "date", placeholder "Date" ]
+                [ type_ "date", placeholder "Date", onInput (FieldChange "date") ]
                 []
             , input
-                [ type_ "text", placeholder "HH:MM (24h format)" ]
+                [ type_ "text", placeholder "HH:MM (24h format)", onInput (FieldChange "time") ]
                 []
             ]
         , div

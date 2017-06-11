@@ -7,7 +7,7 @@ defmodule Pumarex.Web.ScreeningView do
   end
 
   def render("show.json", %{screening: screening}) do
-    %{data: render_one(screening, ScreeningView, "screening.json")}
+    render_one(screening, ScreeningView, "screening.json")
   end
 
   def render("screening.json", %{screening: screening}) do

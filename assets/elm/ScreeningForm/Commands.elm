@@ -17,8 +17,32 @@ createScreening screeningForm =
         encodeTuple =
             \( key, value ) -> ( key, (Encode.string value) )
 
+        date =
+            case Dict.get "date" screeningForm.fields of
+                Nothing ->
+                    ""
+
+                Just value ->
+                    value
+
+        time =
+            case Dict.get "time" screeningForm.fields of
+                Nothing ->
+                    ""
+
+                Just value ->
+                    value
+
+        datetime =
+            date ++ " " ++ time ++ ":00"
+
         encodedParams =
-            List.map encodeTuple (Dict.toList screeningForm.fields)
+            screeningForm.fields
+                |> Dict.remove "date"
+                |> Dict.remove "time"
+                |> Dict.insert "screened_at" datetime
+                |> Dict.toList
+                |> List.map encodeTuple
                 |> Encode.object
 
         body =

@@ -365,6 +365,12 @@ defmodule Pumarex.Theater do
     %Screening{}
     |> screening_changeset(attrs)
     |> Repo.insert()
+    |> case do
+      {:ok, screening} ->
+        {:ok, Repo.preload(screening, [:room, :movie])}
+      {:error, changeset} ->
+        {:error, changeset}
+    end
   end
 
   @doc """
