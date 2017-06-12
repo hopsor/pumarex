@@ -3,7 +3,7 @@ defmodule Pumarex.Theater do
   The boundary for the Theater system.
   """
 
-  import Ecto.{Query, Changeset}, warn: false
+  import Ecto.Query, warn: false
   alias Pumarex.Repo
 
   alias Pumarex.Theater.Movie
@@ -51,7 +51,7 @@ defmodule Pumarex.Theater do
   """
   def create_movie(attrs \\ %{}) do
     %Movie{}
-    |> movie_changeset(attrs)
+    |> Movie.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -69,7 +69,7 @@ defmodule Pumarex.Theater do
   """
   def update_movie(%Movie{} = movie, attrs) do
     movie
-    |> movie_changeset(attrs)
+    |> Movie.changeset(attrs)
     |> Repo.update()
   end
 
@@ -99,14 +99,9 @@ defmodule Pumarex.Theater do
 
   """
   def change_movie(%Movie{} = movie) do
-    movie_changeset(movie, %{})
+    Movie.changeset(movie, %{})
   end
 
-  defp movie_changeset(%Movie{} = movie, attrs) do
-    movie
-    |> cast(attrs, [:title, :year, :duration, :director, :cast, :overview, :poster])
-    |> validate_required([:title, :year, :duration, :director, :cast, :overview, :poster])
-  end
 
   alias Pumarex.Theater.Room
 
@@ -157,7 +152,7 @@ defmodule Pumarex.Theater do
   """
   def create_room(attrs \\ %{}) do
     %Room{}
-    |> room_changeset(attrs)
+    |> Room.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -175,7 +170,7 @@ defmodule Pumarex.Theater do
   """
   def update_room(%Room{} = room, attrs) do
     room
-    |> room_changeset(attrs)
+    |> Room.changeset(attrs)
     |> Repo.update()
   end
 
@@ -205,14 +200,7 @@ defmodule Pumarex.Theater do
 
   """
   def change_room(%Room{} = room) do
-    room_changeset(room, %{})
-  end
-
-  defp room_changeset(%Room{} = room, params) do
-    room
-    |> cast(params, [:name])
-    |> validate_required(:name)
-    |> cast_assoc(:seats, required: true, with: &seat_changeset/2)
+    Room.changeset(room, %{})
   end
 
   alias Pumarex.Theater.Seat
@@ -260,7 +248,7 @@ defmodule Pumarex.Theater do
   """
   def create_seat(attrs \\ %{}) do
     %Seat{}
-    |> seat_changeset(attrs)
+    |> Seat.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -278,7 +266,7 @@ defmodule Pumarex.Theater do
   """
   def update_seat(%Seat{} = seat, attrs) do
     seat
-    |> seat_changeset(attrs)
+    |> Seat.changeset(attrs)
     |> Repo.update()
   end
 
@@ -308,13 +296,7 @@ defmodule Pumarex.Theater do
 
   """
   def change_seat(%Seat{} = seat) do
-    seat_changeset(seat, %{})
-  end
-
-  defp seat_changeset(%Seat{} = seat, attrs) do
-    seat
-    |> cast(attrs, [:row, :column])
-    |> validate_required([:row, :column])
+    Seat.changeset(seat, %{})
   end
 
   alias Pumarex.Theater.Screening
@@ -363,7 +345,7 @@ defmodule Pumarex.Theater do
   """
   def create_screening(attrs \\ %{}) do
     %Screening{}
-    |> screening_changeset(attrs)
+    |> Screening.changeset(attrs)
     |> Repo.insert()
     |> case do
       {:ok, screening} ->
@@ -387,7 +369,7 @@ defmodule Pumarex.Theater do
   """
   def update_screening(%Screening{} = screening, attrs) do
     screening
-    |> screening_changeset(attrs)
+    |> Screening.changeset(attrs)
     |> Repo.update()
   end
 
@@ -417,12 +399,6 @@ defmodule Pumarex.Theater do
 
   """
   def change_screening(%Screening{} = screening) do
-    screening_changeset(screening, %{})
-  end
-
-  defp screening_changeset(%Screening{} = screening, attrs) do
-    screening
-    |> cast(attrs, [:screened_at, :movie_id, :room_id])
-    |> validate_required([:screened_at, :movie_id, :room_id])
+    Screening.changeset(screening, %{})
   end
 end

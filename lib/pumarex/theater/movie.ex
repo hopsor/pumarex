@@ -1,6 +1,8 @@
 defmodule Pumarex.Theater.Movie do
   use Ecto.Schema
-  
+  import Ecto.Changeset
+  alias Pumarex.Theater.Movie
+
   schema "theater_movies" do
     field :title, :string
     field :year, :integer
@@ -11,5 +13,12 @@ defmodule Pumarex.Theater.Movie do
     field :poster, :string
 
     timestamps()
+  end
+
+  @doc false
+  def changeset(%Movie{} = movie, attrs) do
+    movie
+    |> cast(attrs, [:title, :year, :duration, :director, :cast, :overview, :poster])
+    |> validate_required([:title, :year, :duration, :director, :cast, :overview, :poster])
   end
 end
