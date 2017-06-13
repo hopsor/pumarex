@@ -8,6 +8,7 @@ import RoomForm.Messages exposing (..)
 import RoomList.Messages exposing (..)
 import ScreeningForm.Messages exposing (..)
 import ScreeningList.Messages exposing (..)
+import SessionForm.Messages exposing (..)
 import Navigation exposing (Location)
 
 
@@ -21,3 +22,4 @@ type Msg
     | RoomListMsg RoomList.Messages.Msg
     | ScreeningFormMsg ScreeningForm.Messages.Msg
     | ScreeningListMsg ScreeningList.Messages.Msg
+    | SessionFormMsg SessionForm.Messages.Msg

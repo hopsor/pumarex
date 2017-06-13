@@ -11,6 +11,7 @@ import RoomForm.Update
 import RoomList.Update
 import ScreeningForm.Update
 import ScreeningList.Update
+import SessionForm.Update
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
@@ -97,6 +98,15 @@ update msg model =
             in
                 ( newModel
                 , Cmd.map ScreeningListMsg cmd
+                )
+
+        SessionFormMsg subMsg ->
+            let
+                ( newModel, cmd ) =
+                    SessionForm.Update.update subMsg model
+            in
+                ( newModel
+                , Cmd.map SessionFormMsg cmd
                 )
 
 

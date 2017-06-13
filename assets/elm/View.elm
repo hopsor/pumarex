@@ -14,9 +14,11 @@ import RoomForm.View
 import RoomList.View
 import ScreeningForm.View
 import ScreeningList.View
+import SessionForm.View
 import Navigation
 
 
+view : Model -> Html Msg
 view model =
     div [ class "wrapper" ]
         [ header [] [ h1 [] [ text "Pumarex" ] ]
@@ -56,6 +58,9 @@ page model =
 
         ScreeningsRoute ->
             Html.map ScreeningListMsg <| ScreeningList.View.indexView model
+
+        NewSessionRoute ->
+            Html.map SessionFormMsg <| SessionForm.View.formView model
 
         NotFoundRoute ->
             notFoundView
