@@ -9,3 +9,6 @@ update msg model =
     case msg of
         NoOp ->
             model ! []
+
+        Authenticate ->
+            model ! []
