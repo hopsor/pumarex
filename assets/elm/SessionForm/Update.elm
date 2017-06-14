@@ -5,6 +5,7 @@ import SessionForm.Commands exposing (doLogin)
 import Model exposing (..)
 import Navigation
 import Routing exposing (toPath, Route(..))
+import Ports exposing (storeSessionData)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -37,7 +38,7 @@ update msg model =
             model ! [ doLogin model.sessionForm ]
 
         AuthenticationFinished (Ok response) ->
-            model ! [ Navigation.newUrl (toPath RootRoute) ]
+            model ! [ storeSessionData response, Navigation.newUrl (toPath RootRoute) ]
 
         AuthenticationFinished (Err error) ->
             model ! []
