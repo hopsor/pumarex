@@ -26,7 +26,7 @@ update msg model =
                 newRoute =
                     parseLocation location
             in
-                urlUpdate newRoute (initialModel newRoute)
+                urlUpdate newRoute (initialModel model.session newRoute)
 
         HomeMsg subMsg ->
             let

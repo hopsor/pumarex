@@ -8,13 +8,13 @@ import Messages exposing (Msg(..))
 import Routing exposing (..)
 
 
-init : Navigation.Location -> ( Model, Cmd Msg )
-init location =
+init : Flags -> Navigation.Location -> ( Model, Cmd Msg )
+init flags location =
     let
         currentRoute =
             Routing.parseLocation location
     in
-        urlUpdate currentRoute (initialModel currentRoute)
+        urlUpdate currentRoute (initialModel flags.sessionData currentRoute)
 
 
 subscriptions : Model -> Sub Msg
@@ -22,9 +22,9 @@ subscriptions model =
     Sub.none
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-    Navigation.program OnLocationChange
+    Navigation.programWithFlags OnLocationChange
         { init = init
         , view = view
         , update = update
