@@ -11,12 +11,15 @@ defmodule Pumarex.Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
   end
 
   # Other scopes may use custom stacks.
   scope "/api", Pumarex.Web do
     pipe_through :api
 
+    resources "/sessions", SessionController, only: [:create]
     resources "/movies", MovieController, only: [:index, :create, :show]
     resources "/rooms", RoomController, only: [:index, :create, :show, :delete]
     resources "/screenings", ScreeningController

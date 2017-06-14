@@ -101,4 +101,23 @@ defmodule Pumarex.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  @doc """
+  Find a User by his email and password
+  """
+  def authenticate_user(%{"email" => email, "password" => password}) do
+    user = Repo.get_by(User, email: String.downcase(email))
+
+    case check_password(user, password) do
+      true -> {:ok, user}
+      _ -> {:error, "Login invalid"}
+    end
+  end
+
+  defp check_password(user, password) do
+    case user do
+      nil -> Comeonin.Bcrypt.dummy_checkpw()
+      _ -> Comeonin.Bcrypt.checkpw(password, user.encrypted_password)
+    end
+  end
 end

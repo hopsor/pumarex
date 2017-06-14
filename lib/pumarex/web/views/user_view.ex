@@ -14,7 +14,6 @@ defmodule Pumarex.Web.UserView do
     %{id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
-      email: user.email,
-      encrypted_password: user.encrypted_password}
+      email: user.email}
   end
 end
