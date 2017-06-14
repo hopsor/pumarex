@@ -56,3 +56,7 @@ config :pumarex, Pumarex.Repo,
   database: "pumarex_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Configure Guardian
+config :guardian, Guardian,
+  secret_key: "Vnb3td31GpsOsvY9Vbdk3ziLUX2Q+1PBSrPBIQh3wGzIGlfvIN0z0Ftseh85Y3Mp" 
