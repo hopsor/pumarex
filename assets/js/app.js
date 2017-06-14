@@ -10,4 +10,8 @@ if (elmDiv) {
   app.ports.storeSessionData.subscribe((sessionData) => {
     localStorage.setItem('sessionData', JSON.stringify(sessionData));
   });
+
+  app.ports.destroySessionData.subscribe(() => {
+    localStorage.removeItem('sessionData');
+  });
 }

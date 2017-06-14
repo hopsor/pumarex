@@ -16,6 +16,7 @@ import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
 import ScreeningForm.Commands exposing (loadScreeningForm)
+import Ports exposing (destroySessionData)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -108,6 +109,9 @@ update msg model =
                 ( newModel
                 , Cmd.map SessionFormMsg cmd
                 )
+
+        Logout ->
+            { model | session = Nothing } ! [ destroySessionData () ]
 
 
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )

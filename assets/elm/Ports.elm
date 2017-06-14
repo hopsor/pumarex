@@ -8,3 +8,6 @@ import Model exposing (Session)
 
 
 port storeSessionData : Session -> Cmd msg
+
+
+port destroySessionData : () -> Cmd msg

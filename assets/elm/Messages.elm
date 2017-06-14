@@ -23,3 +23,4 @@ type Msg
     | ScreeningFormMsg ScreeningForm.Messages.Msg
     | ScreeningListMsg ScreeningList.Messages.Msg
     | SessionFormMsg SessionForm.Messages.Msg
+    | Logout

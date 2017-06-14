@@ -20,12 +20,31 @@ import Navigation
 
 view : Model -> Html Msg
 view model =
-    div [ class "wrapper" ]
-        [ header [] [ h1 [] [ text "Pumarex" ] ]
-        , div [ class "subwrapper" ]
+    div
+        [ class "wrapper" ]
+        [ headerView model
+        , div
+            [ class "subwrapper" ]
             [ sideNav model
-            , main_ []
+            , main_
+                []
                 [ page model ]
+            ]
+        ]
+
+
+headerView : Model -> Html Msg
+headerView model =
+    header
+        []
+        [ h1
+            []
+            [ text "Pumarex" ]
+        , div
+            [ class "menu" ]
+            [ button
+                [ onClick Logout ]
+                [ text "Logout" ]
             ]
         ]
 
