@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Pumarex.{Repo, Theater}
+alias Pumarex.{Repo, Theater, Accounts}
 
 Repo.insert_all(Theater.Movie, [
   %{
@@ -126,8 +126,22 @@ seats =
 {:ok, room} = Theater.create_room(%{name: "Room 1", seats: seats})
 
 # Screenings
-{:ok, screening} = Theater.create_screening(%{
+{:ok, _screening} = Theater.create_screening(%{
   screened_at: ~N[2018-01-01 00:00:00],
   room_id: room.id,
-  movie_id: Repo.all(Theater.Movie) |> Enum.at(0) |> Map.get(:id)
+  movie_id: Theater.Movie |> Repo.all() |> Enum.at(0) |> Map.get(:id)
+})
+
+{:ok, _john} = Accounts.create_user(%{
+  email: "john.doe@pumar.ex",
+  first_name: "John",
+  last_name: "Doe",
+  password: "foobar"
+})
+
+{:ok, _jane} = Accounts.create_user(%{
+  email: "jane.doe@pumar.ex",
+  first_name: "Jane",
+  last_name: "Doe",
+  password: "foobar"
 })
