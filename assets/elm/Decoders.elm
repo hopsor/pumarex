@@ -72,3 +72,15 @@ screeningDecoder =
         |: (field "screened_at" string)
         |: (field "movie" movieDecoder)
         |: (field "room" roomDecoder)
+
+
+sessionDecoder : JD.Decoder Session
+sessionDecoder =
+    succeed
+        Session
+        |: (field "id" int)
+        |: (field "email" string)
+        |: (field "first_name" string)
+        |: (field "last_name" string)
+        |: (field "jwt" string)
+        |: (field "exp" int)

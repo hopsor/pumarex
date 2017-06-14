@@ -3,5 +3,9 @@ import Elm from './main';
 const elmDiv = document.getElementById('app')
 
 if (elmDiv) {
-  Elm.Main.embed(elmDiv);
+  const app = Elm.Main.embed(elmDiv);
+
+  // app.ports.storeJWT.subscribe((jwt) => {
+  //
+  // });
 }

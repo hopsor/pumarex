@@ -97,6 +97,16 @@ type alias ScreeningList =
     List Screening
 
 
+type alias Session =
+    { id : Int
+    , email : String
+    , firstName : String
+    , lastName : String
+    , jwt : String
+    , exp : Int
+    }
+
+
 type alias SessionForm =
     { email : String
     , password : String

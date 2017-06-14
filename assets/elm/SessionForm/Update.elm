@@ -1,7 +1,10 @@
 module SessionForm.Update exposing (..)
 
 import SessionForm.Messages exposing (..)
+import SessionForm.Commands exposing (doLogin)
 import Model exposing (..)
+import Navigation
+import Routing exposing (toPath, Route(..))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -31,4 +34,10 @@ update msg model =
                 { model | sessionForm = updatedSessionForm } ! []
 
         Authenticate ->
+            model ! [ doLogin model.sessionForm ]
+
+        AuthenticationFinished (Ok response) ->
+            model ! [ Navigation.newUrl (toPath RootRoute) ]
+
+        AuthenticationFinished (Err error) ->
             model ! []

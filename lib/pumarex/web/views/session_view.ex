@@ -7,7 +7,6 @@ defmodule Pumarex.Web.SessionView do
   end
 
   def render("session.json", %{session: session}) do
-    IO.inspect session
     %{id: session.user.id,
       first_name: session.user.first_name,
       last_name: session.user.last_name,
