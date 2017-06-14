@@ -9,27 +9,30 @@ import Model exposing (..)
 
 formView : Model -> Html Msg
 formView model =
-    Html.form
-        [ id "session_form" ]
-        [ h1
-            []
-            [ text "Login" ]
-        , div
-            [ class "field" ]
-            [ input
-                [ type_ "text", placeholder "Email" ]
+    div
+        [ id "session" ]
+        [ Html.form
+            [ id "session_form" ]
+            [ h1
                 []
-            ]
-        , div
-            [ class "field" ]
-            [ input
-                [ type_ "password", placeholder "Password" ]
-                []
-            ]
-        , div
-            [ class "actions" ]
-            [ button
-                [ type_ "button", onClick Authenticate ]
-                [ text "Save" ]
+                [ text "Pumarex" ]
+            , div
+                [ class "field" ]
+                [ input
+                    [ type_ "text", placeholder "Email" ]
+                    []
+                ]
+            , div
+                [ class "field" ]
+                [ input
+                    [ type_ "password", placeholder "Password" ]
+                    []
+                ]
+            , div
+                [ class "actions" ]
+                [ button
+                    [ type_ "button", onClick Authenticate ]
+                    [ text "Log in" ]
+                ]
             ]
         ]

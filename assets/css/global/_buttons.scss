@@ -4,9 +4,10 @@ button, .button{
   background: $orange;
   color: white;
   font-size: 20px;
-  padding: 8px 12px;
+  padding: 1em;
   cursor: pointer;
   outline: none;
+  font-size: 1.1em;
 
   &:hover{
     background-color: darken($orange, 10%);

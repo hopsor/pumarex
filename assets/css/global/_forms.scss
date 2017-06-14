@@ -18,7 +18,8 @@ form{
     textarea{
       border: 1px solid $formInputBorder;
       border-radius: 5px;
-      padding: 8px 12px;
+      padding: 1em;
+      font-size: 1.1em;
     }
 
     input[readonly]{
