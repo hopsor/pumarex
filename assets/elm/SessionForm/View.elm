@@ -19,13 +19,13 @@ formView model =
             , div
                 [ class "field" ]
                 [ input
-                    [ type_ "text", placeholder "Email" ]
+                    [ type_ "text", placeholder "Email", onInput EmailUpdated ]
                     []
                 ]
             , div
                 [ class "field" ]
                 [ input
-                    [ type_ "password", placeholder "Password" ]
+                    [ type_ "password", placeholder "Password", onInput PasswordUpdated ]
                     []
                 ]
             , div

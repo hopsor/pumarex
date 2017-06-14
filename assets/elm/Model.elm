@@ -18,6 +18,7 @@ type alias Model =
     , roomForm : RoomForm
     , screeningList : RemoteData String ScreeningList
     , screeningForm : ScreeningForm
+    , sessionForm : SessionForm
     , route : Route
     }
 
@@ -96,6 +97,12 @@ type alias ScreeningList =
     List Screening
 
 
+type alias SessionForm =
+    { email : String
+    , password : String
+    }
+
+
 initialModel : Routing.Route -> Model
 initialModel route =
     { movieList = NotRequested
@@ -104,5 +111,6 @@ initialModel route =
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , screeningList = NotRequested
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
+    , sessionForm = { email = "", password = "" }
     , route = route
     }

@@ -10,5 +10,25 @@ update msg model =
         NoOp ->
             model ! []
 
+        EmailUpdated email ->
+            let
+                oldSessionForm =
+                    model.sessionForm
+
+                updatedSessionForm =
+                    { oldSessionForm | email = email }
+            in
+                { model | sessionForm = updatedSessionForm } ! []
+
+        PasswordUpdated password ->
+            let
+                oldSessionForm =
+                    model.sessionForm
+
+                updatedSessionForm =
+                    { oldSessionForm | password = password }
+            in
+                { model | sessionForm = updatedSessionForm } ! []
+
         Authenticate ->
             model ! []
