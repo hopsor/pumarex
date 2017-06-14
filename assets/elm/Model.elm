@@ -19,7 +19,7 @@ type alias Model =
     , screeningList : RemoteData String ScreeningList
     , screeningForm : ScreeningForm
     , sessionForm : SessionForm
-    , session : Session
+    , session : Maybe Session
     , route : Route
     }
 
@@ -115,11 +115,11 @@ type alias SessionForm =
 
 
 type alias Flags =
-    { sessionData : Session
+    { sessionData : Maybe Session
     }
 
 
-initialModel : Session -> Routing.Route -> Model
+initialModel : Maybe Session -> Routing.Route -> Model
 initialModel session route =
     { movieList = NotRequested
     , movieForm = Dict.empty
