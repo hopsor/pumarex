@@ -119,26 +119,31 @@ update msg model =
 
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )
 urlUpdate currentRoute model =
-    case currentRoute of
-        MoviesRoute ->
-            ( { model | route = currentRoute, movieList = Requesting }
-            , Cmd.map MovieListMsg (fetchMovies)
-            )
+    case model.session of
+        Just session ->
+            case currentRoute of
+                MoviesRoute ->
+                    ( { model | route = currentRoute, movieList = Requesting }
+                    , Cmd.map MovieListMsg (fetchMovies session)
+                    )
 
-        RoomsRoute ->
-            ( { model | route = currentRoute, roomList = Requesting }
-            , Cmd.map RoomListMsg (fetchRooms)
-            )
+                RoomsRoute ->
+                    ( { model | route = currentRoute, roomList = Requesting }
+                    , Cmd.map RoomListMsg (fetchRooms)
+                    )
 
-        ScreeningsRoute ->
-            ( { model | route = currentRoute, screeningList = Requesting }
-            , Cmd.map ScreeningListMsg (fetchScreenings)
-            )
+                ScreeningsRoute ->
+                    ( { model | route = currentRoute, screeningList = Requesting }
+                    , Cmd.map ScreeningListMsg (fetchScreenings)
+                    )
 
-        NewScreeningRoute ->
-            ( { model | route = currentRoute }
-            , Cmd.map ScreeningFormMsg (loadScreeningForm)
-            )
+                NewScreeningRoute ->
+                    ( { model | route = currentRoute }
+                    , Cmd.map ScreeningFormMsg (loadScreeningForm)
+                    )
 
-        _ ->
+                _ ->
+                    { model | route = currentRoute } ! []
+
+        Nothing ->
             { model | route = currentRoute } ! []
