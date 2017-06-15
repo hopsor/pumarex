@@ -6,13 +6,14 @@ import Model exposing (..)
 import Update exposing (..)
 import Messages exposing (Msg(..))
 import Routing exposing (..)
+import Helpers exposing (getRoute)
 
 
 init : Flags -> Navigation.Location -> ( Model, Cmd Msg )
 init flags location =
     let
         currentRoute =
-            Routing.parseLocation location
+            getRoute flags.sessionData location
     in
         urlUpdate currentRoute (initialModel flags.sessionData currentRoute)
 

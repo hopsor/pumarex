@@ -2,7 +2,8 @@ module Update exposing (..)
 
 import Messages exposing (Msg(..))
 import Model exposing (..)
-import Routing exposing (parseLocation, Route(..))
+import Routing exposing (Route(..))
+import Helpers exposing (getRoute)
 import Home.Update
 import SideNav.Update
 import MovieForm.Update
@@ -16,6 +17,8 @@ import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
 import ScreeningForm.Commands exposing (loadScreeningForm)
+import Navigation
+import Routing exposing (toPath, Route(..))
 import Ports exposing (destroySessionData)
 
 
@@ -25,7 +28,7 @@ update msg model =
         OnLocationChange location ->
             let
                 newRoute =
-                    parseLocation location
+                    getRoute model.session location
             in
                 urlUpdate newRoute (initialModel model.session newRoute)
 
@@ -111,7 +114,7 @@ update msg model =
                 )
 
         Logout ->
-            { model | session = Nothing } ! [ destroySessionData () ]
+            { model | session = Nothing } ! [ destroySessionData (), Navigation.newUrl (toPath NewSessionRoute) ]
 
 
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )

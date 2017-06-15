@@ -38,7 +38,7 @@ update msg model =
             model ! [ doLogin model.sessionForm ]
 
         AuthenticationFinished (Ok response) ->
-            model ! [ storeSessionData response, Navigation.newUrl (toPath RootRoute) ]
+            { model | session = Just response } ! [ storeSessionData response, Navigation.newUrl (toPath RootRoute) ]
 
         AuthenticationFinished (Err error) ->
             model ! []
