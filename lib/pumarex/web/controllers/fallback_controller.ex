@@ -17,4 +17,10 @@ defmodule Pumarex.Web.FallbackController do
     |> put_status(:not_found)
     |> render(Pumarex.Web.ErrorView, :"404")
   end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(Pumarex.Web.ErrorView, "unauthenticated.json")
+  end
 end

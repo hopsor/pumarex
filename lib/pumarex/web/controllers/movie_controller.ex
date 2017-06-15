@@ -4,6 +4,7 @@ defmodule Pumarex.Web.MovieController do
   alias Pumarex.Theater
   alias Pumarex.Theater.Movie
 
+  plug Guardian.Plug.EnsureAuthenticated, handler: Pumarex.Web.FallbackController
   action_fallback Pumarex.Web.FallbackController
 
   def index(conn, _params) do
