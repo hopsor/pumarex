@@ -13,9 +13,17 @@ init : Flags -> Navigation.Location -> ( Model, Cmd Msg )
 init flags location =
     let
         currentRoute =
-            getRoute flags.sessionData location
+            getRoute flags.loggedIn location
+
+        session =
+            case flags.sessionData of
+                Just session ->
+                    session
+
+                Nothing ->
+                    emptySession
     in
-        urlUpdate currentRoute (initialModel flags.sessionData currentRoute)
+        urlUpdate currentRoute (initialModel flags.loggedIn session currentRoute)
 
 
 subscriptions : Model -> Sub Msg

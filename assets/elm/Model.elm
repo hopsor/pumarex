@@ -19,7 +19,8 @@ type alias Model =
     , screeningList : RemoteData String ScreeningList
     , screeningForm : ScreeningForm
     , sessionForm : SessionForm
-    , session : Maybe Session
+    , session : Session
+    , loggedIn : Bool
     , route : Route
     }
 
@@ -116,11 +117,17 @@ type alias SessionForm =
 
 type alias Flags =
     { sessionData : Maybe Session
+    , loggedIn : Bool
     }
 
 
-initialModel : Maybe Session -> Routing.Route -> Model
-initialModel session route =
+emptySession : Session
+emptySession =
+    { id = 0, email = "", firstName = "", lastName = "", jwt = "", exp = 0 }
+
+
+initialModel : Bool -> Session -> Routing.Route -> Model
+initialModel loggedIn session route =
     { movieList = NotRequested
     , movieForm = Dict.empty
     , roomList = NotRequested
@@ -129,5 +136,6 @@ initialModel session route =
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
     , sessionForm = { email = "", password = "" }
     , session = session
+    , loggedIn = loggedIn
     , route = route
     }

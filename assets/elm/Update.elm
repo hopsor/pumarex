@@ -28,9 +28,9 @@ update msg model =
         OnLocationChange location ->
             let
                 newRoute =
-                    getRoute model.session location
+                    getRoute model.loggedIn location
             in
-                urlUpdate newRoute (initialModel model.session newRoute)
+                urlUpdate newRoute (initialModel model.loggedIn model.session newRoute)
 
         HomeMsg subMsg ->
             let
@@ -114,36 +114,31 @@ update msg model =
                 )
 
         Logout ->
-            { model | session = Nothing } ! [ destroySessionData (), Navigation.newUrl (toPath NewSessionRoute) ]
+            { model | session = emptySession, loggedIn = False } ! [ destroySessionData (), Navigation.newUrl (toPath NewSessionRoute) ]
 
 
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )
 urlUpdate currentRoute model =
-    case model.session of
-        Just session ->
-            case currentRoute of
-                MoviesRoute ->
-                    ( { model | route = currentRoute, movieList = Requesting }
-                    , Cmd.map MovieListMsg (fetchMovies session)
-                    )
+    case currentRoute of
+        MoviesRoute ->
+            ( { model | route = currentRoute, movieList = Requesting }
+            , Cmd.map MovieListMsg (fetchMovies model.session)
+            )
 
-                RoomsRoute ->
-                    ( { model | route = currentRoute, roomList = Requesting }
-                    , Cmd.map RoomListMsg (fetchRooms)
-                    )
+        RoomsRoute ->
+            ( { model | route = currentRoute, roomList = Requesting }
+            , Cmd.map RoomListMsg (fetchRooms)
+            )
 
-                ScreeningsRoute ->
-                    ( { model | route = currentRoute, screeningList = Requesting }
-                    , Cmd.map ScreeningListMsg (fetchScreenings)
-                    )
+        ScreeningsRoute ->
+            ( { model | route = currentRoute, screeningList = Requesting }
+            , Cmd.map ScreeningListMsg (fetchScreenings)
+            )
 
-                NewScreeningRoute ->
-                    ( { model | route = currentRoute }
-                    , Cmd.map ScreeningFormMsg (loadScreeningForm)
-                    )
+        NewScreeningRoute ->
+            ( { model | route = currentRoute }
+            , Cmd.map ScreeningFormMsg (loadScreeningForm)
+            )
 
-                _ ->
-                    { model | route = currentRoute } ! []
-
-        Nothing ->
+        _ ->
             { model | route = currentRoute } ! []

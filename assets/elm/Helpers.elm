@@ -7,13 +7,13 @@ import Http
 import Json.Decode as Json
 
 
-getRoute : Maybe Session -> Navigation.Location -> Route
-getRoute session location =
-    case session of
-        Just session ->
+getRoute : Bool -> Navigation.Location -> Route
+getRoute loggedIn location =
+    case loggedIn of
+        True ->
             parseLocation location
 
-        Nothing ->
+        False ->
             NewSessionRoute
 
 
