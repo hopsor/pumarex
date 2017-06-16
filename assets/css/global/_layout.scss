@@ -27,6 +27,47 @@ body,
 
   h1 {
     margin: 12px 12px;
+    float: left;
+  }
+
+  .menu{
+    display: flex;
+    float: right;
+    height: 100%;
+
+    .current-user{
+      display: flex;
+      border-right: 1px solid $sidebarBorderColor;
+      align-items: center;
+
+      .avatar{
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+      }
+
+      .avatar, .username{
+        margin-right: 15px;
+      }
+    }
+
+    .current-user, button{
+      height: 100%;
+    }
+
+    button{
+      padding-left: 15px;
+      padding-right: 15px;
+
+      &:hover{
+        background: lighten($headerBackground, 5%);
+      }
+    }
+
+    &:after{
+      display: block;
+      clear: both;
+    }
   }
 }
 

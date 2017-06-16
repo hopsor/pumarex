@@ -1,20 +1,28 @@
 button, .button{
-  border-radius: 5px;
-  border: none;
-  background: $orange;
-  color: white;
-  font-size: 20px;
-  padding: 1em;
-  cursor: pointer;
   outline: none;
-  font-size: 1.1em;
+  color: white;
+  cursor: pointer;
+  
+  &:not(.unstyled){
+    border-radius: 5px;
+    border: none;
+    background: $orange;
+    font-size: 20px;
+    padding: 1em;
+    font-size: 1.1em;
 
-  &:hover{
-    background-color: darken($orange, 10%);
+    &:hover{
+      background-color: darken($orange, 10%);
+    }
+
+    &.small{
+      font-size: 15px;
+      padding: 6px 10px;
+    }
   }
 
-  &.small{
-    font-size: 15px;
-    padding: 6px 10px;
+  &.unstyled{
+    background: transparent;
+    border: none;
   }
 }

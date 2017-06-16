@@ -42,8 +42,17 @@ headerView model =
             [ text "Pumarex" ]
         , div
             [ class "menu" ]
-            [ button
-                [ onClick Logout ]
+            [ div
+                [ class "current-user" ]
+                [ img
+                    [ class "avatar", src "https://lelakisihat.com/wp-content/uploads/2016/09/avatar.jpg" ]
+                    []
+                , span
+                    [ class "username" ]
+                    [ text model.session.firstName ]
+                ]
+            , button
+                [ class "unstyled", onClick Logout ]
                 [ text "Logout" ]
             ]
         ]
