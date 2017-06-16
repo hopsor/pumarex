@@ -45,7 +45,7 @@ headerView model =
             [ div
                 [ class "current-user" ]
                 [ img
-                    [ class "avatar", src "https://lelakisihat.com/wp-content/uploads/2016/09/avatar.jpg" ]
+                    [ class "avatar", src model.session.avatarUrl ]
                     []
                 , span
                     [ class "username" ]

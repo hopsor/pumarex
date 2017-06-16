@@ -84,3 +84,4 @@ sessionDecoder =
         |: (field "last_name" string)
         |: (field "jwt" string)
         |: (field "exp" int)
+        |: (field "avatar_url" string)

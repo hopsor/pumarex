@@ -106,6 +106,7 @@ type alias Session =
     , lastName : String
     , jwt : String
     , exp : Int
+    , avatarUrl : String
     }
 
 
@@ -123,7 +124,7 @@ type alias Flags =
 
 emptySession : Session
 emptySession =
-    { id = 0, email = "", firstName = "", lastName = "", jwt = "", exp = 0 }
+    { id = 0, email = "", firstName = "", lastName = "", jwt = "", exp = 0, avatarUrl = "" }
 
 
 initialModel : Bool -> Session -> Routing.Route -> Model
