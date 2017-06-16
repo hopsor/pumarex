@@ -8,14 +8,14 @@ new features included in Phoenix Framework 1.3
 ## TODO list
 
 - [ ] Improve movie creation form.
-- [ ] Room management.
-  - [ ] Room list.
-  - [ ] Room creation.
-- [ ] Screening management
-  - [ ] Screening list.
-  - [ ] Screening creation.
+- [x] Room management.
+  - [x] Room list.
+  - [x] Room creation.
+- [x] Screening management
+  - [x] Screening list.
+  - [x] Screening creation.
 - [ ] Box office.
-- [ ] User authentication.
+- [x] User authentication.
 
 ## Development setup
 
