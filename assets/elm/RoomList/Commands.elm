@@ -1,40 +1,27 @@
 module RoomList.Commands exposing (..)
 
-import Model exposing (Room)
+import Model exposing (Session, Room)
 import Decoders exposing (roomListDecoder)
 import Http
 import Json.Decode as JD
 import Json.Encode as JE
 import RoomList.Messages exposing (Msg(..))
+import Helpers exposing (getRequest, deleteRequest)
 
 
-fetchRooms : Cmd Msg
-fetchRooms =
+fetchRooms : Session -> Cmd Msg
+fetchRooms session =
     let
-        apiUrl =
-            "/api/rooms"
-
         request =
-            Http.get apiUrl roomListDecoder
+            getRequest session "/api/rooms" roomListDecoder
     in
         Http.send FetchRooms request
 
 
-deleteRoom : Room -> Cmd Msg
-deleteRoom room =
+deleteRoom : Session -> Room -> Cmd Msg
+deleteRoom session room =
     let
-        apiUrl =
-            "/api/rooms/" ++ (toString room.id)
-
         request =
-            Http.request
-                { method = "DELETE"
-                , headers = []
-                , url = apiUrl
-                , body = Http.emptyBody
-                , expect = Http.expectString
-                , timeout = Nothing
-                , withCredentials = False
-                }
+            deleteRequest session <| "/api/rooms/" ++ (toString room.id)
     in
         Http.send (RoomDeleted room) request

@@ -1,40 +1,30 @@
 module ScreeningList.Commands exposing (..)
 
-import Model exposing (Screening)
+import Model exposing (Session, Screening)
 import Decoders exposing (screeningListDecoder)
 import Http
 import Json.Decode as JD
 import Json.Encode as JE
 import ScreeningList.Messages exposing (Msg(..))
+import Helpers exposing (getRequest, deleteRequest)
 
 
-fetchScreenings : Cmd Msg
-fetchScreenings =
+fetchScreenings : Session -> Cmd Msg
+fetchScreenings session =
     let
-        apiUrl =
-            "/api/screenings"
-
         request =
-            Http.get apiUrl screeningListDecoder
+            getRequest session "/api/screenings" screeningListDecoder
     in
         Http.send FetchScreenings request
 
 
-deleteScreening : Screening -> Cmd Msg
-deleteScreening screening =
+deleteScreening : Session -> Screening -> Cmd Msg
+deleteScreening session screening =
     let
         apiUrl =
             "/api/screenings/" ++ (toString screening.id)
 
         request =
-            Http.request
-                { method = "DELETE"
-                , headers = []
-                , url = apiUrl
-                , body = Http.emptyBody
-                , expect = Http.expectString
-                , timeout = Nothing
-                , withCredentials = False
-                }
+            deleteRequest session apiUrl
     in
         Http.send (ScreeningDeleted screening) request

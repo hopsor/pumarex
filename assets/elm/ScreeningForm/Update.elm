@@ -74,4 +74,4 @@ update msg model =
                 { model | screeningForm = updatedScreeningForm } ! []
 
         Save ->
-            model ! [ createScreening model.screeningForm ]
+            model ! [ createScreening model.session model.screeningForm ]

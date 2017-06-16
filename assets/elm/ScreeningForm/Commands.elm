@@ -2,18 +2,16 @@ module ScreeningForm.Commands exposing (..)
 
 import Decoders exposing (screeningDecoder, movieListDecoder, roomListDecoder)
 import Json.Encode as Encode
-import Model exposing (ScreeningForm)
+import Model exposing (Session, ScreeningForm)
 import Http
 import ScreeningForm.Messages exposing (Msg(..))
 import Dict
+import Helpers exposing (getRequest, postRequest)
 
 
-createScreening : ScreeningForm -> Cmd Msg
-createScreening screeningForm =
+createScreening : Session -> ScreeningForm -> Cmd Msg
+createScreening session screeningForm =
     let
-        apiUrl =
-            "/api/screenings"
-
         encodeTuple =
             \( key, value ) -> ( key, (Encode.string value) )
 
@@ -50,35 +48,29 @@ createScreening screeningForm =
                 |> Http.jsonBody
 
         request =
-            Http.post apiUrl body screeningDecoder
+            postRequest session "/api/screenings" body screeningDecoder
     in
         Http.send ScreeningCreated request
 
 
-loadScreeningForm : Cmd Msg
-loadScreeningForm =
-    Cmd.batch [ fetchRooms, fetchMovies ]
+loadScreeningForm : Session -> Cmd Msg
+loadScreeningForm session =
+    Cmd.batch [ (fetchRooms session), (fetchMovies session) ]
 
 
-fetchMovies : Cmd Msg
-fetchMovies =
+fetchMovies : Session -> Cmd Msg
+fetchMovies session =
     let
-        apiUrl =
-            "/api/movies"
-
         request =
-            Http.get apiUrl movieListDecoder
+            getRequest session "/api/movies" movieListDecoder
     in
         Http.send FetchMovies request
 
 
-fetchRooms : Cmd Msg
-fetchRooms =
+fetchRooms : Session -> Cmd Msg
+fetchRooms session =
     let
-        apiUrl =
-            "/api/rooms"
-
         request =
-            Http.get apiUrl roomListDecoder
+            getRequest session "/api/rooms" roomListDecoder
     in
         Http.send FetchRooms request

@@ -21,7 +21,7 @@ update msg model =
             { model | roomList = Failure "Something went wrong" } ! []
 
         HandleDeleteRoomClick room ->
-            model ! [ deleteRoom room ]
+            model ! [ deleteRoom model.session room ]
 
         GoToNewRoom ->
             model ! [ Navigation.newUrl (toPath NewRoomRoute) ]

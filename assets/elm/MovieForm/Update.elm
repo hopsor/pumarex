@@ -28,4 +28,4 @@ update msg model =
             model ! []
 
         Save ->
-            model ! [ createMovie model.movieForm ]
+            model ! [ createMovie model.session model.movieForm ]

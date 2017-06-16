@@ -2,29 +2,28 @@ module MovieForm.Commands exposing (..)
 
 import Decoders exposing (movieDecoder)
 import Json.Encode as Encode
-import Model exposing (MovieForm)
+import Model exposing (Session, MovieForm)
 import Http
 import MovieForm.Messages exposing (Msg(..))
 import Dict
+import Helpers exposing (postRequest)
 
 
-createMovie : MovieForm -> Cmd Msg
-createMovie movieForm =
+createMovie : Session -> MovieForm -> Cmd Msg
+createMovie session movieForm =
     let
-        apiUrl =
-            "/api/movies"
-
         encodeTuple =
-          \(key, value) -> (key, (Encode.string value))
+            \( key, value ) -> ( key, (Encode.string value) )
 
+        encodedParams =
+            List.map encodeTuple (Dict.toList movieForm)
+                |> Encode.object
 
-        encodedParams = List.map encodeTuple (Dict.toList movieForm)
-          |> Encode.object
-
-        body = Encode.object [("movie", encodedParams)]
-          |> Http.jsonBody
+        body =
+            Encode.object [ ( "movie", encodedParams ) ]
+                |> Http.jsonBody
 
         request =
-            Http.post apiUrl body movieDecoder
+            postRequest session "/api/movies" body movieDecoder
     in
         Http.send MovieCreated request

@@ -21,7 +21,7 @@ update msg model =
             { model | screeningList = Failure "Something went wrong" } ! []
 
         HandleDeleteScreeningClick room ->
-            model ! [ deleteScreening room ]
+            model ! [ deleteScreening model.session room ]
 
         GoToNewScreening ->
             model ! [ Navigation.newUrl (toPath NewScreeningRoute) ]

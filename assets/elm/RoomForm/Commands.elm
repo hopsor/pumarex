@@ -2,25 +2,23 @@ module RoomForm.Commands exposing (createRoom)
 
 import Decoders exposing (roomDecoder)
 import Json.Encode as Encode
-import Model exposing (RoomForm)
+import Model exposing (Session, RoomForm)
 import Http
 import RoomForm.Messages exposing (Msg(..))
 import Dict
 import List.Extra exposing (elemIndices)
+import Helpers exposing (postRequest)
 
 
-createRoom : RoomForm -> Cmd Msg
-createRoom roomForm =
+createRoom : Session -> RoomForm -> Cmd Msg
+createRoom session roomForm =
     let
-        apiUrl =
-            "/api/rooms"
-
         body =
             encodeRoomForm roomForm
                 |> Http.jsonBody
 
         request =
-            Http.post apiUrl body roomDecoder
+            postRequest session "/api/rooms" body roomDecoder
     in
         Http.send RoomCreated request
 

@@ -111,7 +111,7 @@ update msg model =
                 { model | roomForm = updatedRoomForm } ! []
 
         HandleSubmit ->
-            model ! [ createRoom model.roomForm ]
+            model ! [ createRoom model.session model.roomForm ]
 
         RoomCreated (Ok response) ->
             model ! [ Navigation.newUrl (toPath RoomsRoute) ]

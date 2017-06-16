@@ -127,17 +127,17 @@ urlUpdate currentRoute model =
 
         RoomsRoute ->
             ( { model | route = currentRoute, roomList = Requesting }
-            , Cmd.map RoomListMsg (fetchRooms)
+            , Cmd.map RoomListMsg (fetchRooms model.session)
             )
 
         ScreeningsRoute ->
             ( { model | route = currentRoute, screeningList = Requesting }
-            , Cmd.map ScreeningListMsg (fetchScreenings)
+            , Cmd.map ScreeningListMsg (fetchScreenings model.session)
             )
 
         NewScreeningRoute ->
             ( { model | route = currentRoute }
-            , Cmd.map ScreeningFormMsg (loadScreeningForm)
+            , Cmd.map ScreeningFormMsg (loadScreeningForm model.session)
             )
 
         _ ->
