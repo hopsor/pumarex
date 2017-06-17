@@ -18,6 +18,7 @@ import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
 import ScreeningForm.Commands exposing (loadScreeningForm)
+import BoxOffice.Commands exposing (fetchAvailableScreenings)
 import Navigation
 import Routing exposing (toPath, Route(..))
 import Ports exposing (destroySessionData)
@@ -148,6 +149,11 @@ urlUpdate currentRoute model =
         NewScreeningRoute ->
             ( { model | route = currentRoute }
             , Cmd.map ScreeningFormMsg (loadScreeningForm model.session)
+            )
+
+        BoxOfficeRoute ->
+            ( { model | route = currentRoute }
+            , Cmd.map BoxOfficeMsg (fetchAvailableScreenings model.session)
             )
 
         _ ->

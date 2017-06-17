@@ -18,6 +18,7 @@ type alias Model =
     , roomForm : RoomForm
     , screeningList : RemoteData String ScreeningList
     , screeningForm : ScreeningForm
+    , boxOffice : BoxOffice
     , sessionForm : SessionForm
     , session : Session
     , loggedIn : Bool
@@ -99,6 +100,12 @@ type alias ScreeningList =
     List Screening
 
 
+type alias BoxOffice =
+    { availableScreenings : RemoteData String ScreeningList
+    , selectedScreening : Maybe Screening
+    }
+
+
 type alias Session =
     { id : Int
     , email : String
@@ -135,6 +142,7 @@ initialModel loggedIn session route =
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , screeningList = NotRequested
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
+    , boxOffice = { availableScreenings = NotRequested, selectedScreening = Nothing }
     , sessionForm = { email = "", password = "" }
     , session = session
     , loggedIn = loggedIn
