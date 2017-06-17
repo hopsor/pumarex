@@ -20,3 +20,6 @@ update msg model =
 
         GoToScreenings ->
             model ! [ Navigation.newUrl (toPath ScreeningsRoute) ]
+
+        GoToBoxOffice ->
+            model ! [ Navigation.newUrl (toPath BoxOfficeRoute) ]

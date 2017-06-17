@@ -13,6 +13,7 @@ import RoomList.Update
 import ScreeningForm.Update
 import ScreeningList.Update
 import SessionForm.Update
+import BoxOffice.Update
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
@@ -111,6 +112,15 @@ update msg model =
             in
                 ( newModel
                 , Cmd.map SessionFormMsg cmd
+                )
+
+        BoxOfficeMsg subMsg ->
+            let
+                ( newModel, cmd ) =
+                    BoxOffice.Update.update subMsg model
+            in
+                ( newModel
+                , Cmd.map BoxOfficeMsg cmd
                 )
 
         Logout ->

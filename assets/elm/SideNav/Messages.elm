@@ -6,3 +6,4 @@ type Msg
     | GoToMovies
     | GoToRooms
     | GoToScreenings
+    | GoToBoxOffice

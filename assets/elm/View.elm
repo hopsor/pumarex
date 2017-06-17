@@ -15,6 +15,7 @@ import RoomList.View
 import ScreeningForm.View
 import ScreeningList.View
 import SessionForm.View
+import BoxOffice.View
 import Navigation
 
 
@@ -89,6 +90,9 @@ page model =
 
         NewSessionRoute ->
             Html.map SessionFormMsg <| SessionForm.View.formView model
+
+        BoxOfficeRoute ->
+            Html.map BoxOfficeMsg <| BoxOffice.View.boxOfficeView model
 
         NotFoundRoute ->
             notFoundView

@@ -24,6 +24,9 @@ sideNavView model =
 
         screeningsNavClass =
             classList [ ( "current", model.route == Routing.ScreeningsRoute || model.route == Routing.NewScreeningRoute ) ]
+
+        boxOfficeNavClass =
+            classList [ ( "current", model.route == Routing.BoxOfficeRoute ) ]
     in
         nav []
             [ ul []
@@ -39,7 +42,7 @@ sideNavView model =
                     [ div [ class "icon icon-calendar" ] []
                     , text "Screenings"
                     ]
-                , li []
+                , li [ boxOfficeNavClass, onClick GoToBoxOffice ]
                     [ div [ class "icon icon-ticket" ] []
                     , text "Box Office"
                     ]

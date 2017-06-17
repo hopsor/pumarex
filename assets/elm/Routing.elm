@@ -13,6 +13,7 @@ type Route
     | NewScreeningRoute
     | ScreeningsRoute
     | NewSessionRoute
+    | BoxOfficeRoute
     | NotFoundRoute
 
 
@@ -43,6 +44,9 @@ toPath route =
         NewSessionRoute ->
             "/sessions/new"
 
+        BoxOfficeRoute ->
+            "/box-office"
+
         NotFoundRoute ->
             "/not-found"
 
@@ -56,8 +60,9 @@ matchers =
         , map NewRoomRoute <| s "rooms" </> s "new"
         , map RoomsRoute <| s "rooms"
         , map NewScreeningRoute <| s "screenings" </> s "new"
-        , map NewSessionRoute <| s "sessions" </> s "new"
         , map ScreeningsRoute <| s "screenings"
+        , map NewSessionRoute <| s "sessions" </> s "new"
+        , map BoxOfficeRoute <| s "box-office"
         ]
 
 
