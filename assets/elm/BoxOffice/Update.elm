@@ -3,6 +3,7 @@ module BoxOffice.Update exposing (..)
 import BoxOffice.Messages exposing (..)
 import Model exposing (..)
 import List.Extra as ListExtra
+import Phoenix.Channel as Channel
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
