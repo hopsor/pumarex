@@ -21,7 +21,9 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": (path) => !path.includes('elm-stuff')
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -53,7 +55,7 @@ exports.config = {
       elmFolder: "elm",
       mainModules: ["Main.elm"],
       outputFolder: "../js",
-      makeParameters: ['--debug']      
+      makeParameters: ['--debug']
     },
     sass:{
       mode: 'native',
