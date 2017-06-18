@@ -1,7 +1,7 @@
 module SessionForm.Messages exposing (..)
 
 import Http
-import Model exposing (Session)
+import DataModel exposing (Session)
 
 
 type Msg

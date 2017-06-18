@@ -2,7 +2,7 @@ module SessionForm.Commands exposing (..)
 
 import Decoders exposing (sessionDecoder)
 import Json.Encode as Encode
-import Model exposing (SessionForm)
+import DataModel exposing (SessionForm)
 import Http
 import SessionForm.Messages exposing (Msg(..))
 

@@ -3,7 +3,7 @@ module MovieList.Commands exposing (..)
 import Decoders exposing (movieListDecoder)
 import Http
 import Helpers exposing (getRequest)
-import Model exposing (Session)
+import DataModel exposing (Session)
 import MovieList.Messages exposing (Msg(..))
 
 

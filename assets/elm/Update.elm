@@ -2,6 +2,7 @@ module Update exposing (..)
 
 import Messages exposing (Msg(..))
 import Model exposing (..)
+import DataModel exposing (RemoteData(..), emptySession)
 import Routing exposing (Route(..))
 import Helpers exposing (getRoute)
 import Home.Update
@@ -22,6 +23,7 @@ import BoxOffice.Commands exposing (fetchAvailableScreenings)
 import Navigation
 import Routing exposing (toPath, Route(..))
 import Ports exposing (destroySessionData)
+import Phoenix.Socket
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -126,6 +128,15 @@ update msg model =
 
         Logout ->
             { model | session = emptySession, loggedIn = False } ! [ destroySessionData (), Navigation.newUrl (toPath NewSessionRoute) ]
+
+        PhoenixMsg msg ->
+            let
+                ( phxSocket, phxCmd ) =
+                    Phoenix.Socket.update msg model.phxSocket
+            in
+                ( { model | phxSocket = phxSocket }
+                , Cmd.map PhoenixMsg phxCmd
+                )
 
 
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )

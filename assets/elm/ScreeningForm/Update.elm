@@ -3,6 +3,7 @@ module ScreeningForm.Update exposing (..)
 import ScreeningForm.Messages exposing (..)
 import ScreeningForm.Commands exposing (createScreening)
 import Model exposing (..)
+import DataModel exposing (RemoteData(..))
 import Navigation
 import Routing exposing (toPath, Route(..))
 import Dict

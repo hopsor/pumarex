@@ -2,7 +2,7 @@ module MovieForm.Commands exposing (..)
 
 import Decoders exposing (movieDecoder)
 import Json.Encode as Encode
-import Model exposing (Session, MovieForm)
+import DataModel exposing (Session, MovieForm)
 import Http
 import MovieForm.Messages exposing (Msg(..))
 import Dict

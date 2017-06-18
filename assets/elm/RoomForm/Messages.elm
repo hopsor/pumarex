@@ -1,7 +1,7 @@
 module RoomForm.Messages exposing (..)
 
 import Http
-import Model exposing (Room)
+import DataModel exposing (Room)
 
 
 type Msg

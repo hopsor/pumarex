@@ -1,7 +1,7 @@
 module RoomList.Messages exposing (..)
 
 import Http
-import Model exposing (Room, RoomList)
+import DataModel exposing (Room, RoomList)
 
 
 type Msg

@@ -2,6 +2,7 @@ module BoxOffice.Update exposing (..)
 
 import BoxOffice.Messages exposing (..)
 import Model exposing (..)
+import DataModel exposing (RemoteData(..))
 import List.Extra as ListExtra
 
 

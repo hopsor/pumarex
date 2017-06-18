@@ -2,7 +2,7 @@ module ScreeningForm.Commands exposing (..)
 
 import Decoders exposing (screeningDecoder, movieListDecoder, roomListDecoder)
 import Json.Encode as Encode
-import Model exposing (Session, ScreeningForm)
+import DataModel exposing (Session, ScreeningForm)
 import Http
 import ScreeningForm.Messages exposing (Msg(..))
 import Dict

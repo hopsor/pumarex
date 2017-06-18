@@ -2,7 +2,7 @@ module RoomForm.Commands exposing (createRoom)
 
 import Decoders exposing (roomDecoder)
 import Json.Encode as Encode
-import Model exposing (Session, RoomForm)
+import DataModel exposing (Session, RoomForm)
 import Http
 import RoomForm.Messages exposing (Msg(..))
 import Dict

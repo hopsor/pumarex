@@ -1,10 +1,11 @@
 module Helpers exposing (..)
 
-import Model exposing (Session)
+import DataModel exposing (Session)
 import Navigation
 import Routing exposing (parseLocation, Route(..))
 import Http
 import Json.Decode as Json
+import Phoenix.Socket
 
 
 getRoute : Bool -> Navigation.Location -> Route

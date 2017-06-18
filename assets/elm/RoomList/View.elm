@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import RoomList.Messages exposing (..)
 import Model exposing (..)
+import DataModel exposing (RemoteData(..), Room, RoomList)
 
 
 indexView : Model -> Html Msg

@@ -1,6 +1,6 @@
 module RoomList.Commands exposing (..)
 
-import Model exposing (Session, Room)
+import DataModel exposing (Session, Room)
 import Decoders exposing (roomListDecoder)
 import Http
 import Json.Decode as JD

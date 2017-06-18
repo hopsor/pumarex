@@ -1,7 +1,7 @@
 module MovieList.Messages exposing (..)
 
 import Http
-import Model exposing (MovieList)
+import DataModel exposing (MovieList)
 
 
 type Msg

@@ -2,7 +2,7 @@ module BoxOffice.Commands exposing (..)
 
 import Decoders exposing (screeningListDecoder)
 import Json.Encode as Encode
-import Model exposing (Session)
+import DataModel exposing (Session)
 import Http
 import BoxOffice.Messages exposing (Msg(..))
 import Dict

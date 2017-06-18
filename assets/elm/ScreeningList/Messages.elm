@@ -1,7 +1,7 @@
 module ScreeningList.Messages exposing (..)
 
 import Http
-import Model exposing (Screening, ScreeningList)
+import DataModel exposing (Screening, ScreeningList)
 
 
 type Msg
