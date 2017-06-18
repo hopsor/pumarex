@@ -2,7 +2,6 @@ module MovieList.Update exposing (..)
 
 import MovieList.Messages exposing (..)
 import Model exposing (..)
-import DataModel exposing (..)
 import Navigation
 import Routing exposing (toPath, Route(..))
 

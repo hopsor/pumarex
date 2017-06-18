@@ -5,7 +5,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (..)
-import DataModel exposing (RemoteData(..), Movie, MovieList)
 
 
 indexView : Model -> Html Msg

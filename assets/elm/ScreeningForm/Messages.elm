@@ -1,7 +1,7 @@
 module ScreeningForm.Messages exposing (..)
 
 import Http
-import DataModel exposing (Screening, RoomList, MovieList)
+import Model exposing (Screening, RoomList, MovieList)
 
 
 type Msg

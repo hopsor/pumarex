@@ -11,7 +11,6 @@ import ScreeningList.Messages exposing (..)
 import SessionForm.Messages exposing (..)
 import BoxOffice.Messages exposing (..)
 import Navigation exposing (Location)
-import Phoenix.Socket
 
 
 type Msg
@@ -27,4 +26,3 @@ type Msg
     | SessionFormMsg SessionForm.Messages.Msg
     | BoxOfficeMsg BoxOffice.Messages.Msg
     | Logout
-    | PhoenixMsg (Phoenix.Socket.Msg Msg)

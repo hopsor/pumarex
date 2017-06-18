@@ -5,7 +5,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import ScreeningList.Messages exposing (..)
 import Model exposing (..)
-import DataModel exposing (RemoteData(..), ScreeningList, Screening)
 
 
 indexView : Model -> Html Msg

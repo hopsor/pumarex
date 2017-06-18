@@ -3,10 +3,8 @@ module Main exposing (..)
 import Navigation
 import View exposing (view)
 import Model exposing (..)
-import DataModel exposing (emptySession)
 import Update exposing (..)
 import Messages exposing (Msg(..))
-import Subscriptions exposing (subscriptions)
 import Routing exposing (..)
 import Helpers exposing (getRoute)
 
@@ -26,6 +24,11 @@ init flags location =
                     emptySession
     in
         urlUpdate currentRoute (initialModel flags.loggedIn session currentRoute)
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
 
 main : Program Flags Model Msg

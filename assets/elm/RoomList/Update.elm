@@ -3,7 +3,6 @@ module RoomList.Update exposing (..)
 import RoomList.Messages exposing (..)
 import RoomList.Commands exposing (deleteRoom)
 import Model exposing (..)
-import DataModel exposing (RemoteData(..))
 import Navigation
 import Routing exposing (toPath, Route(..))
 import List.Extra exposing (filterNot)

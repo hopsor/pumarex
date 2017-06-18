@@ -1,7 +1,7 @@
 module MovieForm.Messages exposing (..)
 
 import Http
-import DataModel exposing (Movie)
+import Model exposing (Movie)
 
 
 type Msg

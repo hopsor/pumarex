@@ -1,6 +1,6 @@
 module BoxOffice.Messages exposing (..)
 
-import DataModel exposing (ScreeningList)
+import Model exposing (ScreeningList)
 import Http
 
 

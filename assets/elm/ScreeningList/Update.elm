@@ -3,7 +3,6 @@ module ScreeningList.Update exposing (..)
 import ScreeningList.Messages exposing (..)
 import ScreeningList.Commands exposing (deleteScreening)
 import Model exposing (..)
-import DataModel exposing (RemoteData(..))
 import Navigation
 import Routing exposing (toPath, Route(..))
 import List.Extra exposing (filterNot)

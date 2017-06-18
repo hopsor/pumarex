@@ -1,6 +1,6 @@
 module ScreeningList.Commands exposing (..)
 
-import DataModel exposing (Session, Screening)
+import Model exposing (Session, Screening)
 import Decoders exposing (screeningListDecoder)
 import Http
 import Json.Decode as JD

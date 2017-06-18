@@ -1,6 +1,6 @@
 port module Ports exposing (..)
 
-import DataModel exposing (Session)
+import Model exposing (Session)
 
 
 -- In Ports
