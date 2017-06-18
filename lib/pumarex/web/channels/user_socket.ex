@@ -1,8 +1,9 @@
 defmodule Pumarex.Web.UserSocket do
   use Phoenix.Socket
+  use Guardian.Phoenix.Socket
 
   ## Channels
-  # channel "room:*", Pumarex.Web.RoomChannel
+  channel "screening:*", Pumarex.Web.ScreeningChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
