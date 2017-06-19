@@ -1,0 +1,18 @@
+#box_office{
+  .online-ticket-sellers{
+    .ticket-seller{
+      width: 100px;
+      display: inline-block;
+      text-align: center;
+      
+      img {
+        width: 70px;
+        border-radius: 35px;
+      }
+
+      span{
+        display: block;
+      }
+    }
+  }
+}

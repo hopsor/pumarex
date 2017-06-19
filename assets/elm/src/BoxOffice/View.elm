@@ -99,5 +99,7 @@ connectedUserView ( userId, payload ) =
             [ img
                 [ src user.avatar ]
                 []
-            , text user.fullName
+            , span
+                []
+                [ text user.fullName ]
             ]
