@@ -5,7 +5,10 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (..)
 import BoxOffice.Messages exposing (..)
+import Decoders exposing (ticketSellerDecoder)
 import Dict exposing (Dict)
+import Json.Decode as JD
+import Json.Encode as JE
 
 
 boxOfficeView : Model -> Html Msg
@@ -19,7 +22,7 @@ boxOfficeView model =
                 [ onInput ScreeningChanged ]
                 (screeningOptions model.boxOffice.availableScreenings)
             ]
-        , connectedTicketSellersView model
+        , connectedUsersView model
         ]
 
 
@@ -47,30 +50,54 @@ screeningOptions availableScreenings =
             ]
 
 
-connectedTicketSellersView : Model -> Html Msg
-connectedTicketSellersView model =
-    let
-        sellerView : ( String, List JD.Value ) -> Html Msg
-        sellerView =
-            \( sellerId, jdValue ) ->
-                div [ class "connected-seller" ] [ text sellerId ]
-
-        sellersViews =
-            model.boxOffice.presence
-                |> Dict.toList
-                |> List.map sellerView
-    in
-        case model.boxOffice.selectedScreening of
-            Just screening ->
-                div
+connectedUsersView : Model -> Html Msg
+connectedUsersView model =
+    case model.boxOffice.selectedScreening of
+        Just screening ->
+            div
+                []
+                [ h2
                     []
-                    [ h2
-                        []
-                        [ text "Connected Sellers" ]
-                    , div
-                        []
-                        sellersViews
-                    ]
+                    [ text "Connected Sellers" ]
+                , div
+                    [ class "online-ticket-sellers" ]
+                    (List.map connectedUserView (Dict.toList model.boxOffice.presence))
+                ]
 
-            Nothing ->
-                text ""
+        Nothing ->
+            text ""
+
+
+
+-- TODO: Find a better way of doing what is on let block
+
+
+connectedUserView : ( String, List JD.Value ) -> Html Msg
+connectedUserView ( userId, payload ) =
+    let
+        userData =
+            List.head payload
+
+        value =
+            case userData of
+                Just ud ->
+                    ud
+
+                Nothing ->
+                    JE.object []
+
+        user =
+            case JD.decodeValue ticketSellerDecoder value of
+                Ok user ->
+                    user
+
+                _ ->
+                    TicketSeller "" "" ""
+    in
+        div
+            [ class "ticket-seller" ]
+            [ img
+                [ src user.avatar ]
+                []
+            , text user.fullName
+            ]

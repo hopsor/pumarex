@@ -85,3 +85,12 @@ sessionDecoder =
         |: (field "jwt" string)
         |: (field "exp" int)
         |: (field "avatar_url" string)
+
+
+ticketSellerDecoder : JD.Decoder TicketSeller
+ticketSellerDecoder =
+    succeed
+        TicketSeller
+        |: (field "full_name" string)
+        |: (field "avatar" string)
+        |: (field "phx_ref" string)

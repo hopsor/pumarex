@@ -108,6 +108,13 @@ type alias BoxOffice =
     }
 
 
+type alias TicketSeller =
+    { fullName : String
+    , avatar : String
+    , phxRef : String
+    }
+
+
 type alias Session =
     { id : Int
     , email : String
