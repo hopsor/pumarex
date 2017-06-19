@@ -1,12 +1,23 @@
 defmodule Pumarex.Web.ScreeningChannel do
   use Pumarex.Web, :channel
+  alias Pumarex.Web.Presence
 
   def join("screening:" <> _screening_id, payload, socket) do
     if authorized?(payload) do
+      send(self(), :after_join)
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
+  end
+
+  def handle_info(:after_join, socket) do
+    user = Guardian.Phoenix.Socket.current_resource(socket)
+    push socket, "presence_state", Presence.list(socket)
+    {:ok, _} = Presence.track(socket, user.id, %{
+      online_at: inspect(System.system_time(:seconds))
+    })
+    {:noreply, socket}
   end
 
   # Channels can be used in a request/response fashion
