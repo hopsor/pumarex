@@ -12,6 +12,8 @@ defmodule Pumarex.Application do
       supervisor(Pumarex.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Pumarex.Web.Endpoint, []),
+      # Start the presence tracker
+      supervisor(Pumarex.Web.Presence, [])
       # Start your own worker by calling: Pumarex.Worker.start_link(arg1, arg2, arg3)
       # worker(Pumarex.Worker, [arg1, arg2, arg3]),
     ]
