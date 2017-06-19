@@ -2,7 +2,7 @@ module BoxOffice.Messages exposing (..)
 
 import Model exposing (ScreeningList)
 import Http
-import Dict
+import Dict exposing (Dict)
 import Json.Decode as JD
 
 

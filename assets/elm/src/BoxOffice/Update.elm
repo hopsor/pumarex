@@ -4,6 +4,7 @@ import BoxOffice.Messages exposing (..)
 import Model exposing (..)
 import List.Extra as ListExtra
 import Phoenix.Channel as Channel
+import Dict exposing (Dict)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -46,7 +47,7 @@ update msg model =
                             ListExtra.find (\screening -> screening.id == screeningId) screeningList
 
                         newBoxOffice =
-                            { oldBoxOffice | selectedScreening = selectedScreening }
+                            { oldBoxOffice | selectedScreening = selectedScreening, presence = Dict.empty }
                     in
                         { model | boxOffice = newBoxOffice } ! []
 
@@ -61,5 +62,4 @@ update msg model =
                 newBoxOffice =
                     { oldBoxOffice | presence = presenceState }
             in
-                { model | presence = Debug.log "presenceState " presenceState }
-                    ! []
+                { model | boxOffice = newBoxOffice } ! []

@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (..)
 import BoxOffice.Messages exposing (..)
+import Dict exposing (Dict)
 
 
 boxOfficeView : Model -> Html Msg
@@ -18,6 +19,7 @@ boxOfficeView model =
                 [ onInput ScreeningChanged ]
                 (screeningOptions model.boxOffice.availableScreenings)
             ]
+        , connectedTicketSellersView model
         ]
 
 
@@ -42,4 +44,23 @@ screeningOptions availableScreenings =
             [ option
                 [ value "" ]
                 [ text "Not loaded" ]
+            ]
+
+
+connectedTicketSellersView : Model -> Html Msg
+connectedTicketSellersView model =
+    let
+        sellersViews =
+            model.boxOffice.presence
+                |> Dict.keys
+                |> List.map (\a -> div [] [ text a ])
+    in
+        div
+            []
+            [ h2
+                []
+                [ text "Connected Sellers" ]
+            , div
+                []
+                sellersViews
             ]
