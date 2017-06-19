@@ -50,17 +50,27 @@ screeningOptions availableScreenings =
 connectedTicketSellersView : Model -> Html Msg
 connectedTicketSellersView model =
     let
+        sellerView : ( String, List JD.Value ) -> Html Msg
+        sellerView =
+            \( sellerId, jdValue ) ->
+                div [ class "connected-seller" ] [ text sellerId ]
+
         sellersViews =
             model.boxOffice.presence
-                |> Dict.keys
-                |> List.map (\a -> div [] [ text a ])
+                |> Dict.toList
+                |> List.map sellerView
     in
-        div
-            []
-            [ h2
-                []
-                [ text "Connected Sellers" ]
-            , div
-                []
-                sellersViews
-            ]
+        case model.boxOffice.selectedScreening of
+            Just screening ->
+                div
+                    []
+                    [ h2
+                        []
+                        [ text "Connected Sellers" ]
+                    , div
+                        []
+                        sellersViews
+                    ]
+
+            Nothing ->
+                text ""
