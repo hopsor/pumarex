@@ -2,6 +2,7 @@ module Model exposing (..)
 
 import Routing exposing (Route)
 import Dict exposing (Dict)
+import Json.Decode as JD
 
 
 type RemoteData e a
@@ -103,6 +104,7 @@ type alias ScreeningList =
 type alias BoxOffice =
     { availableScreenings : RemoteData String ScreeningList
     , selectedScreening : Maybe Screening
+    , presence : Dict String (List JD.Value)
     }
 
 
@@ -142,7 +144,7 @@ initialModel loggedIn session route =
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , screeningList = NotRequested
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
-    , boxOffice = { availableScreenings = NotRequested, selectedScreening = Nothing }
+    , boxOffice = { availableScreenings = NotRequested, selectedScreening = Nothing, presence = Dict.empty }
     , sessionForm = { email = "", password = "" }
     , session = session
     , loggedIn = loggedIn

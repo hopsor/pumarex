@@ -4,6 +4,7 @@ import Model exposing (..)
 import BoxOffice.Messages exposing (Msg(..))
 import Phoenix
 import Phoenix.Socket as Socket exposing (Socket)
+import Phoenix.Presence as Presence exposing (Presence)
 import Phoenix.Channel as Channel
 
 
@@ -15,8 +16,13 @@ subscriptions model =
                 channelName =
                     "screening:" ++ (toString screening.id)
 
+                presence =
+                    Presence.create
+                        |> Presence.onChange UpdatePresence
+
                 channel =
                     Channel.init channelName
+                        |> Channel.withPresence presence
                         |> Channel.withDebug
 
                 socketSub =

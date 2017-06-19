@@ -52,3 +52,14 @@ update msg model =
 
                 _ ->
                     model ! []
+
+        UpdatePresence presenceState ->
+            let
+                oldBoxOffice =
+                    model.boxOffice
+
+                newBoxOffice =
+                    { oldBoxOffice | presence = presenceState }
+            in
+                { model | presence = Debug.log "presenceState " presenceState }
+                    ! []
