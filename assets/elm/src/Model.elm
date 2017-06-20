@@ -105,6 +105,7 @@ type alias BoxOffice =
     { availableScreenings : RemoteData String ScreeningList
     , selectedScreening : Maybe Screening
     , presence : Dict String (List JD.Value)
+    , room : Maybe Room
     }
 
 
@@ -151,7 +152,7 @@ initialModel loggedIn session route =
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , screeningList = NotRequested
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
-    , boxOffice = { availableScreenings = NotRequested, selectedScreening = Nothing, presence = Dict.empty }
+    , boxOffice = { availableScreenings = NotRequested, selectedScreening = Nothing, presence = Dict.empty, room = Nothing }
     , sessionForm = { email = "", password = "" }
     , session = session
     , loggedIn = loggedIn

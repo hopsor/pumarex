@@ -22,6 +22,7 @@ subscriptions model =
 
                 channel =
                     Channel.init channelName
+                        |> Channel.on "room_loaded" (\msg -> RoomLoaded msg)
                         |> Channel.withPresence presence
                         |> Channel.withDebug
 

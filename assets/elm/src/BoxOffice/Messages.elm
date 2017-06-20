@@ -11,3 +11,4 @@ type Msg
     | FetchScreenings (Result Http.Error ScreeningList)
     | ScreeningChanged String
     | UpdatePresence (Dict String (List JD.Value))
+    | RoomLoaded JD.Value

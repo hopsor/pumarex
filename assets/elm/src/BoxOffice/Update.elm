@@ -5,6 +5,8 @@ import Model exposing (..)
 import List.Extra as ListExtra
 import Phoenix.Channel as Channel
 import Dict exposing (Dict)
+import Json.Decode as JD
+import Decoders exposing (roomDecoder)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -61,5 +63,23 @@ update msg model =
 
                 newBoxOffice =
                     { oldBoxOffice | presence = presenceState }
+            in
+                { model | boxOffice = newBoxOffice } ! []
+
+        RoomLoaded payload ->
+            let
+                room =
+                    case JD.decodeValue roomDecoder payload of
+                        Ok decodedRoom ->
+                            Just decodedRoom
+
+                        _ ->
+                            Nothing
+
+                oldBoxOffice =
+                    model.boxOffice
+
+                newBoxOffice =
+                    { oldBoxOffice | room = room }
             in
                 { model | boxOffice = newBoxOffice } ! []
