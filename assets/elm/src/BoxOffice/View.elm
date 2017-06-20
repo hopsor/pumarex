@@ -149,4 +149,4 @@ rowView room row totalColumns =
 
 seatView : Room -> Int -> Int -> Html Msg
 seatView room row column =
-    div [ class "seat" ] []
+    div [ class "seat", onClick (SeatClicked row column) ] []

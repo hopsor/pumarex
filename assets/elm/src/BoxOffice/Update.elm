@@ -3,9 +3,12 @@ module BoxOffice.Update exposing (..)
 import BoxOffice.Messages exposing (..)
 import Model exposing (..)
 import List.Extra as ListExtra
+import Phoenix
 import Phoenix.Channel as Channel
+import Phoenix.Push as Push
 import Dict exposing (Dict)
 import Json.Decode as JD
+import Json.Encode as JE
 import Decoders exposing (roomDecoder)
 
 
@@ -83,3 +86,19 @@ update msg model =
                     { oldBoxOffice | room = room }
             in
                 { model | boxOffice = newBoxOffice } ! []
+
+        SeatClicked row column ->
+            let
+                topic =
+                    case model.boxOffice.selectedScreening of
+                        Just screening ->
+                            "screening:" ++ (toString screening.id)
+
+                        _ ->
+                            "screening:0"
+
+                push =
+                    Push.init topic "seat_status"
+                        |> Push.withPayload (JE.object [ ( "row", JE.int row ), ( "column", JE.int column ) ])
+            in
+                model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]

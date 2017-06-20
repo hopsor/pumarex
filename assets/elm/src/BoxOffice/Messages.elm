@@ -12,3 +12,4 @@ type Msg
     | ScreeningChanged String
     | UpdatePresence (Dict String (List JD.Value))
     | RoomLoaded JD.Value
+    | SeatClicked Int Int

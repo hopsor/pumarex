@@ -4,7 +4,7 @@
       width: 100px;
       display: inline-block;
       text-align: center;
-      
+
       img {
         width: 70px;
         border-radius: 35px;
@@ -13,6 +13,16 @@
       span{
         display: block;
       }
+    }
+  }
+
+  .room{
+    .seat{
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin: 0 7px 7px 0;
+      border: 1px solid #000;
     }
   }
 }

@@ -40,6 +40,11 @@ defmodule Pumarex.Web.ScreeningChannel do
     {:noreply, socket}
   end
 
+  def handle_in("seat_status", %{"row" => row, "column" => column}, socket) do
+    IO.inspect [row, column]
+    {:noreply, socket}
+  end
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true
