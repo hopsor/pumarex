@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (..)
 import BoxOffice.Messages exposing (..)
+import BoxOffice.Helpers exposing (..)
 import Decoders exposing (ticketSellerDecoder)
 import Dict exposing (Dict)
 import Json.Decode as JD
@@ -23,6 +24,7 @@ boxOfficeView model =
                 (screeningOptions model.boxOffice.availableScreenings)
             ]
         , connectedUsersView model
+        , roomViewWrapper model
         ]
 
 
@@ -103,3 +105,48 @@ connectedUserView ( userId, payload ) =
                 []
                 [ text user.fullName ]
             ]
+
+
+roomViewWrapper : Model -> Html Msg
+roomViewWrapper model =
+    case model.boxOffice.room of
+        Just room ->
+            roomView room
+
+        Nothing ->
+            text "Room not loaded"
+
+
+roomView : Room -> Html Msg
+roomView room =
+    let
+        rows =
+            roomRowsCount room
+
+        columns =
+            roomColumnsCount room
+
+        rowElements =
+            rows
+                |> List.range 1
+                |> List.map (\row -> rowView room row columns)
+    in
+        div
+            [ class "room" ]
+            rowElements
+
+
+rowView : Room -> Int -> Int -> Html Msg
+rowView room row totalColumns =
+    let
+        columns =
+            List.range 1 totalColumns
+    in
+        div
+            [ class "room-row" ]
+            (List.map (\column -> seatView room row column) columns)
+
+
+seatView : Room -> Int -> Int -> Html Msg
+seatView room row column =
+    div [ class "seat" ] []
