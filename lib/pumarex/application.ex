@@ -13,7 +13,10 @@ defmodule Pumarex.Application do
       # Start the endpoint when the application starts
       supervisor(Pumarex.Web.Endpoint, []),
       # Start the presence tracker
-      supervisor(Pumarex.Web.Presence, [])
+      supervisor(Pumarex.Web.Presence, []),
+      # Start the Seat Locking supervisor
+      supervisor(Pumarex.SeatLocking.Supervisor, []),
+
       # Start your own worker by calling: Pumarex.Worker.start_link(arg1, arg2, arg3)
       # worker(Pumarex.Worker, [arg1, arg2, arg3]),
     ]
