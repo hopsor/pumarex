@@ -41,8 +41,17 @@ defmodule Pumarex.SeatLocking.Monitor do
   end
 
   def handle_call({:switch_lock, seat}, _from, seats) do
-    seats = seats ++ [seat]
-    {:reply, seats, seats}
+    %{row: row, column: column, user_id: user_id} = seat
+
+    updated_seats =
+      Enum.find(seats, fn (s) -> s.row == seat.row && s.column == seat.column end)
+      |> case do
+        nil -> seats ++ [seat]
+        %{user_id: uid} when uid == user_id -> seats -- [seat]
+        %{user_id: uid} when uid != user_id -> seats
+      end
+
+    {:reply, updated_seats, updated_seats}
   end
 
   def handle_call({:clear_locks_from_user, user_id}, _from, seats) do
