@@ -45,4 +45,35 @@
       border-color: transparent;
     }
   }
+
+  .room-legend{
+    list-style-type: none;
+
+    li{
+      display: inline;
+      margin-right: 15px;
+      vertical-align: bottom;
+
+      &.sold::before{
+        background-color: red;
+      }
+
+      &.locked-by-you::before{
+        background-color: green;
+      }
+
+      &.locked-by-someone::before{
+        background-color: purple;
+      }
+    }
+
+    li::before{
+      content: " ";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      vertical-align: bottom;
+      margin-right: 5px;
+    }
+  }
 }

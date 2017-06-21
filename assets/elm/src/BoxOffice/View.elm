@@ -111,10 +111,30 @@ roomViewWrapper : Model -> Html Msg
 roomViewWrapper model =
     case model.boxOffice.room of
         Just room ->
-            roomView room model.boxOffice model.session
+            div
+                [ id "room_view_wrapper" ]
+                [ roomView room model.boxOffice model.session
+                , roomLegendView
+                ]
 
         Nothing ->
             text "Room not loaded"
+
+
+roomLegendView : Html Msg
+roomLegendView =
+    ul
+        [ class "room-legend" ]
+        [ li
+            [ class "sold" ]
+            [ text "Sold" ]
+        , li
+            [ class "locked-by-you" ]
+            [ text "Locked by you" ]
+        , li
+            [ class "locked-by-someone" ]
+            [ text "Locked by someone" ]
+        ]
 
 
 roomView : Room -> BoxOffice -> Session -> Html Msg
