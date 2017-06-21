@@ -93,8 +93,8 @@ seatStatusClass status =
         LockedBySomeone ->
             "locked-by-someone"
 
-        _ ->
-            ""
+        Available ->
+            "available"
 
 
 

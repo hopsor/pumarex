@@ -29,12 +29,17 @@
     .seat{
       border-color: #000;
 
+      &.available{
+        cursor: pointer;
+      }
+
       &.sold{
         background-color: red;
       }
 
       &.locked-by-you{
         background-color: green;
+        cursor: pointer;
       }
 
       &.locked-by-someone{
