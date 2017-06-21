@@ -1,6 +1,6 @@
 module BoxOffice.Helpers exposing (..)
 
-import Model exposing (Room, BoxOffice, Session, SeatList, LockedSeatList)
+import Model exposing (Room, BoxOffice, Session, SeatList, LockedSeatList, SeatStatus(..))
 import List.Extra as ListExtra
 
 
@@ -46,7 +46,7 @@ seatClasses row column boxOffice session =
     in
         case kos of
             "seat" ->
-                kos ++ " " ++ (seatStatus row column boxOffice.lockedSeats session.id)
+                kos ++ " " ++ ((seatStatus row column boxOffice.lockedSeats session.id) |> seatStatusClass)
 
             _ ->
                 kos
@@ -67,7 +67,7 @@ isSeat row column seats =
     List.any (\s -> s.row == row && s.column == column) seats
 
 
-seatStatus : Int -> Int -> LockedSeatList -> Int -> String
+seatStatus : Int -> Int -> LockedSeatList -> Int -> SeatStatus
 seatStatus row column lockedSeats userId =
     let
         findSeat =
@@ -76,9 +76,54 @@ seatStatus row column lockedSeats userId =
         case ListExtra.find findSeat lockedSeats of
             Just lockedSeat ->
                 if lockedSeat.userId == userId then
-                    "locked-by-you"
+                    LockedByYou
                 else
-                    "locked-by-someone"
+                    LockedBySomeone
 
             _ ->
-                ""
+                Available
+
+
+seatStatusClass : SeatStatus -> String
+seatStatusClass status =
+    case status of
+        LockedByYou ->
+            "locked-by-you"
+
+        LockedBySomeone ->
+            "locked-by-someone"
+
+        _ ->
+            ""
+
+
+
+-- TODO: Check if the seat is sold
+
+
+seatIsClickable : Int -> Int -> BoxOffice -> Session -> Bool
+seatIsClickable row column boxOffice session =
+    let
+        room =
+            boxOffice.room
+                |> Maybe.withDefault (Room 0 "" (Just []) (Just 0))
+
+        seats =
+            room.seats
+                |> Maybe.withDefault []
+
+        isNotEmpty =
+            isSeat row column seats
+    in
+        if isNotEmpty == True then
+            case (seatStatus row column boxOffice.lockedSeats session.id) of
+                Available ->
+                    True
+
+                LockedByYou ->
+                    True
+
+                _ ->
+                    False
+        else
+            False

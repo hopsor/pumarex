@@ -1,6 +1,7 @@
 module BoxOffice.Update exposing (..)
 
 import BoxOffice.Messages exposing (..)
+import BoxOffice.Helpers exposing (..)
 import Model exposing (..)
 import List.Extra as ListExtra
 import Phoenix
@@ -87,7 +88,6 @@ update msg model =
             in
                 { model | boxOffice = newBoxOffice } ! []
 
-        -- TODO: Implement real functionality
         LockedSeats payload ->
             let
                 payloadDecoder =
@@ -113,17 +113,20 @@ update msg model =
                 { model | boxOffice = newBoxOffice } ! []
 
         SeatClicked row column ->
-            let
-                topic =
-                    case model.boxOffice.selectedScreening of
-                        Just screening ->
-                            "screening:" ++ (toString screening.id)
+            if (seatIsClickable row column model.boxOffice model.session) then
+                let
+                    topic =
+                        case model.boxOffice.selectedScreening of
+                            Just screening ->
+                                "screening:" ++ (toString screening.id)
 
-                        _ ->
-                            "screening:0"
+                            _ ->
+                                "screening:0"
 
-                push =
-                    Push.init topic "seat_status"
-                        |> Push.withPayload (JE.object [ ( "row", JE.int row ), ( "column", JE.int column ) ])
-            in
-                model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
+                    push =
+                        Push.init topic "seat_status"
+                            |> Push.withPayload (JE.object [ ( "row", JE.int row ), ( "column", JE.int column ) ])
+                in
+                    model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
+            else
+                model ! []

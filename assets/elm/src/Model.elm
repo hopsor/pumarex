@@ -128,6 +128,12 @@ type alias LockedSeatList =
     List LockedSeat
 
 
+type SeatStatus
+    = Available
+    | LockedByYou
+    | LockedBySomeone
+
+
 type alias Session =
     { id : Int
     , email : String
