@@ -111,7 +111,8 @@ type alias BoxOffice =
 
 
 type alias TicketSeller =
-    { fullName : String
+    { id : Int
+    , fullName : String
     , avatar : String
     , phxRef : String
     }

@@ -94,7 +94,7 @@ connectedUserView ( userId, payload ) =
                     user
 
                 _ ->
-                    TicketSeller "" "" ""
+                    TicketSeller 0 "" "" ""
     in
         div
             [ class "ticket-seller" ]

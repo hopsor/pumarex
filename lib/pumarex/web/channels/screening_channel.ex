@@ -23,6 +23,7 @@ defmodule Pumarex.Web.ScreeningChannel do
     push socket, "locked_seats", %{locked_seats: Monitor.locked_seats(socket.assigns[:screening_id])}
 
     {:ok, _} = Presence.track(socket, user.id, %{
+      id: user.id,
       full_name: User.full_name(user),
       avatar: User.avatar_url(user)
     })
@@ -34,7 +35,6 @@ defmodule Pumarex.Web.ScreeningChannel do
     user = Guardian.Phoenix.Socket.current_resource(socket)
     locked_seats = Monitor.switch_lock(socket.assigns[:screening_id], %{row: row, column: column, user_id: user.id})
     broadcast! socket, "locked_seats", %{locked_seats: locked_seats}
-    IO.inspect locked_seats
     {:noreply, socket}
   end
 

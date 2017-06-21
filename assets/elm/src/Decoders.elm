@@ -91,6 +91,7 @@ ticketSellerDecoder : JD.Decoder TicketSeller
 ticketSellerDecoder =
     succeed
         TicketSeller
+        |: (field "id" int)
         |: (field "full_name" string)
         |: (field "avatar" string)
         |: (field "phx_ref" string)
