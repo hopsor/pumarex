@@ -106,6 +106,7 @@ type alias BoxOffice =
     , selectedScreening : Maybe Screening
     , presence : Dict String (List JD.Value)
     , room : Maybe Room
+    , lockedSeats : Maybe (List LockedSeat)
     }
 
 
@@ -113,6 +114,13 @@ type alias TicketSeller =
     { fullName : String
     , avatar : String
     , phxRef : String
+    }
+
+
+type alias LockedSeat =
+    { row : Int
+    , column : Int
+    , userId : Int
     }
 
 
@@ -144,6 +152,16 @@ emptySession =
     { id = 0, email = "", firstName = "", lastName = "", jwt = "", exp = 0, avatarUrl = "" }
 
 
+initialBoxOffice : BoxOffice
+initialBoxOffice =
+    { availableScreenings = NotRequested
+    , selectedScreening = Nothing
+    , presence = Dict.empty
+    , room = Nothing
+    , lockedSeats = Nothing
+    }
+
+
 initialModel : Bool -> Session -> Routing.Route -> Model
 initialModel loggedIn session route =
     { movieList = NotRequested
@@ -152,7 +170,7 @@ initialModel loggedIn session route =
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }
     , screeningList = NotRequested
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
-    , boxOffice = { availableScreenings = NotRequested, selectedScreening = Nothing, presence = Dict.empty, room = Nothing }
+    , boxOffice = initialBoxOffice
     , sessionForm = { email = "", password = "" }
     , session = session
     , loggedIn = loggedIn
