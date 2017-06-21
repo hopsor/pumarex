@@ -28,6 +28,18 @@
 
     .seat{
       border-color: #000;
+
+      &.sold{
+        background-color: red;
+      }
+
+      &.locked-by-you{
+        background-color: green;
+      }
+
+      &.locked-by-someone{
+        background-color: purple;
+      }
     }
     .floor{
       border-color: transparent;

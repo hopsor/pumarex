@@ -99,10 +99,10 @@ update msg model =
                 lockedSeats =
                     case ls of
                         Ok seats ->
-                            Just seats
+                            seats
 
                         _ ->
-                            Nothing
+                            []
 
                 oldBoxOffice =
                     model.boxOffice

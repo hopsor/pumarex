@@ -106,7 +106,7 @@ type alias BoxOffice =
     , selectedScreening : Maybe Screening
     , presence : Dict String (List JD.Value)
     , room : Maybe Room
-    , lockedSeats : Maybe LockedSeatList
+    , lockedSeats : LockedSeatList
     }
 
 
@@ -162,7 +162,7 @@ initialBoxOffice =
     , selectedScreening = Nothing
     , presence = Dict.empty
     , room = Nothing
-    , lockedSeats = Nothing
+    , lockedSeats = []
     }
 
 
