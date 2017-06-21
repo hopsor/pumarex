@@ -17,12 +17,20 @@
   }
 
   .room{
-    .seat{
+    .seat, .floor{
       width: 20px;
       height: 20px;
       display: inline-block;
       margin: 0 7px 7px 0;
-      border: 1px solid #000;
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .seat{
+      border-color: #000;
+    }
+    .floor{
+      border-color: transparent;
     }
   }
 }

@@ -111,14 +111,14 @@ roomViewWrapper : Model -> Html Msg
 roomViewWrapper model =
     case model.boxOffice.room of
         Just room ->
-            roomView room
+            roomView room model.boxOffice model.session
 
         Nothing ->
             text "Room not loaded"
 
 
-roomView : Room -> Html Msg
-roomView room =
+roomView : Room -> BoxOffice -> Session -> Html Msg
+roomView room boxOffice session =
     let
         rows =
             roomRowsCount room
@@ -129,24 +129,28 @@ roomView room =
         rowElements =
             rows
                 |> List.range 1
-                |> List.map (\row -> rowView room row columns)
+                |> List.map (\row -> rowView room row columns boxOffice session)
     in
         div
             [ class "room" ]
             rowElements
 
 
-rowView : Room -> Int -> Int -> Html Msg
-rowView room row totalColumns =
+rowView : Room -> Int -> Int -> BoxOffice -> Session -> Html Msg
+rowView room row totalColumns boxOffice session =
     let
         columns =
             List.range 1 totalColumns
     in
         div
             [ class "room-row" ]
-            (List.map (\column -> seatView room row column) columns)
+            (List.map (\column -> seatView room row column boxOffice session) columns)
 
 
-seatView : Room -> Int -> Int -> Html Msg
-seatView room row column =
-    div [ class "seat", onClick (SeatClicked row column) ] []
+seatView : Room -> Int -> Int -> BoxOffice -> Session -> Html Msg
+seatView room row column boxOffice session =
+    div
+        [ class (seatClasses row column boxOffice session)
+        , onClick (SeatClicked row column)
+        ]
+        []
