@@ -94,3 +94,17 @@ ticketSellerDecoder =
         |: (field "full_name" string)
         |: (field "avatar" string)
         |: (field "phx_ref" string)
+
+
+lockedSeatDecoder : JD.Decoder LockedSeat
+lockedSeatDecoder =
+    succeed
+        LockedSeat
+        |: (field "row" int)
+        |: (field "column" int)
+        |: (field "user_id" int)
+
+
+lockedSeatListDecoder : JD.Decoder LockedSeatList
+lockedSeatListDecoder =
+    list lockedSeatDecoder

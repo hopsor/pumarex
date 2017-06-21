@@ -38,6 +38,8 @@ defmodule Pumarex.Web.ScreeningChannel do
     {:noreply, socket}
   end
 
+  # TODO: Prevent clearing when the same user still keeps one session or more
+  # open in different devices
   def terminate(_reason, socket) do
     user = Guardian.Phoenix.Socket.current_resource(socket)
     locked_seats = Monitor.clear_locks_from_user(socket.assigns[:screening_id], user.id)

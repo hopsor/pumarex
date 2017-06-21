@@ -106,7 +106,7 @@ type alias BoxOffice =
     , selectedScreening : Maybe Screening
     , presence : Dict String (List JD.Value)
     , room : Maybe Room
-    , lockedSeats : Maybe (List LockedSeat)
+    , lockedSeats : Maybe LockedSeatList
     }
 
 
@@ -122,6 +122,10 @@ type alias LockedSeat =
     , column : Int
     , userId : Int
     }
+
+
+type alias LockedSeatList =
+    List LockedSeat
 
 
 type alias Session =

@@ -87,6 +87,14 @@ update msg model =
             in
                 { model | boxOffice = newBoxOffice } ! []
 
+        -- TODO: Implement real functionality
+        LockedSeats payload ->
+            let
+                lockedSeats =
+                    []
+            in
+                { model | lockedSeats = lockedSeats } ! []
+
         SeatClicked row column ->
             let
                 topic =
