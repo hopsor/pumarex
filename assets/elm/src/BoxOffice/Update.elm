@@ -9,7 +9,7 @@ import Phoenix.Push as Push
 import Dict exposing (Dict)
 import Json.Decode as JD
 import Json.Encode as JE
-import Decoders exposing (roomDecoder)
+import Decoders exposing (roomDecoder, lockedSeatListDecoder)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -90,10 +90,27 @@ update msg model =
         -- TODO: Implement real functionality
         LockedSeats payload ->
             let
+                payloadDecoder =
+                    JD.field "locked_seats" lockedSeatListDecoder
+
+                ls =
+                    JD.decodeValue payloadDecoder payload
+
                 lockedSeats =
-                    []
+                    case ls of
+                        Ok seats ->
+                            Just seats
+
+                        _ ->
+                            Nothing
+
+                oldBoxOffice =
+                    model.boxOffice
+
+                newBoxOffice =
+                    { oldBoxOffice | lockedSeats = lockedSeats }
             in
-                { model | lockedSeats = lockedSeats } ! []
+                { model | boxOffice = newBoxOffice } ! []
 
         SeatClicked row column ->
             let
