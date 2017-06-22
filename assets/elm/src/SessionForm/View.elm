@@ -12,7 +12,7 @@ formView model =
     div
         [ id "session" ]
         [ Html.form
-            [ id "session_form" ]
+            [ id "session_form", onSubmit Authenticate ]
             [ h1
                 []
                 [ text "Pumarex" ]
@@ -31,7 +31,7 @@ formView model =
             , div
                 [ class "actions" ]
                 [ button
-                    [ type_ "button", onClick Authenticate ]
+                    [ type_ "submit" ]
                     [ text "Log in" ]
                 ]
             ]
