@@ -16,6 +16,7 @@ formView model =
             [ h1
                 []
                 [ text "Pumarex" ]
+            , errorMessage model.sessionForm.authenticationFailed
             , div
                 [ class "field" ]
                 [ input
@@ -36,3 +37,15 @@ formView model =
                 ]
             ]
         ]
+
+
+errorMessage : Bool -> Html Msg
+errorMessage failStatus =
+    case failStatus of
+        True ->
+            div
+                [ class "alert alert-error" ]
+                [ text "Authentication failed!" ]
+
+        False ->
+            text ""

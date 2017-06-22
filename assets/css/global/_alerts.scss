@@ -1,0 +1,13 @@
+.alert{
+  border-width: 1px;
+  border-style: solid;
+  padding: 25px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  &.alert-error{
+    border-color: darken(red, 15%);
+    background: $red;
+    color: darken(red, 10%);
+  }
+}

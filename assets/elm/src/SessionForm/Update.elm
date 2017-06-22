@@ -41,4 +41,11 @@ update msg model =
             { model | session = response, loggedIn = True } ! [ storeSessionData response, Navigation.newUrl (toPath RootRoute) ]
 
         AuthenticationFinished (Err error) ->
-            model ! []
+            let
+                oldSessionForm =
+                    model.sessionForm
+
+                updatedSessionForm =
+                    { oldSessionForm | authenticationFailed = True }
+            in
+                { model | sessionForm = updatedSessionForm } ! []

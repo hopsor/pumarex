@@ -154,6 +154,7 @@ type alias Session =
 type alias SessionForm =
     { email : String
     , password : String
+    , authenticationFailed : Bool
     }
 
 
@@ -188,7 +189,7 @@ initialModel loggedIn session route =
     , screeningList = NotRequested
     , screeningForm = { fields = Dict.empty, movies = NotRequested, rooms = NotRequested }
     , boxOffice = initialBoxOffice
-    , sessionForm = { email = "", password = "" }
+    , sessionForm = { email = "", password = "", authenticationFailed = False }
     , session = session
     , loggedIn = loggedIn
     , route = route
