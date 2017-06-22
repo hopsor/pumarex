@@ -25,6 +25,7 @@ boxOfficeView model =
             ]
         , connectedUsersView model
         , roomViewWrapper model
+        , ticketsWrapper model
         ]
 
 
@@ -174,3 +175,22 @@ seatView room row column boxOffice session =
         , onClick (SeatClicked row column)
         ]
         []
+
+
+ticketsWrapper : Model -> Html Msg
+ticketsWrapper model =
+    let
+        fSelectSeats =
+            \ls -> ls.userId == model.session.id
+
+        selectedSeats =
+            model.boxOffice.lockedSeats
+                |> List.filter fSelectSeats
+                |> List.length
+    in
+        if selectedSeats > 0 then
+            button
+                [ type_ "button", onClick SellTickets ]
+                [ text ("Sell " ++ (toString selectedSeats) ++ " tickets") ]
+        else
+            text ""

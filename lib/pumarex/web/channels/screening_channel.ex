@@ -38,6 +38,11 @@ defmodule Pumarex.Web.ScreeningChannel do
     {:noreply, socket}
   end
 
+  def handle_in("sell_tickets", %{"tickets" => tickets}, socket) do
+    IO.inspect tickets
+    {:noreply, socket}
+  end
+
   # TODO: Prevent clearing when the same user still keeps one session or more
   # open in different devices
   def terminate(_reason, socket) do

@@ -14,3 +14,4 @@ type Msg
     | RoomLoaded JD.Value
     | LockedSeats JD.Value
     | SeatClicked Int Int
+    | SellTickets

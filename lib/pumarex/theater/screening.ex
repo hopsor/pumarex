@@ -7,6 +7,7 @@ defmodule Pumarex.Theater.Screening do
     field :screened_at, :naive_datetime
     belongs_to :movie, Pumarex.Theater.Movie
     belongs_to :room, Pumarex.Theater.Room
+    has_many :tickets, Pumarex.Theater.Ticket
 
     timestamps()
   end

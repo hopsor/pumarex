@@ -130,3 +130,32 @@ update msg model =
                     model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
             else
                 model ! []
+
+        SellTickets ->
+            let
+                topic =
+                    case model.boxOffice.selectedScreening of
+                        Just screening ->
+                            "screening:" ++ (toString screening.id)
+
+                        _ ->
+                            "screening:0"
+
+                fEncodeSeats : LockedSeat -> JE.Value
+                fEncodeSeats =
+                    \ls -> JE.object [ ( "row", JE.int ls.row ), ( "column", JE.int ls.column ) ]
+
+                encodedSeats =
+                    model.boxOffice.lockedSeats
+                        |> List.filter (\lockedSeat -> lockedSeat.userId == model.session.id)
+                        |> List.map fEncodeSeats
+                        |> JE.list
+
+                payload =
+                    JE.object [ ( "tickets", encodedSeats ) ]
+
+                push =
+                    Push.init topic "sell_tickets"
+                        |> Push.withPayload payload
+            in
+                model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
