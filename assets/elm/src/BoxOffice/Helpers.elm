@@ -1,6 +1,6 @@
 module BoxOffice.Helpers exposing (..)
 
-import Model exposing (Room, BoxOffice, Session, SeatList, LockedSeatList, SeatStatus(..))
+import Model exposing (Room, BoxOffice, Session, Seat, SeatList, LockedSeatList, SeatStatus(..))
 import List.Extra as ListExtra
 
 
@@ -30,48 +30,32 @@ roomColumnsCount room =
             0
 
 
-seatClasses : Int -> Int -> BoxOffice -> Session -> String
-seatClasses row column boxOffice session =
+seatClasses : Seat -> BoxOffice -> Session -> String
+seatClasses seat boxOffice session =
     let
-        room =
-            boxOffice.room
-                |> Maybe.withDefault (Room 0 "" (Just []) (Just 0))
-
         seats =
-            room.seats
+            boxOffice.room
+                |> Maybe.andThen .seats
                 |> Maybe.withDefault []
 
-        kos =
-            kindOfSpot row column seats
+        statusClass =
+            seatStatus seat boxOffice.lockedSeats session.id
+                |> seatStatusClass
     in
-        case kos of
-            "seat" ->
-                kos ++ " " ++ ((seatStatus row column boxOffice.lockedSeats session.id) |> seatStatusClass)
-
-            _ ->
-                kos
+        "seat " ++ statusClass
 
 
-kindOfSpot : Int -> Int -> SeatList -> String
-kindOfSpot row column seats =
-    case isSeat row column seats of
-        True ->
-            "seat"
-
-        False ->
-            "floor"
+getSeatAt : Int -> Int -> SeatList -> Maybe Seat
+getSeatAt row column seats =
+    seats
+        |> ListExtra.find (\s -> s.row == row && s.column == column)
 
 
-isSeat : Int -> Int -> SeatList -> Bool
-isSeat row column seats =
-    List.any (\s -> s.row == row && s.column == column) seats
-
-
-seatStatus : Int -> Int -> LockedSeatList -> Int -> SeatStatus
-seatStatus row column lockedSeats userId =
+seatStatus : Seat -> LockedSeatList -> Int -> SeatStatus
+seatStatus seat lockedSeats userId =
     let
         findSeat =
-            \lockedSeat -> lockedSeat.row == row && lockedSeat.column == column
+            \lockedSeat -> lockedSeat.seatId == seat.id
     in
         case ListExtra.find findSeat lockedSeats of
             Just lockedSeat ->
@@ -101,29 +85,20 @@ seatStatusClass status =
 -- TODO: Check if the seat is sold
 
 
-seatIsClickable : Int -> Int -> BoxOffice -> Session -> Bool
-seatIsClickable row column boxOffice session =
+seatIsClickable : Seat -> BoxOffice -> Session -> Bool
+seatIsClickable seat boxOffice session =
     let
-        room =
-            boxOffice.room
-                |> Maybe.withDefault (Room 0 "" (Just []) (Just 0))
-
         seats =
-            room.seats
+            boxOffice.room
+                |> Maybe.andThen .seats
                 |> Maybe.withDefault []
-
-        isNotEmpty =
-            isSeat row column seats
     in
-        if isNotEmpty == True then
-            case (seatStatus row column boxOffice.lockedSeats session.id) of
-                Available ->
-                    True
+        case (seatStatus seat boxOffice.lockedSeats session.id) of
+            Available ->
+                True
 
-                LockedByYou ->
-                    True
+            LockedByYou ->
+                True
 
-                _ ->
-                    False
-        else
-            False
+            _ ->
+                False

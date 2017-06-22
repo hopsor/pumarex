@@ -119,8 +119,7 @@ type alias TicketSeller =
 
 
 type alias LockedSeat =
-    { row : Int
-    , column : Int
+    { seatId : Int
     , userId : Int
     }
 

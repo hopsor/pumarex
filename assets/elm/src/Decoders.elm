@@ -101,8 +101,7 @@ lockedSeatDecoder : JD.Decoder LockedSeat
 lockedSeatDecoder =
     succeed
         LockedSeat
-        |: (field "row" int)
-        |: (field "column" int)
+        |: (field "seat_id" int)
         |: (field "user_id" int)
 
 

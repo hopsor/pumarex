@@ -112,8 +112,8 @@ update msg model =
             in
                 { model | boxOffice = newBoxOffice } ! []
 
-        SeatClicked row column ->
-            if (seatIsClickable row column model.boxOffice model.session) then
+        SeatClicked seat ->
+            if (seatIsClickable seat model.boxOffice model.session) then
                 let
                     topic =
                         case model.boxOffice.selectedScreening of
@@ -123,9 +123,12 @@ update msg model =
                             _ ->
                                 "screening:0"
 
+                    payload =
+                        JE.object [ ( "seat_id", JE.int seat.id ) ]
+
                     push =
                         Push.init topic "seat_status"
-                            |> Push.withPayload (JE.object [ ( "row", JE.int row ), ( "column", JE.int column ) ])
+                            |> Push.withPayload payload
                 in
                     model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
             else
@@ -141,18 +144,14 @@ update msg model =
                         _ ->
                             "screening:0"
 
-                fEncodeSeats : LockedSeat -> JE.Value
-                fEncodeSeats =
-                    \ls -> JE.object [ ( "row", JE.int ls.row ), ( "column", JE.int ls.column ) ]
-
                 encodedSeats =
                     model.boxOffice.lockedSeats
                         |> List.filter (\lockedSeat -> lockedSeat.userId == model.session.id)
-                        |> List.map fEncodeSeats
+                        |> List.map (\lockedSeat -> JE.int lockedSeat.seatId)
                         |> JE.list
 
                 payload =
-                    JE.object [ ( "tickets", encodedSeats ) ]
+                    JE.object [ ( "seat_ids", encodedSeats ) ]
 
                 push =
                     Push.init topic "sell_tickets"

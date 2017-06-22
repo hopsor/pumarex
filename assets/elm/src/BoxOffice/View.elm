@@ -170,11 +170,25 @@ rowView room row totalColumns boxOffice session =
 
 seatView : Room -> Int -> Int -> BoxOffice -> Session -> Html Msg
 seatView room row column boxOffice session =
-    div
-        [ class (seatClasses row column boxOffice session)
-        , onClick (SeatClicked row column)
-        ]
-        []
+    let
+        seat =
+            boxOffice.room
+                |> Maybe.andThen .seats
+                |> Maybe.withDefault []
+                |> getSeatAt row column
+    in
+        case seat of
+            Just seat ->
+                div
+                    [ class (seatClasses seat boxOffice session)
+                    , onClick (SeatClicked seat)
+                    ]
+                    []
+
+            Nothing ->
+                div
+                    [ class "floor" ]
+                    []
 
 
 ticketsWrapper : Model -> Html Msg

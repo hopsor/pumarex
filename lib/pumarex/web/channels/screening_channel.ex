@@ -31,15 +31,15 @@ defmodule Pumarex.Web.ScreeningChannel do
     {:noreply, socket}
   end
 
-  def handle_in("seat_status", %{"row" => row, "column" => column}, socket) do
+  def handle_in("seat_status", %{"seat_id" => seat_id}, socket) do
     user = Guardian.Phoenix.Socket.current_resource(socket)
-    locked_seats = Monitor.switch_lock(socket.assigns[:screening_id], %{row: row, column: column, user_id: user.id})
+    locked_seats = Monitor.switch_lock(socket.assigns[:screening_id], %{seat_id: seat_id, user_id: user.id})
     broadcast! socket, "locked_seats", %{locked_seats: locked_seats}
     {:noreply, socket}
   end
 
-  def handle_in("sell_tickets", %{"tickets" => tickets}, socket) do
-    IO.inspect tickets
+  def handle_in("sell_tickets", %{"seat_ids" => seat_ids}, socket) do
+    IO.inspect seat_ids
     {:noreply, socket}
   end
 

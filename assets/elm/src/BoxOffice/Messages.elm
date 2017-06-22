@@ -1,6 +1,6 @@
 module BoxOffice.Messages exposing (..)
 
-import Model exposing (ScreeningList)
+import Model exposing (ScreeningList, Seat)
 import Http
 import Dict exposing (Dict)
 import Json.Decode as JD
@@ -13,5 +13,5 @@ type Msg
     | UpdatePresence (Dict String (List JD.Value))
     | RoomLoaded JD.Value
     | LockedSeats JD.Value
-    | SeatClicked Int Int
+    | SeatClicked Seat
     | SellTickets
