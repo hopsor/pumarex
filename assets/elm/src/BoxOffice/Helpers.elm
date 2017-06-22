@@ -33,13 +33,8 @@ roomColumnsCount room =
 seatClasses : Seat -> BoxOffice -> Session -> String
 seatClasses seat boxOffice session =
     let
-        seats =
-            boxOffice.room
-                |> Maybe.andThen .seats
-                |> Maybe.withDefault []
-
         statusClass =
-            seatStatus seat boxOffice.lockedSeats session.id
+            seatStatus seat boxOffice session.id
                 |> seatStatusClass
     in
         "seat " ++ statusClass
@@ -51,21 +46,27 @@ getSeatAt row column seats =
         |> ListExtra.find (\s -> s.row == row && s.column == column)
 
 
-seatStatus : Seat -> LockedSeatList -> Int -> SeatStatus
-seatStatus seat lockedSeats userId =
+seatStatus : Seat -> BoxOffice -> Int -> SeatStatus
+seatStatus seat boxOffice userId =
     let
         findSeat =
             \lockedSeat -> lockedSeat.seatId == seat.id
-    in
-        case ListExtra.find findSeat lockedSeats of
-            Just lockedSeat ->
-                if lockedSeat.userId == userId then
-                    LockedByYou
-                else
-                    LockedBySomeone
 
-            _ ->
-                Available
+        isSold =
+            List.member seat.id boxOffice.soldSeats
+    in
+        if isSold == True then
+            Sold
+        else
+            case ListExtra.find findSeat boxOffice.lockedSeats of
+                Just lockedSeat ->
+                    if lockedSeat.userId == userId then
+                        LockedByYou
+                    else
+                        LockedBySomeone
+
+                _ ->
+                    Available
 
 
 seatStatusClass : SeatStatus -> String
@@ -80,6 +81,9 @@ seatStatusClass status =
         Available ->
             "available"
 
+        Sold ->
+            "sold"
+
 
 
 -- TODO: Check if the seat is sold
@@ -93,7 +97,7 @@ seatIsClickable seat boxOffice session =
                 |> Maybe.andThen .seats
                 |> Maybe.withDefault []
     in
-        case (seatStatus seat boxOffice.lockedSeats session.id) of
+        case (seatStatus seat boxOffice session.id) of
             Available ->
                 True
 

@@ -13,5 +13,6 @@ type Msg
     | UpdatePresence (Dict String (List JD.Value))
     | RoomLoaded JD.Value
     | LockedSeats JD.Value
+    | SoldSeats JD.Value
     | SeatClicked Seat
     | SellTickets

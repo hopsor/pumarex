@@ -17,10 +17,12 @@ defmodule Pumarex.Web.ScreeningChannel do
 
   def handle_info(:after_join, socket) do
     user = Guardian.Phoenix.Socket.current_resource(socket)
+    screening_id = socket.assigns[:screening_id]
 
     push socket, "presence_state", Presence.list(socket)
     push socket, "room_loaded", load_room(socket)
-    push socket, "locked_seats", %{locked_seats: Monitor.locked_seats(socket.assigns[:screening_id])}
+    push socket, "locked_seats", %{locked_seats: Monitor.locked_seats(screening_id)}
+    push socket, "sold_seats", %{sold_seats: sold_seat_ids(screening_id)}
 
     {:ok, _} = Presence.track(socket, user.id, %{
       id: user.id,
@@ -39,7 +41,24 @@ defmodule Pumarex.Web.ScreeningChannel do
   end
 
   def handle_in("sell_tickets", %{"seat_ids" => seat_ids}, socket) do
-    IO.inspect seat_ids
+    user = Guardian.Phoenix.Socket.current_resource(socket)
+    screening_id = socket.assigns[:screening_id]
+    tickets_to_sell = Enum.map(seat_ids, fn (seat_id) ->
+      %{seat_id: seat_id,
+        seller_id: user.id,
+        screening_id: String.to_integer(screening_id)}
+    end)
+
+    # 1. Create tickets
+    Theater.create_tickets(tickets_to_sell)
+
+    # 2. Remove locks
+    Monitor.unlock_seats(screening_id, seat_ids)
+
+    # 3. Reload and broadcast tickets and locks
+    broadcast! socket, "locked_seats", %{locked_seats: Monitor.locked_seats(screening_id)}
+    broadcast! socket, "sold_seats", %{sold_seats: sold_seat_ids(screening_id)}
+
     {:noreply, socket}
   end
 
@@ -70,5 +89,11 @@ defmodule Pumarex.Web.ScreeningChannel do
           row: seat.row,
           column: seat.column}
       end)}
+  end
+
+  defp sold_seat_ids(screening_id) do
+    screening_id
+    |> Theater.list_tickets()
+    |> Enum.map(fn(ticket) -> ticket.seat_id end)
   end
 end

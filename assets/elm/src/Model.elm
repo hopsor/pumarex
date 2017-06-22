@@ -107,6 +107,7 @@ type alias BoxOffice =
     , presence : Dict String (List JD.Value)
     , room : Maybe Room
     , lockedSeats : LockedSeatList
+    , soldSeats : SoldSeatList
     }
 
 
@@ -128,10 +129,15 @@ type alias LockedSeatList =
     List LockedSeat
 
 
+type alias SoldSeatList =
+    List Int
+
+
 type SeatStatus
     = Available
     | LockedByYou
     | LockedBySomeone
+    | Sold
 
 
 type alias Session =
@@ -169,6 +175,7 @@ initialBoxOffice =
     , presence = Dict.empty
     , room = Nothing
     , lockedSeats = []
+    , soldSeats = []
     }
 
 

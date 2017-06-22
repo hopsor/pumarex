@@ -112,6 +112,27 @@ update msg model =
             in
                 { model | boxOffice = newBoxOffice } ! []
 
+        SoldSeats payload ->
+            let
+                payloadDecoder =
+                    JD.field "sold_seats" (JD.list (JD.int))
+
+                soldSeats =
+                    case JD.decodeValue payloadDecoder payload of
+                        Ok seatIds ->
+                            seatIds
+
+                        _ ->
+                            []
+
+                oldBoxOffice =
+                    model.boxOffice
+
+                newBoxOffice =
+                    { oldBoxOffice | soldSeats = soldSeats }
+            in
+                { model | boxOffice = newBoxOffice } ! []
+
         SeatClicked seat ->
             if (seatIsClickable seat model.boxOffice model.session) then
                 let

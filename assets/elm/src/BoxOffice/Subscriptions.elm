@@ -24,6 +24,7 @@ subscriptions model =
                     Channel.init channelName
                         |> Channel.on "room_loaded" (\msg -> RoomLoaded msg)
                         |> Channel.on "locked_seats" (\msg -> LockedSeats msg)
+                        |> Channel.on "sold_seats" (\msg -> SoldSeats msg)
                         |> Channel.withPresence presence
                         |> Channel.withDebug
 

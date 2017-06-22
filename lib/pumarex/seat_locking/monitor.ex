@@ -33,6 +33,10 @@ defmodule Pumarex.SeatLocking.Monitor do
     try_call screening_id, {:clear_locks_from_user, user_id}
   end
 
+  def unlock_seats(screening_id, seat_ids) do
+    try_call screening_id, {:unlock_seats, seat_ids}
+  end
+
   #####
   # GenServer implementation
 
@@ -57,6 +61,14 @@ defmodule Pumarex.SeatLocking.Monitor do
   def handle_call({:clear_locks_from_user, user_id}, _from, seats) do
     seats = Enum.reject(seats, fn (seat) -> seat.user_id == user_id end)
     {:reply, seats, seats}
+  end
+
+  def handle_call({:unlock_seats, seat_ids}, _from, seats) do
+    updated_seats = Enum.reject(seats, fn (seat) ->
+      Enum.member?(seat_ids, seat.seat_id) 
+    end)
+
+    {:reply, updated_seats, updated_seats}
   end
 
   defp ref(screening_id) do

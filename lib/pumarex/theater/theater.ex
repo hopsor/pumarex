@@ -4,6 +4,7 @@ defmodule Pumarex.Theater do
   """
 
   import Ecto.Query, warn: false
+  alias Ecto.Multi
   alias Pumarex.Repo
 
   alias Pumarex.Theater.Movie
@@ -413,8 +414,11 @@ defmodule Pumarex.Theater do
       [%Ticket{}, ...]
 
   """
-  def list_tickets do
-    Repo.all(Ticket)
+  def list_tickets(screening_id \\ nil) do
+    case screening_id do
+      nil -> Repo.all(Ticket)
+      _ -> where(Ticket, screening_id: ^screening_id) |> Repo.all
+    end
   end
 
   @doc """
@@ -450,6 +454,23 @@ defmodule Pumarex.Theater do
     |> Ticket.changeset(attrs)
     |> Repo.insert()
   end
+
+  def create_tickets(tickets) do
+    Multi.new
+    |> insert_ticket_transaction(tickets)
+    |> Repo.transaction
+  end
+  defp insert_ticket_transaction(multi, [ticket_attrs | tail]) do
+    %{seat_id: seat_id, screening_id: screening_id} = ticket_attrs
+
+    transaction_id =
+      "ticket_" <> to_string(seat_id) <> "_" <> to_string(screening_id)
+
+    multi
+    |> Multi.insert(transaction_id, Ticket.changeset(%Ticket{}, ticket_attrs))
+    |> insert_ticket_transaction(tail)
+  end
+  defp insert_ticket_transaction(multi, []), do: multi
 
   @doc """
   Updates a ticket.
