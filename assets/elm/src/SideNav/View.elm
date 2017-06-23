@@ -21,7 +21,10 @@ sideNavView model =
                 Routing.NewMovieRoute ->
                     True
 
-                Routing.EditMovieRoute movieId ->
+                Routing.EditMovieRoute _ ->
+                    True
+
+                Routing.MovieRoute _ ->
                     True
 
                 _ ->

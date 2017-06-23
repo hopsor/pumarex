@@ -5,6 +5,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (..)
+import Routing exposing (toPath, Route(..))
+import Json.Decode as JD
 
 
 indexView : Model -> Html Msg
@@ -41,17 +43,45 @@ movieItem movie =
         posterStyle =
             style [ ( "backgroundImage", "url(" ++ movie.poster ++ ")" ) ]
     in
-        li [ class "movie-item" ]
-            [ a [ href "#" ]
-                [ div [ class "poster", posterStyle ] []
-                , span [] [ text movie.title ]
+        li
+            [ class "movie-item" ]
+            [ a
+                [ href (toPath (MovieRoute movie.id))
+                , onPreventDefaultClick (GoToMovie movie.id)
+                ]
+                [ div
+                    [ class "poster", posterStyle ]
+                    []
+                , span
+                    []
+                    [ text movie.title ]
                 ]
             ]
 
 
 addItemButton : Html Msg
 addItemButton =
-    li [ class "add-movie-item" ]
-        [ button [ onClick GoToNewMovie ]
-            [ span [] [ text "Add new movie" ] ]
+    li
+        [ class "add-movie-item" ]
+        [ a
+            [ class "button"
+            , href (toPath NewMovieRoute)
+            , onPreventDefaultClick GoToNewMovie
+            ]
+            [ span
+                []
+                [ text "Add new movie" ]
+            ]
         ]
+
+
+
+-- TODO: Research if it's possible to expose this function as a generic one
+
+
+onPreventDefaultClick : Msg -> Attribute Msg
+onPreventDefaultClick message =
+    onWithOptions
+        "click"
+        { defaultOptions | preventDefault = True }
+        (JD.succeed message)

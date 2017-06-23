@@ -20,3 +20,6 @@ update msg model =
 
         GoToNewMovie ->
             model ! [ Navigation.newUrl (toPath NewMovieRoute) ]
+
+        GoToMovie movieId ->
+            model ! [ Navigation.newUrl (toPath (MovieRoute movieId)) ]

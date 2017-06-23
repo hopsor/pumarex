@@ -8,3 +8,4 @@ type Msg
     = NoOp
     | FetchMovies (Result Http.Error MovieList)
     | GoToNewMovie
+    | GoToMovie Int

@@ -14,6 +14,7 @@ type RemoteData e a
 
 type alias Model =
     { movieList : RemoteData String MovieList
+    , movie : RemoteData String Movie
     , movieForm : MovieForm
     , roomList : RemoteData String RoomList
     , roomForm : RoomForm
@@ -183,6 +184,7 @@ initialBoxOffice =
 initialModel : Bool -> Session -> Routing.Route -> Model
 initialModel loggedIn session route =
     { movieList = NotRequested
+    , movie = NotRequested
     , movieForm = Dict.empty
     , roomList = NotRequested
     , roomForm = { name = "", rows = 0, columns = 0, matrix = [] }

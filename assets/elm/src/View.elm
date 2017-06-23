@@ -9,6 +9,7 @@ import Routing exposing (toPath, Route(..))
 import SideNav.View exposing (sideNavView)
 import Home.View exposing (homeView)
 import MovieForm.View
+import MoviePage.View
 import MovieList.View
 import RoomForm.View
 import RoomList.View
@@ -73,8 +74,11 @@ page model =
         NewMovieRoute ->
             Html.map MovieFormMsg <| MovieForm.View.formView model
 
-        EditMovieRoute movieId ->
+        EditMovieRoute _ ->
             Html.map MovieFormMsg <| MovieForm.View.formView model
+
+        MovieRoute _ ->
+            Html.map MoviePageMsg <| MoviePage.View.movieView model
 
         MoviesRoute ->
             Html.map MovieListMsg <| MovieList.View.indexView model

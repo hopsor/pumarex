@@ -7,6 +7,7 @@ import Helpers exposing (getRoute)
 import Home.Update
 import SideNav.Update
 import MovieForm.Update
+import MoviePage.Update
 import MovieList.Update
 import RoomForm.Update
 import RoomList.Update
@@ -14,6 +15,7 @@ import ScreeningForm.Update
 import ScreeningList.Update
 import SessionForm.Update
 import BoxOffice.Update
+import MoviePage.Commands exposing (loadMovie)
 import MovieForm.Commands exposing (fetchMovie)
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
@@ -60,6 +62,15 @@ update msg model =
             in
                 ( newModel
                 , Cmd.map MovieFormMsg cmd
+                )
+
+        MoviePageMsg subMsg ->
+            let
+                ( newModel, cmd ) =
+                    MoviePage.Update.update subMsg model
+            in
+                ( newModel
+                , Cmd.map MoviePageMsg cmd
                 )
 
         MovieListMsg subMsg ->
@@ -132,6 +143,11 @@ update msg model =
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )
 urlUpdate currentRoute model =
     case currentRoute of
+        MovieRoute movieId ->
+            ( { model | route = currentRoute, movie = Requesting }
+            , Cmd.map MoviePageMsg (loadMovie model.session movieId)
+            )
+
         EditMovieRoute movieId ->
             ( { model | route = currentRoute }
             , Cmd.map MovieFormMsg (fetchMovie model.session movieId)
