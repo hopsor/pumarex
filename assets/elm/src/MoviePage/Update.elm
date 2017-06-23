@@ -17,3 +17,9 @@ update msg model =
 
         LoadMovie (Err error) ->
             { model | movie = Failure "Something went wrong..." } ! []
+
+        GoToMovies ->
+            model ! [ Navigation.newUrl (toPath MoviesRoute) ]
+
+        GoToEditMovie movieId ->
+            model ! [ Navigation.newUrl (toPath (EditMovieRoute movieId)) ]

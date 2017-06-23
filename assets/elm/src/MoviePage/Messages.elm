@@ -7,3 +7,5 @@ import Model exposing (Movie)
 type Msg
     = NoOp
     | LoadMovie (Result Http.Error Movie)
+    | GoToEditMovie Int
+    | GoToMovies

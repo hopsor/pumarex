@@ -2,7 +2,8 @@ button, .button{
   outline: none;
   color: white;
   cursor: pointer;
-  
+  text-align: center;
+
   &:not(.unstyled){
     border-radius: 5px;
     border: none;
@@ -18,6 +19,16 @@ button, .button{
     &.small{
       font-size: 15px;
       padding: 6px 10px;
+    }
+
+    &.button-unfilled{
+      background-color: transparent;
+      border: 1px solid $orange;
+      color: $orange;
+
+      &:hover{
+        background-color: darken($globalBackground, 3%);
+      }
     }
   }
 

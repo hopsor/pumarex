@@ -85,3 +85,43 @@
     height: 120px;
   }
 }
+
+#movie_page{
+  .movie-details{
+    display: flex;
+
+    .poster-wrapper{
+      width: 340px;
+
+      .poster, .button{
+        display: block; 
+        margin-bottom: 10px;
+      }
+
+      .poster{
+        width: 90%;
+        border-radius: 10px;
+      }
+
+      .button{
+        width: 90%;
+      }
+    }
+
+    .info-wrapper{
+      flex: 1;
+      max-width: 700px;
+    }
+
+    .info-bit{
+      margin-bottom: 20px;
+
+      .info-bit-heading{
+        font-family: 'Prompt';
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: lighten($mainColorText, 25%);
+      }
+    }
+  }
+}
