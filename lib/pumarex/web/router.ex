@@ -20,7 +20,7 @@ defmodule Pumarex.Web.Router do
     pipe_through :api
 
     resources "/sessions", SessionController, only: [:create]
-    resources "/movies", MovieController, only: [:index, :create, :show]
+    resources "/movies", MovieController, only: [:index, :create, :update, :show]
     resources "/rooms", RoomController, only: [:index, :create, :show, :delete]
     resources "/screenings", ScreeningController
   end

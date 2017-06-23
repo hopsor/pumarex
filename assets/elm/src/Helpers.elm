@@ -43,6 +43,19 @@ postRequest session url body decoder =
         }
 
 
+putRequest : Session -> String -> Http.Body -> Json.Decoder a -> Http.Request a
+putRequest session url body decoder =
+    Http.request
+        { method = "PUT"
+        , headers = [ Http.header "Authorization" ("Bearer " ++ session.jwt) ]
+        , url = url
+        , body = body
+        , expect = Http.expectJson decoder
+        , timeout = Nothing
+        , withCredentials = True
+        }
+
+
 deleteRequest : Session -> String -> Http.Request String
 deleteRequest session url =
     Http.request

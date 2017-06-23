@@ -14,22 +14,21 @@ sideNavView : Model -> Html Msg
 sideNavView model =
     let
         isMovieRoute =
-            \route ->
-                case route of
-                    Routing.MoviesRoute ->
-                        True
+            case model.route of
+                Routing.MoviesRoute ->
+                    True
 
-                    Routing.NewMovieRoute ->
-                        True
+                Routing.NewMovieRoute ->
+                    True
 
-                    Routing.EditMovieRoute movieId ->
-                        True
+                Routing.EditMovieRoute movieId ->
+                    True
 
-                    _ ->
-                        False
+                _ ->
+                    False
 
         moviesNavClass =
-            classList [ ( "current", isMovieRoute model.route ) ]
+            classList [ ( "current", isMovieRoute ) ]
 
         roomsNavClass =
             classList [ ( "current", model.route == Routing.RoomsRoute || model.route == Routing.NewRoomRoute ) ]

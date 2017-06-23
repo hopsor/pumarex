@@ -1,7 +1,7 @@
 module MovieForm.Update exposing (..)
 
 import MovieForm.Messages exposing (..)
-import MovieForm.Commands exposing (createMovie)
+import MovieForm.Commands exposing (createMovie, updateMovie)
 import Model exposing (..)
 import Navigation
 import Routing exposing (toPath, Route(..))
@@ -27,6 +27,12 @@ update msg model =
         MovieCreated (Err error) ->
             model ! []
 
+        MovieUpdated (Ok response) ->
+            model ! [ Navigation.newUrl (toPath MoviesRoute) ]
+
+        MovieUpdated (Err error) ->
+            model ! []
+
         MovieFetched (Ok movie) ->
             let
                 updatedMovieForm =
@@ -46,4 +52,9 @@ update msg model =
             model ! []
 
         Save ->
-            model ! [ createMovie model.session model.movieForm ]
+            case Dict.get "id" model.movieForm of
+                Just movieId ->
+                    model ! [ updateMovie model.session movieId model.movieForm ]
+
+                Nothing ->
+                    model ! [ createMovie model.session model.movieForm ]
