@@ -6,7 +6,7 @@ import Model exposing (Session, MovieForm)
 import Http
 import MovieForm.Messages exposing (Msg(..))
 import Dict
-import Helpers exposing (postRequest)
+import Helpers exposing (postRequest, getRequest)
 
 
 createMovie : Session -> MovieForm -> Cmd Msg
@@ -27,3 +27,12 @@ createMovie session movieForm =
             postRequest session "/api/movies" body movieDecoder
     in
         Http.send MovieCreated request
+
+
+fetchMovie : Session -> Int -> Cmd Msg
+fetchMovie session movieId =
+    let
+        request =
+            getRequest session ("/api/movies/" ++ (toString movieId)) movieDecoder
+    in
+        Http.send MovieFetched request

@@ -14,6 +14,7 @@ import ScreeningForm.Update
 import ScreeningList.Update
 import SessionForm.Update
 import BoxOffice.Update
+import MovieForm.Commands exposing (fetchMovie)
 import MovieList.Commands exposing (fetchMovies)
 import RoomList.Commands exposing (fetchRooms)
 import ScreeningList.Commands exposing (fetchScreenings)
@@ -131,6 +132,11 @@ update msg model =
 urlUpdate : Route -> Model -> ( Model, Cmd Msg )
 urlUpdate currentRoute model =
     case currentRoute of
+        EditMovieRoute movieId ->
+            ( { model | route = currentRoute }
+            , Cmd.map MovieFormMsg (fetchMovie model.session movieId)
+            )
+
         MoviesRoute ->
             ( { model | route = currentRoute, movieList = Requesting }
             , Cmd.map MovieListMsg (fetchMovies model.session)

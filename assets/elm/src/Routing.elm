@@ -7,6 +7,7 @@ import UrlParser exposing (..)
 type Route
     = RootRoute
     | NewMovieRoute
+    | EditMovieRoute Int
     | MoviesRoute
     | NewRoomRoute
     | RoomsRoute
@@ -25,6 +26,9 @@ toPath route =
 
         NewMovieRoute ->
             "/movies/new"
+
+        EditMovieRoute movieId ->
+            "/movies/" ++ (toString movieId) ++ "/edit"
 
         MoviesRoute ->
             "/movies"
@@ -56,6 +60,7 @@ matchers =
     oneOf
         [ map RootRoute <| s ""
         , map NewMovieRoute <| s "movies" </> s "new"
+        , map EditMovieRoute <| s "movies" </> int </> s "edit"
         , map MoviesRoute <| s "movies"
         , map NewRoomRoute <| s "rooms" </> s "new"
         , map RoomsRoute <| s "rooms"

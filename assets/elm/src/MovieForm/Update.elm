@@ -27,5 +27,23 @@ update msg model =
         MovieCreated (Err error) ->
             model ! []
 
+        MovieFetched (Ok movie) ->
+            let
+                updatedMovieForm =
+                    model.movieForm
+                        |> Dict.insert "id" (toString movie.id)
+                        |> Dict.insert "title" movie.title
+                        |> Dict.insert "director" movie.director
+                        |> Dict.insert "cast" movie.cast
+                        |> Dict.insert "poster" movie.poster
+                        |> Dict.insert "overview" movie.overview
+                        |> Dict.insert "year" (toString movie.year)
+                        |> Dict.insert "duration" (toString movie.duration)
+            in
+                { model | movieForm = updatedMovieForm } ! []
+
+        MovieFetched (Err error) ->
+            model ! []
+
         Save ->
             model ! [ createMovie model.session model.movieForm ]

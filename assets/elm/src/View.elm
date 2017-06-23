@@ -73,6 +73,9 @@ page model =
         NewMovieRoute ->
             Html.map MovieFormMsg <| MovieForm.View.formView model
 
+        EditMovieRoute movieId ->
+            Html.map MovieFormMsg <| MovieForm.View.formView model
+
         MoviesRoute ->
             Html.map MovieListMsg <| MovieList.View.indexView model
 
