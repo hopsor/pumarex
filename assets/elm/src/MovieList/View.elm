@@ -5,8 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (..)
-import Routing exposing (toPath, Route(..))
-import Json.Decode as JD
+import Routing exposing (toPath, onPreventDefaultClick, Route(..))
 
 
 indexView : Model -> Html Msg
@@ -73,15 +72,3 @@ addItemButton =
                 [ text "Add new movie" ]
             ]
         ]
-
-
-
--- TODO: Research if it's possible to expose this function as a generic one
-
-
-onPreventDefaultClick : Msg -> Attribute Msg
-onPreventDefaultClick message =
-    onWithOptions
-        "click"
-        { defaultOptions | preventDefault = True }
-        (JD.succeed message)

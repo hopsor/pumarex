@@ -2,6 +2,9 @@ module Routing exposing (..)
 
 import Navigation
 import UrlParser exposing (..)
+import Html exposing (Attribute)
+import Html.Events exposing (onWithOptions, defaultOptions)
+import Json.Decode as JD
 
 
 type Route
@@ -84,3 +87,11 @@ parseLocation location =
 
         Nothing ->
             NotFoundRoute
+
+
+onPreventDefaultClick : a -> Attribute a
+onPreventDefaultClick message =
+    onWithOptions
+        "click"
+        { defaultOptions | preventDefault = True }
+        (JD.succeed message)
