@@ -32,6 +32,9 @@ config :pumarex, Pumarex.Repo,
 # Configure Guardian
 config :guardian, Guardian,
   secret_key: System.get_env("SECRET_KEY_BASE")
+  
+config :pumarex, :websocket_url,
+  "ws://pumarex.herokuapp.com/socket/websocket"
 
 # ## SSL Support
 #

@@ -24,7 +24,7 @@ init flags location =
                 Nothing ->
                     emptySession
     in
-        urlUpdate currentRoute (initialModel flags.loggedIn session currentRoute)
+        urlUpdate currentRoute (initialModel flags.loggedIn session flags.websocketUrl currentRoute)
 
 
 main : Program Flags Model Msg

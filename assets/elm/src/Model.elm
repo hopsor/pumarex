@@ -23,6 +23,7 @@ type alias Model =
     , boxOffice : BoxOffice
     , sessionForm : SessionForm
     , session : Session
+    , websocketUrl : String
     , loggedIn : Bool
     , route : Route
     }
@@ -162,6 +163,7 @@ type alias SessionForm =
 type alias Flags =
     { sessionData : Maybe Session
     , loggedIn : Bool
+    , websocketUrl : String
     }
 
 
@@ -181,8 +183,8 @@ initialBoxOffice =
     }
 
 
-initialModel : Bool -> Session -> Routing.Route -> Model
-initialModel loggedIn session route =
+initialModel : Bool -> Session -> String -> Routing.Route -> Model
+initialModel loggedIn session websocketUrl route =
     { movieList = NotRequested
     , movie = NotRequested
     , movieForm = Dict.empty
@@ -193,6 +195,7 @@ initialModel loggedIn session route =
     , boxOffice = initialBoxOffice
     , sessionForm = { email = "", password = "", authenticationFailed = False }
     , session = session
+    , websocketUrl = websocketUrl
     , loggedIn = loggedIn
     , route = route
     }

@@ -35,7 +35,7 @@ update msg model =
                 newRoute =
                     getRoute model.loggedIn location
             in
-                urlUpdate newRoute (initialModel model.loggedIn model.session newRoute)
+                urlUpdate newRoute (initialModel model.loggedIn model.session model.websocketUrl newRoute)
 
         HomeMsg subMsg ->
             let

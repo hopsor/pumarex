@@ -151,7 +151,7 @@ update msg model =
                         Push.init topic "seat_status"
                             |> Push.withPayload payload
                 in
-                    model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
+                    model ! [ Phoenix.push model.websocketUrl push ]
             else
                 model ! []
 
@@ -178,4 +178,4 @@ update msg model =
                     Push.init topic "sell_tickets"
                         |> Push.withPayload payload
             in
-                model ! [ Phoenix.push "ws://localhost:4000/socket/websocket" push ]
+                model ! [ Phoenix.push model.websocketUrl push ]

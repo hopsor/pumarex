@@ -12,6 +12,9 @@
 
   <body>
     <div id="app"></div>
+    <script type="text/javascript">
+      window.websocketUrl = "<%= websocket_url %>";
+    </script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

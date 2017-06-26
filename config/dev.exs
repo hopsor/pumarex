@@ -59,4 +59,7 @@ config :pumarex, Pumarex.Repo,
 
 # Configure Guardian
 config :guardian, Guardian,
-  secret_key: "Vnb3td31GpsOsvY9Vbdk3ziLUX2Q+1PBSrPBIQh3wGzIGlfvIN0z0Ftseh85Y3Mp" 
+  secret_key: "Vnb3td31GpsOsvY9Vbdk3ziLUX2Q+1PBSrPBIQh3wGzIGlfvIN0z0Ftseh85Y3Mp"
+
+config :pumarex, :websocket_url,
+  "ws://localhost:4000/socket/websocket"

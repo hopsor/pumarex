@@ -43,5 +43,5 @@ subscriptions model =
 
 getSocket : Model -> Socket Msg
 getSocket model =
-    Socket.init "ws://localhost:4000/socket/websocket"
+    Socket.init model.websocketUrl
         |> Socket.withParams [ ( "guardian_token", model.session.jwt ) ]
