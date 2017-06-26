@@ -1,5 +1,5 @@
 cd elm
-elm-make --yes --debug --output ../js/main.js ./Main.elm
+elm-make --yes --debug --output ../js/main.js ./src/Main.elm
 
 cd ..
 brunch build --production
