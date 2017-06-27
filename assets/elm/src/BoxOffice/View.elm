@@ -16,16 +16,30 @@ boxOfficeView : Model -> Html Msg
 boxOfficeView model =
     Html.form
         [ id "box_office" ]
-        [ h1 [] [ text "Box Office" ]
-        , div
-            [ class "field" ]
-            [ select
-                [ onInput ScreeningChanged ]
-                (screeningOptions model.boxOffice.availableScreenings)
+        [ div
+            [ class "box-office-header" ]
+            [ screeningSelectorWrapper model
+            , connectedUsersView model
             ]
-        , connectedUsersView model
-        , roomViewWrapper model
-        , ticketsWrapper model
+        , div
+            [ class "box-office-body" ]
+            [ posterWrapper model
+            , roomViewWrapper model
+            , ticketsWrapper model
+            ]
+        ]
+
+
+screeningSelectorWrapper : Model -> Html Msg
+screeningSelectorWrapper model =
+    div
+        [ class "field" ]
+        [ h2
+            []
+            [ text "Screening" ]
+        , select
+            [ onInput ScreeningChanged ]
+            (screeningOptions model.boxOffice.availableScreenings)
         ]
 
 
@@ -51,6 +65,11 @@ screeningOptions availableScreenings =
                 [ value "" ]
                 [ text "Not loaded" ]
             ]
+
+
+posterWrapper : Model -> Html Msg
+posterWrapper model =
+    text ""
 
 
 connectedUsersView : Model -> Html Msg
