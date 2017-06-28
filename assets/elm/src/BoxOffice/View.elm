@@ -69,7 +69,9 @@ screeningOptions availableScreenings =
 
 posterWrapper : Model -> Html Msg
 posterWrapper model =
-    text ""
+    div
+        [ class "poster-wrapper" ]
+        [ text "MEMEME" ]
 
 
 connectedUsersView : Model -> Html Msg
@@ -77,7 +79,7 @@ connectedUsersView model =
     case model.boxOffice.selectedScreening of
         Just screening ->
             div
-                []
+                [ class "connected-sellers-wrapper" ]
                 [ h2
                     []
                     [ text "Connected Sellers" ]
@@ -220,10 +222,15 @@ ticketsWrapper model =
             model.boxOffice.lockedSeats
                 |> List.filter fSelectSeats
                 |> List.length
+
+        buttonDiv =
+            if selectedSeats > 0 then
+                button
+                    [ type_ "button", onClick SellTickets ]
+                    [ text ("Sell " ++ (toString selectedSeats) ++ " tickets") ]
+            else
+                text ""
     in
-        if selectedSeats > 0 then
-            button
-                [ type_ "button", onClick SellTickets ]
-                [ text ("Sell " ++ (toString selectedSeats) ++ " tickets") ]
-        else
-            text ""
+        div
+            [ class "tickets-wrapper" ]
+            [ buttonDiv ]

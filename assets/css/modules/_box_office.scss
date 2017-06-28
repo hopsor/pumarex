@@ -1,20 +1,55 @@
 #box_office{
-  .online-ticket-sellers{
-    .ticket-seller{
-      width: 100px;
-      display: inline-block;
-      text-align: center;
+  .box-office-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 
-      img {
-        width: 70px;
-        border-radius: 35px;
-      }
+    .field, .connected-sellers-wrapper{
+      flex: 1;
+    }
 
-      span{
-        display: block;
+    select{
+      width: 90%;
+    }
+
+    .online-ticket-sellers{
+      .ticket-seller{
+        width: 100px;
+        display: inline-block;
+        text-align: center;
+
+        img {
+          width: 60px;
+          border-radius: 30px;
+        }
+
+        span{
+          display: block;
+          font-size: 12px;
+          margin-top: 10px;
+          text-align: center;
+        }
       }
     }
   }
+
+  .box-office-body{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .poster-wrapper{
+    }
+
+    #room_view_wrapper{
+      flex: 3;
+    }
+
+    .tickets-wrapper{
+
+    }
+  }
+
 
   .room{
     .seat, .floor{
@@ -53,6 +88,7 @@
 
   .room-legend{
     list-style-type: none;
+    padding: 0;
 
     li{
       display: inline;
