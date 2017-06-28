@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 50px;
 
     .field, .connected-sellers-wrapper{
       flex: 1;
@@ -38,7 +39,15 @@
     flex-direction: row;
     width: 100%;
 
+    > div {
+      margin: 0 15px;
+    }
+
     .poster-wrapper{
+      img {
+        width: 250px;
+        border-radius: 10px;
+      }
     }
 
     #room_view_wrapper{
@@ -52,37 +61,69 @@
 
 
   .room{
-    .seat, .floor{
-      width: 20px;
-      height: 20px;
+    .row-counter, .seat, .floor, .column-footer{
+      width: $spotSize;
       display: inline-block;
       margin: 0 7px 7px 0;
       border-width: 1px;
       border-style: solid;
     }
 
+    .row-counter{
+      border-color: transparent;
+      vertical-align: middle;
+      text-align: right;
+      margin-right: 15px;
+      font-size: 18px;
+    }
+
+    .column-footer{
+      border-color: transparent;
+      text-align: center;
+      font-size: 18px;
+    }
+
     .seat{
-      border-color: #000;
+      border-radius: 4px;
+      height: $spotSize;
+      vertical-align: middle;
 
       &.available{
         cursor: pointer;
+        background-color: darken($globalBackground, 5%);
+        border-color: #ccc;
+
+        &:hover {
+          background-color: darken($globalBackground, 10%);
+        }
       }
 
       &.sold{
         background-color: red;
+        border-color: red;
       }
 
       &.locked-by-you{
         background-color: green;
+        border-color: green;
         cursor: pointer;
       }
 
       &.locked-by-someone{
         background-color: purple;
+        border-color: purple;
       }
     }
     .floor{
       border-color: transparent;
+      height: $spotSize;
+      vertical-align: middle;
+    }
+
+    .footer{
+      .column-footer:first-child{
+        margin-left: 50px;
+      }
     }
   }
 

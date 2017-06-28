@@ -88,6 +88,7 @@ type alias Screening =
     , screenedAt : String
     , movie : Movie
     , room : Room
+    , name : String
     }
 
 

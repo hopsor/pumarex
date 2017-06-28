@@ -56,7 +56,7 @@ screeningOptions availableScreenings =
                     \screening ->
                         option
                             [ value (toString screening.id) ]
-                            [ text screening.movie.title ]
+                            [ text screening.name ]
             in
                 [ emptyOption ] ++ List.map screeningOption result
 
@@ -69,9 +69,18 @@ screeningOptions availableScreenings =
 
 posterWrapper : Model -> Html Msg
 posterWrapper model =
-    div
-        [ class "poster-wrapper" ]
-        [ text "MEMEME" ]
+    let
+        poster =
+            case model.boxOffice.selectedScreening of
+                Just screening ->
+                    img [ src screening.movie.poster ] []
+
+                Nothing ->
+                    text ""
+    in
+        div
+            [ class "poster-wrapper" ]
+            [ poster ]
 
 
 connectedUsersView : Model -> Html Msg
@@ -172,10 +181,15 @@ roomView room boxOffice session =
             rows
                 |> List.range 1
                 |> List.map (\row -> rowView room row columns boxOffice session)
+
+        footer =
+            List.range 1 columns
+                |> List.map (\colNumber -> div [ class "column-footer" ] [ text (toString colNumber) ])
+                |> div [ class "footer" ]
     in
         div
             [ class "room" ]
-            rowElements
+            (rowElements ++ [ footer ])
 
 
 rowView : Room -> Int -> Int -> BoxOffice -> Session -> Html Msg
@@ -183,10 +197,18 @@ rowView room row totalColumns boxOffice session =
     let
         columns =
             List.range 1 totalColumns
+
+        rowCounter =
+            div
+                [ class "row-counter" ]
+                [ text (toString row) ]
+
+        rowColumns =
+            List.map (\column -> seatView room row column boxOffice session) columns
     in
         div
             [ class "room-row" ]
-            (List.map (\column -> seatView room row column boxOffice session) columns)
+            ([ rowCounter ] ++ rowColumns)
 
 
 seatView : Room -> Int -> Int -> BoxOffice -> Session -> Html Msg
