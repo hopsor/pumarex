@@ -8,26 +8,35 @@ import BoxOffice.Messages exposing (..)
 import BoxOffice.Helpers exposing (..)
 import Decoders exposing (ticketSellerDecoder)
 import Dict exposing (Dict)
+import List.Extra as ListExtra
 import Json.Decode as JD
 import Json.Encode as JE
 
 
 boxOfficeView : Model -> Html Msg
 boxOfficeView model =
-    Html.form
-        [ id "box_office" ]
-        [ div
-            [ class "box-office-header" ]
-            [ screeningSelectorWrapper model
-            , connectedUsersView model
+    let
+        body =
+            case model.boxOffice.selectedScreening of
+                Just _ ->
+                    [ ticketsWrapper model
+                    , roomViewWrapper model
+                    ]
+
+                Nothing ->
+                    []
+    in
+        Html.form
+            [ id "box_office" ]
+            [ div
+                [ class "box-office-header" ]
+                [ screeningSelectorWrapper model
+                , connectedUsersView model
+                ]
+            , div
+                [ class "box-office-body" ]
+                body
             ]
-        , div
-            [ class "box-office-body" ]
-            [ posterWrapper model
-            , roomViewWrapper model
-            , ticketsWrapper model
-            ]
-        ]
 
 
 screeningSelectorWrapper : Model -> Html Msg
@@ -65,22 +74,6 @@ screeningOptions availableScreenings =
                 [ value "" ]
                 [ text "Not loaded" ]
             ]
-
-
-posterWrapper : Model -> Html Msg
-posterWrapper model =
-    let
-        poster =
-            case model.boxOffice.selectedScreening of
-                Just screening ->
-                    img [ src screening.movie.poster ] []
-
-                Nothing ->
-                    text ""
-    in
-        div
-            [ class "poster-wrapper" ]
-            [ poster ]
 
 
 connectedUsersView : Model -> Html Msg
@@ -255,4 +248,79 @@ ticketsWrapper model =
     in
         div
             [ class "tickets-wrapper" ]
-            [ buttonDiv ]
+            [ (saleWrapper model), buttonDiv ]
+
+
+saleWrapper : Model -> Html Msg
+saleWrapper model =
+    let
+        saleTopInfo =
+            case model.boxOffice.selectedScreening of
+                Just screening ->
+                    [ div
+                        [ class "sale-header" ]
+                        [ text "Pumarex" ]
+                    , div
+                        [ class "cover", style [ ( "backgroundImage", "url(" ++ screening.movie.poster ++ ")" ) ] ]
+                        []
+                    , div
+                        [ class "screening-details" ]
+                        [ h2
+                            []
+                            [ text screening.movie.title ]
+                        , h3
+                            []
+                            [ text (screening.room.name ++ " - " ++ screening.formattedDate) ]
+                        ]
+                    ]
+
+                Nothing ->
+                    [ text "" ]
+    in
+        div
+            [ class "sale" ]
+            (saleTopInfo ++ (tickets model))
+
+
+tickets : Model -> List (Html Msg)
+tickets model =
+    List.map (\lockedSeat -> ticketView model lockedSeat) model.boxOffice.lockedSeats
+
+
+ticketView : Model -> LockedSeat -> Html Msg
+ticketView model lockedSeat =
+    let
+        seats =
+            model.boxOffice.room
+                |> Maybe.andThen .seats
+                |> Maybe.withDefault []
+
+        seat =
+            ListExtra.find (\seat -> seat.id == lockedSeat.seatId) seats
+    in
+        case seat of
+            Just seat ->
+                div
+                    [ class "ticket" ]
+                    [ div
+                        [ class "row" ]
+                        [ div
+                            [ class "title" ]
+                            [ text "Row" ]
+                        , div
+                            [ class "value" ]
+                            [ text (toString seat.row) ]
+                        ]
+                    , div
+                        [ class "column" ]
+                        [ div
+                            [ class "title" ]
+                            [ text "Seat" ]
+                        , div
+                            [ class "value" ]
+                            [ text (toString seat.column) ]
+                        ]
+                    ]
+
+            Nothing ->
+                text ""

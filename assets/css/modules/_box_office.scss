@@ -40,14 +40,7 @@
     width: 100%;
 
     > div {
-      margin: 0 15px;
-    }
-
-    .poster-wrapper{
-      img {
-        width: 250px;
-        border-radius: 10px;
-      }
+      margin: 0 50px;
     }
 
     #room_view_wrapper{
@@ -55,7 +48,61 @@
     }
 
     .tickets-wrapper{
+      .sale{
+        width: 350px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+        border-radius: 20px;
+        border-top: 5px solid $orange;
+        background: $white;
+        padding-bottom: 20px;
 
+        .sale-header{
+          text-align: center;
+          font-size: 35px;
+          font-family: 'Prompt';
+          padding: 10px 0;
+        }
+
+        .cover{
+          width: 350px;
+          height: 175px;
+          background-size: cover;
+
+          img {
+            width: 100%;
+            position: absolute;
+            top: -50%;
+          }
+        }
+
+        .screening-details{
+          text-align: center;
+        }
+
+        .ticket{
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+
+          .row, .column{
+            width: 50%;
+            text-align: center;
+
+            .title{
+
+            }
+
+            .value{
+
+            }
+          }
+        }
+      }
+    }
+
+    button{
+      width: 100%;
+      margin-top: 20px;
     }
   }
 
@@ -129,12 +176,16 @@
 
   .room-legend{
     list-style-type: none;
-    padding: 0;
+    padding-left: 50px;
 
     li{
       display: inline;
       margin-right: 15px;
       vertical-align: bottom;
+
+      &::before{
+        border-radius: 5px;
+      }
 
       &.sold::before{
         background-color: red;

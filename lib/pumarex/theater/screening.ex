@@ -24,4 +24,8 @@ defmodule Pumarex.Theater.Screening do
     format_date = Timex.format!(screening.screened_at, "%A, %B %d", :strftime)
     "#{movie.title} - #{room.name} - #{format_date}"
   end
+
+  def formatted_date(%Screening{} = screening) do
+    Timex.format!(screening.screened_at, "%A, %B %d, %Y", :strftime)
+  end
 end

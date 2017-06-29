@@ -73,6 +73,7 @@ screeningDecoder =
         |: (field "movie" movieDecoder)
         |: (field "room" roomDecoder)
         |: (field "name" string)
+        |: (field "formatted_date" string)
 
 
 sessionDecoder : JD.Decoder Session
