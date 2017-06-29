@@ -284,10 +284,10 @@ saleWrapper model =
 
 tickets : Model -> List (Html Msg)
 tickets model =
-    List.map (\lockedSeat -> ticketView model lockedSeat) model.boxOffice.lockedSeats
+    List.concatMap (\lockedSeat -> ticketView model lockedSeat) model.boxOffice.lockedSeats
 
 
-ticketView : Model -> LockedSeat -> Html Msg
+ticketView : Model -> LockedSeat -> List (Html Msg)
 ticketView model lockedSeat =
     let
         seats =
@@ -300,7 +300,8 @@ ticketView model lockedSeat =
     in
         case seat of
             Just seat ->
-                div
+                [ dividerView
+                , div
                     [ class "ticket" ]
                     [ div
                         [ class "row" ]
@@ -321,6 +322,17 @@ ticketView model lockedSeat =
                             [ text (toString seat.column) ]
                         ]
                     ]
+                ]
 
             Nothing ->
-                text ""
+                [ text "" ]
+
+
+dividerView : Html Msg
+dividerView =
+    div
+        [ class "ticket-divider" ]
+        [ div [ class "divider-left divider-hole" ] []
+        , div [ class "divider" ] []
+        , div [ class "divider-right divider-hole" ] []
+        ]

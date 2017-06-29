@@ -77,6 +77,10 @@
 
         .screening-details{
           text-align: center;
+          margin-bottom: 30px;
+          h2 {
+            color: #a9a9a9;
+          }
         }
 
         .ticket{
@@ -87,16 +91,54 @@
           .row, .column{
             width: 50%;
             text-align: center;
+            padding: 25px 0;
 
             .title{
-
+              margin-bottom: 10px;
+              text-transform: uppercase;
+              font-size: 12px;
+              color: #a9a9a9;
             }
 
             .value{
-
+              font-size: 32px;
+              font-family: 'Prompt';
             }
           }
         }
+
+        .ticket-divider {
+      		position: relative;
+      		width: 100%;
+
+      		.divider-left {
+      			left: -15px;
+      		}
+
+      		.divider-hole {
+      			position: absolute;
+      			top: -12px;
+      			padding: 0px;
+      			height: 25px;
+      			width: 25px;
+      			border-radius: 100%;
+      			background: $globalBackground;
+            // box-shadow: inset 0 3px 10px 0 rgba(0,0,0,.4);
+      		}
+
+      		.divider {
+      			width: 85%;
+      			margin: auto;
+      			height: 2px;
+      			background: linear-gradient(to right, #000000 50%, transparent 50%);
+       			background-size: 10px 8px, 100% 2px;
+      			opacity: .2;
+      		}
+
+      		.divider-right {
+      			right: -15px;
+      		}
+      	}
       }
     }
 
