@@ -10,6 +10,7 @@ defmodule Pumarex.Repo.Migrations.CreatePumarex.Theater.Movie do
       add :cast, :text
       add :overview, :text
       add :poster, :string
+      add :banner, :string
 
       timestamps()
     end

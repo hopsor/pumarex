@@ -261,7 +261,7 @@ saleWrapper model =
                         [ class "sale-header" ]
                         [ text "Pumarex" ]
                     , div
-                        [ class "cover", style [ ( "backgroundImage", "url(" ++ screening.movie.poster ++ ")" ) ] ]
+                        [ class "cover", style [ ( "backgroundImage", "url(" ++ screening.movie.banner ++ ")" ) ] ]
                         []
                     , div
                         [ class "screening-details" ]
@@ -284,7 +284,9 @@ saleWrapper model =
 
 tickets : Model -> List (Html Msg)
 tickets model =
-    List.concatMap (\lockedSeat -> ticketView model lockedSeat) model.boxOffice.lockedSeats
+    model.boxOffice.lockedSeats
+        |> List.filter (\lockedSeat -> lockedSeat.userId == model.session.id)
+        |> List.concatMap (\lockedSeat -> ticketView model lockedSeat)
 
 
 ticketView : Model -> LockedSeat -> List (Html Msg)

@@ -19,6 +19,7 @@ formView model =
                 , regularField model.movieForm "year" "number"
                 , regularField model.movieForm "duration" "number"
                 , regularField model.movieForm "poster" "text"
+                , regularField model.movieForm "banner" "text"
                 , div [ class "actions" ]
                     [ button [ type_ "submit" ] [ text "Save" ] ]
                 ]

@@ -33,6 +33,7 @@ movieDecoder =
         |: (field "cast" string)
         |: (field "overview" string)
         |: (field "poster" string)
+        |: (field "banner" string)
 
 
 roomListDecoder : JD.Decoder RoomList

@@ -11,6 +11,7 @@ defmodule Pumarex.Theater.Movie do
     field :cast, :string
     field :overview, :string
     field :poster, :string
+    field :banner, :string
 
     timestamps()
   end
@@ -18,7 +19,7 @@ defmodule Pumarex.Theater.Movie do
   @doc false
   def changeset(%Movie{} = movie, attrs) do
     movie
-    |> cast(attrs, [:title, :year, :duration, :director, :cast, :overview, :poster])
-    |> validate_required([:title, :year, :duration, :director, :cast, :overview, :poster])
+    |> cast(attrs, [:title, :year, :duration, :director, :cast, :overview, :poster, :banner])
+    |> validate_required([:title, :year, :duration, :director, :cast, :overview, :poster, :banner])
   end
 end
