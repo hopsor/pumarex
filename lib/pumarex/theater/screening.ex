@@ -1,5 +1,6 @@
 defmodule Pumarex.Theater.Screening do
   use Ecto.Schema
+  use Timex
   import Ecto.Changeset
   alias Pumarex.Theater.Screening
 
@@ -17,5 +18,14 @@ defmodule Pumarex.Theater.Screening do
     screening
     |> cast(attrs, [:screened_at, :movie_id, :room_id])
     |> validate_required([:screened_at, :movie_id, :room_id])
+  end
+
+  def to_s(%Screening{movie: movie, room: room} = screening) do
+    format_date = Timex.format!(screening.screened_at, "%A, %B %d", :strftime)
+    "#{movie.title} - #{room.name} - #{format_date}"
+  end
+
+  def formatted_date(%Screening{} = screening) do
+    Timex.format!(screening.screened_at, "%A, %B %d, %Y", :strftime)
   end
 end

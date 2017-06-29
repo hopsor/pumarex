@@ -33,6 +33,7 @@ movieDecoder =
         |: (field "cast" string)
         |: (field "overview" string)
         |: (field "poster" string)
+        |: (field "banner" string)
 
 
 roomListDecoder : JD.Decoder RoomList
@@ -72,6 +73,8 @@ screeningDecoder =
         |: (field "screened_at" string)
         |: (field "movie" movieDecoder)
         |: (field "room" roomDecoder)
+        |: (field "name" string)
+        |: (field "formatted_date" string)
 
 
 sessionDecoder : JD.Decoder Session

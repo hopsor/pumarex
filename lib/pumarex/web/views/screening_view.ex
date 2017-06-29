@@ -1,6 +1,7 @@
 defmodule Pumarex.Web.ScreeningView do
   use Pumarex.Web, :view
   alias Pumarex.Web.{ScreeningView, MovieView, RoomView}
+  alias Pumarex.Theater.Screening
 
   def render("index.json", %{screenings: screenings}) do
     render_many(screenings, ScreeningView, "screening.json")
@@ -14,6 +15,8 @@ defmodule Pumarex.Web.ScreeningView do
     %{id: screening.id,
       screened_at: screening.screened_at,
       room: render_one(screening.room, RoomView, "lite_room.json"),
-      movie: render_one(screening.movie, MovieView, "movie.json")}
+      movie: render_one(screening.movie, MovieView, "movie.json"),
+      name: Screening.to_s(screening),
+      formatted_date: Screening.formatted_date(screening)}
   end
 end

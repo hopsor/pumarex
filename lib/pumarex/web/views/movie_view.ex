@@ -23,6 +23,7 @@ defmodule Pumarex.Web.MovieView do
       director: movie.director,
       cast: movie.cast,
       overview: movie.overview,
-      poster: movie.poster}
+      poster: movie.poster,
+      banner: movie.banner}
   end
 end

@@ -21,6 +21,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Casey Affleck, Michelle Williams, Kyle Chandler",
     overview: "A depressed uncle is asked to take care of his teenage nephew after the boy's father dies.",
     poster: "https://image.tmdb.org/t/p/w640/hp39iyhbbTZKLYXD2FG9I2NnpjU.jpg",
+    banner: "https://image.tmdb.org/t/p/original/1poyTjAI4UR3ZgpXwwYxO5jKmS8.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -32,6 +33,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Mahershala Ali, Shariff Earp, Duan Sanderso",
     overview: "A chronicle of the childhood, adolescence and burgeoning adulthood of a young black man growing up in a rough neighborhood of Miami.",
     poster: "https://image.tmdb.org/t/p/w640/qAwFbszz0kRyTuXmMeKQZCX3Q2O.jpg",
+    banner: "https://image.tmdb.org/t/p/original/gaNPGYFm4glZUsee5xnGMf4v2FG.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -43,6 +45,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Ryan Gosling, Emma Stone, Rosemarie DeWitt",
     overview: "A jazz pianist falls for an aspiring actress in Los Angeles.",
     poster: "https://image.tmdb.org/t/p/w640/i712GLJklSVeuuNiz4egs7L1BvF.jpg",
+    banner: "https://image.tmdb.org/t/p/original/nadTlnTE6DdgmYsN4iWc2a2wiaI.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -54,6 +57,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Amy Adams, Jeremy Renner, Forest Whitaker",
     overview: "When twelve mysterious spacecraft appear around the world, linguistics professor Louise Banks is tasked with interpreting the language of the apparent alien visitors.",
     poster: "https://image.tmdb.org/t/p/w640/AcilyyFwtFuZAkSD9oi2CBw4J9Q.jpg",
+    banner: "https://image.tmdb.org/t/p/original/wFFlaVHmQG4U43m0l3eQqHZluvn.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -65,6 +69,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Taraji P. Henson, Octavia Spencer, Janelle Monáe",
     overview: "The story of a team of African-American women mathematicians who served a vital role in NASA during the early years of the US space program.",
     poster: "https://image.tmdb.org/t/p/w640/6cbIDZLfwUTmttXTmNi8Mp3Rnmg.jpg",
+    banner: "https://image.tmdb.org/t/p/original/bmwscUBu4DZlnG2IwFJhiR9YQLg.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -76,6 +81,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Jeff Bridges, Chris Pine, Ben Foster",
     overview: "A divorced dad and his ex-con brother resort to a desperate scheme in order to save their family's farm in West Texas.",
     poster: "https://image.tmdb.org/t/p/w640/6YOrNBdoXvT8aC5VPLkkN6t5z0V.jpg",
+    banner: "https://image.tmdb.org/t/p/original/5GbRKOQSY08U3SQXXcQAKEnL2rE.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -87,6 +93,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Dev Patel, Nicole Kidman, Rooney Mara",
     overview: "A five-year-old Indian boy gets lost on the streets of Calcutta, thousands of kilometers from home. He survives many challenges before being adopted by a couple in Australia; 25 years later, he sets out to find his lost family.",
     poster: "https://image.tmdb.org/t/p/w640/pq4I860JAol0hFXp2H4VFA2lrU6.jpg",
+    banner: "https://image.tmdb.org/t/p/original/a0cvTQOZ3hIXAGQp9VQq8U5lNXO.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -98,6 +105,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Denzel Washington, Viola Davis, Stephen Henderson",
     overview: "A working-class African-American father tries to raise his family in the 1950s, while coming to terms with the events of his life.",
     poster: "https://image.tmdb.org/t/p/w640/e3QX3tY0fBR1GuxdP0mwpN16cqI.jpg",
+    banner: "https://image.tmdb.org/t/p/original/s48V6GtDZJjrshq3uJbFUJP5eH.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   },
@@ -109,6 +117,7 @@ Repo.insert_all(Theater.Movie, [
     cast: "Andrew Garfield, Sam Worthington, Luke Bracey",
     overview: "WWII American Army Medic Desmond T. Doss, who served during the Battle of Okinawa, refuses to kill people and becomes the first Conscientious Objector in American history to win the Congressional Medal of Honor.",
     poster: "https://image.tmdb.org/t/p/w640/bndiUFfJxNd2fYx8XO610L9a07m.jpg",
+    banner: "https://image.tmdb.org/t/p/original/n8JrZ3jAqznGqQS1W2E7IhZkTZY.jpg",
     inserted_at: Ecto.DateTime.utc,
     updated_at: Ecto.DateTime.utc
   }

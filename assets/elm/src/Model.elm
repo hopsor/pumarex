@@ -46,6 +46,7 @@ type alias Movie =
     , cast : String
     , overview : String
     , poster : String
+    , banner : String
     }
 
 
@@ -89,6 +90,8 @@ type alias Screening =
     , screenedAt : String
     , movie : Movie
     , room : Room
+    , name : String
+    , formattedDate : String
     }
 
 

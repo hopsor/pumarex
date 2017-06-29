@@ -42,6 +42,7 @@ update msg model =
                         |> Dict.insert "director" movie.director
                         |> Dict.insert "cast" movie.cast
                         |> Dict.insert "poster" movie.poster
+                        |> Dict.insert "banner" movie.banner
                         |> Dict.insert "overview" movie.overview
                         |> Dict.insert "year" (toString movie.year)
                         |> Dict.insert "duration" (toString movie.duration)
