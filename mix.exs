@@ -29,7 +29,7 @@ defmodule Pumarex.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "1.3.0-rc.2", override: true},
+    [{:phoenix, "~> 1.3.0"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.2"},
      {:postgrex, ">= 0.0.0"},
@@ -38,7 +38,7 @@ defmodule Pumarex.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:guardian, "~> 0.14.4"},
-     {:comeonin, "~> 3.0"},
+     {:comeonin, "~> 4.0"},
      {:timex, "~> 3.1"}]
   end
 
