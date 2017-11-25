@@ -4,9 +4,33 @@ defmodule Pumarex.TheaterTest do
   alias Pumarex.Theater
   alias Pumarex.Theater.Movie
 
-  @create_attrs %{cast: "some cast", director: "some director", duration: 42, overview: "some overview", poster: "some poster", title: "some title", year: 42}
-  @update_attrs %{cast: "some updated cast", director: "some updated director", duration: 43, overview: "some updated overview", poster: "some updated poster", title: "some updated title", year: 43}
-  @invalid_attrs %{cast: nil, director: nil, duration: nil, overview: nil, poster: nil, title: nil, year: nil}
+  @create_attrs %{
+    cast: "some cast",
+    director: "some director",
+    duration: 42,
+    overview: "some overview",
+    poster: "some poster",
+    title: "some title",
+    year: 42
+  }
+  @update_attrs %{
+    cast: "some updated cast",
+    director: "some updated director",
+    duration: 43,
+    overview: "some updated overview",
+    poster: "some updated poster",
+    title: "some updated title",
+    year: 43
+  }
+  @invalid_attrs %{
+    cast: nil,
+    director: nil,
+    duration: nil,
+    overview: nil,
+    poster: nil,
+    title: nil,
+    year: nil
+  }
 
   def fixture(:movie, attrs \\ @create_attrs) do
     {:ok, movie} = Theater.create_movie(attrs)
@@ -25,7 +49,7 @@ defmodule Pumarex.TheaterTest do
 
   test "create_movie/1 with valid data creates a movie" do
     assert {:ok, %Movie{} = movie} = Theater.create_movie(@create_attrs)
-    
+
     assert movie.cast == "some cast"
     assert movie.director == "some director"
     assert movie.duration == 42
@@ -43,7 +67,7 @@ defmodule Pumarex.TheaterTest do
     movie = fixture(:movie)
     assert {:ok, movie} = Theater.update_movie(movie, @update_attrs)
     assert %Movie{} = movie
-    
+
     assert movie.cast == "some updated cast"
     assert movie.director == "some updated director"
     assert movie.duration == 43

@@ -11,20 +11,19 @@ defmodule Pumarex.Web.RoomView do
   end
 
   def render("room.json", %{room: room}) do
-    %{id: room.id,
-      name: room.name,
-      capacity: room.capacity}
+    %{id: room.id, name: room.name, capacity: room.capacity}
   end
 
   def render("room+seats.json", %{room: room}) do
-    %{id: room.id,
+    %{
+      id: room.id,
       name: room.name,
       seats: render_many(room.seats, SeatView, "seat.json"),
-      capacity: length(room.seats)}
+      capacity: length(room.seats)
+    }
   end
 
   def render("lite_room.json", %{room: room}) do
-    %{id: room.id,
-      name: room.name}
+    %{id: room.id, name: room.name}
   end
 end

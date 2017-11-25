@@ -3,11 +3,10 @@ defmodule Pumarex.Theater.Ticket do
   import Ecto.Changeset
   alias Pumarex.Theater.Ticket
 
-
   schema "theater_tickets" do
-    belongs_to :screening, Pumarex.Theater.Screening
-    belongs_to :seller, Pumarex.Theater.User
-    belongs_to :seat, Pumarex.Theater.Seat
+    belongs_to(:screening, Pumarex.Theater.Screening)
+    belongs_to(:seller, Pumarex.Theater.User)
+    belongs_to(:seat, Pumarex.Theater.Seat)
 
     timestamps()
   end

@@ -4,10 +4,10 @@ defmodule Pumarex.Theater.Seat do
   alias Pumarex.Theater.Seat
 
   schema "theater_seats" do
-    field :column, :integer
-    field :row, :integer
+    field(:column, :integer)
+    field(:row, :integer)
 
-    belongs_to :room, Pumarex.Theater.Room
+    belongs_to(:room, Pumarex.Theater.Room)
 
     timestamps()
   end

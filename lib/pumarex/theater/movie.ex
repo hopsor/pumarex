@@ -4,14 +4,14 @@ defmodule Pumarex.Theater.Movie do
   alias Pumarex.Theater.Movie
 
   schema "theater_movies" do
-    field :title, :string
-    field :year, :integer
-    field :duration, :integer
-    field :director, :string
-    field :cast, :string
-    field :overview, :string
-    field :poster, :string
-    field :banner, :string
+    field(:title, :string)
+    field(:year, :integer)
+    field(:duration, :integer)
+    field(:director, :string)
+    field(:cast, :string)
+    field(:overview, :string)
+    field(:poster, :string)
+    field(:banner, :string)
 
     timestamps()
   end

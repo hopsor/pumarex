@@ -6,16 +6,14 @@
 use Mix.Config
 
 # General application configuration
-config :pumarex,
-  ecto_repos: [Pumarex.Repo]
+config :pumarex, ecto_repos: [Pumarex.Repo]
 
 # Configures the endpoint
 config :pumarex, Pumarex.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "xBoTo/siGbkZnzxfew6rHvttDuUxlqvaUlLIRNFzkGeZNqnmCza3wteFs/vLlQgC",
   render_errors: [view: Pumarex.Web.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Pumarex.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Pumarex.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -24,16 +22,16 @@ config :logger, :console,
 
 # Configures Guardian
 config :guardian, Guardian,
-  allowed_algos: ["HS512"], # optional
-  verify_module: Guardian.JWT,  # optional
+  # optional
+  allowed_algos: ["HS512"],
+  # optional
+  verify_module: Guardian.JWT,
   issuer: "Pumarex",
-  ttl: { 30, :days },
+  ttl: {30, :days},
   serializer: Pumarex.Web.GuardianSerializer
 
-config :bcrypt_elixir,
-  :log_rounds, 4
-
+config :bcrypt_elixir, :log_rounds, 4
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

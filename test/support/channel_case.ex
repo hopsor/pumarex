@@ -25,13 +25,13 @@ defmodule Pumarex.Web.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Pumarex.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Pumarex.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end

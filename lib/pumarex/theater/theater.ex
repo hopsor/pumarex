@@ -103,7 +103,6 @@ defmodule Pumarex.Theater do
     Movie.changeset(movie, %{})
   end
 
-
   alias Pumarex.Theater.Room
 
   @doc """
@@ -116,10 +115,13 @@ defmodule Pumarex.Theater do
 
   """
   def list_rooms do
-    Repo.all(from r in Room,
-      left_join: s in assoc(r, :seats),
-      group_by: r.id,
-      select: %{id: r.id, name: r.name, capacity: count(s.id)}
+    Repo.all(
+      from(
+        r in Room,
+        left_join: s in assoc(r, :seats),
+        group_by: r.id,
+        select: %{id: r.id, name: r.name, capacity: count(s.id)}
+      )
     )
   end
 
@@ -349,11 +351,12 @@ defmodule Pumarex.Theater do
     |> Screening.changeset(attrs)
     |> Repo.insert()
     |> case do
-      {:ok, screening} ->
-        {:ok, Repo.preload(screening, [:room, :movie])}
-      {:error, changeset} ->
-        {:error, changeset}
-    end
+         {:ok, screening} ->
+           {:ok, Repo.preload(screening, [:room, :movie])}
+
+         {:error, changeset} ->
+           {:error, changeset}
+       end
   end
 
   @doc """
@@ -417,7 +420,7 @@ defmodule Pumarex.Theater do
   def list_tickets(screening_id \\ nil) do
     case screening_id do
       nil -> Repo.all(Ticket)
-      _ -> where(Ticket, screening_id: ^screening_id) |> Repo.all
+      _ -> where(Ticket, screening_id: ^screening_id) |> Repo.all()
     end
   end
 
@@ -456,20 +459,21 @@ defmodule Pumarex.Theater do
   end
 
   def create_tickets(tickets) do
-    Multi.new
+    Multi.new()
     |> insert_ticket_transaction(tickets)
-    |> Repo.transaction
+    |> Repo.transaction()
   end
+
   defp insert_ticket_transaction(multi, [ticket_attrs | tail]) do
     %{seat_id: seat_id, screening_id: screening_id} = ticket_attrs
 
-    transaction_id =
-      "ticket_" <> to_string(seat_id) <> "_" <> to_string(screening_id)
+    transaction_id = "ticket_" <> to_string(seat_id) <> "_" <> to_string(screening_id)
 
     multi
     |> Multi.insert(transaction_id, Ticket.changeset(%Ticket{}, ticket_attrs))
     |> insert_ticket_transaction(tail)
   end
+
   defp insert_ticket_transaction(multi, []), do: multi
 
   @doc """

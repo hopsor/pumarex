@@ -12,6 +12,7 @@ defmodule Pumarex.SeatLocking.Monitor do
     case GenServer.whereis(ref(screening_id)) do
       nil ->
         Supervisor.start_child(Pumarex.SeatLocking.Supervisor, [screening_id])
+
       _screening ->
         {:error, :screening_already_exists}
     end
@@ -22,19 +23,19 @@ defmodule Pumarex.SeatLocking.Monitor do
   end
 
   def locked_seats(screening_id) do
-    try_call screening_id, {:locked_seats}
+    try_call(screening_id, {:locked_seats})
   end
 
   def switch_lock(screening_id, seat) do
-    try_call screening_id, {:switch_lock, seat}
+    try_call(screening_id, {:switch_lock, seat})
   end
 
   def clear_locks_from_user(screening_id, user_id) do
-    try_call screening_id, {:clear_locks_from_user, user_id}
+    try_call(screening_id, {:clear_locks_from_user, user_id})
   end
 
   def unlock_seats(screening_id, seat_ids) do
-    try_call screening_id, {:unlock_seats, seat_ids}
+    try_call(screening_id, {:unlock_seats, seat_ids})
   end
 
   #####
@@ -48,25 +49,26 @@ defmodule Pumarex.SeatLocking.Monitor do
     %{seat_id: seat_id, user_id: user_id} = seat
 
     updated_seats =
-      Enum.find(seats, fn (s) -> s.seat_id == seat_id end)
+      Enum.find(seats, fn s -> s.seat_id == seat_id end)
       |> case do
-        nil -> seats ++ [seat]
-        %{user_id: uid} when uid == user_id -> seats -- [seat]
-        %{user_id: uid} when uid != user_id -> seats
-      end
+           nil -> seats ++ [seat]
+           %{user_id: uid} when uid == user_id -> seats -- [seat]
+           %{user_id: uid} when uid != user_id -> seats
+         end
 
     {:reply, updated_seats, updated_seats}
   end
 
   def handle_call({:clear_locks_from_user, user_id}, _from, seats) do
-    seats = Enum.reject(seats, fn (seat) -> seat.user_id == user_id end)
+    seats = Enum.reject(seats, fn seat -> seat.user_id == user_id end)
     {:reply, seats, seats}
   end
 
   def handle_call({:unlock_seats, seat_ids}, _from, seats) do
-    updated_seats = Enum.reject(seats, fn (seat) ->
-      Enum.member?(seat_ids, seat.seat_id) 
-    end)
+    updated_seats =
+      Enum.reject(seats, fn seat ->
+        Enum.member?(seat_ids, seat.seat_id)
+      end)
 
     {:reply, updated_seats, updated_seats}
   end
@@ -79,6 +81,7 @@ defmodule Pumarex.SeatLocking.Monitor do
     case GenServer.whereis(ref(screening_id)) do
       nil ->
         {:error, :invalid_screening}
+
       screening ->
         GenServer.call(screening, call_function)
     end

@@ -3,10 +3,10 @@ defmodule Pumarex.Web.UserSocket do
   use Guardian.Phoenix.Socket
 
   ## Channels
-  channel "screening:*", Pumarex.Web.ScreeningChannel
+  channel("screening:*", Pumarex.Web.ScreeningChannel)
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
+  transport(:websocket, Phoenix.Transports.WebSocket)
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can

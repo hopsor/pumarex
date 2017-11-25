@@ -5,10 +5,10 @@ defmodule Pumarex.Theater.Screening do
   alias Pumarex.Theater.Screening
 
   schema "theater_screenings" do
-    field :screened_at, :naive_datetime
-    belongs_to :movie, Pumarex.Theater.Movie
-    belongs_to :room, Pumarex.Theater.Room
-    has_many :tickets, Pumarex.Theater.Ticket
+    field(:screened_at, :naive_datetime)
+    belongs_to(:movie, Pumarex.Theater.Movie)
+    belongs_to(:room, Pumarex.Theater.Room)
+    has_many(:tickets, Pumarex.Theater.Ticket)
 
     timestamps()
   end

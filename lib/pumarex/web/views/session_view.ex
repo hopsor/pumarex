@@ -8,13 +8,15 @@ defmodule Pumarex.Web.SessionView do
   end
 
   def render("session.json", %{session: session}) do
-    %{id: session.user.id,
+    %{
+      id: session.user.id,
       first_name: session.user.first_name,
       last_name: session.user.last_name,
       email: session.user.email,
       jwt: session.jwt,
       exp: session.exp,
-      avatar_url: User.avatar_url(session.user)}
+      avatar_url: User.avatar_url(session.user)
+    }
   end
 
   def render("error.json", %{message: message}) do

@@ -16,7 +16,8 @@ defmodule Pumarex.Web.MovieView do
   end
 
   def render("movie.json", %{movie: movie}) do
-    %{id: movie.id,
+    %{
+      id: movie.id,
       title: movie.title,
       year: movie.year,
       duration: movie.duration,
@@ -24,6 +25,7 @@ defmodule Pumarex.Web.MovieView do
       cast: movie.cast,
       overview: movie.overview,
       poster: movie.poster,
-      banner: movie.banner}
+      banner: movie.banner
+    }
   end
 end

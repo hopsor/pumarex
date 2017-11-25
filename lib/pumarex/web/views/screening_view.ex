@@ -12,11 +12,13 @@ defmodule Pumarex.Web.ScreeningView do
   end
 
   def render("screening.json", %{screening: screening}) do
-    %{id: screening.id,
+    %{
+      id: screening.id,
       screened_at: screening.screened_at,
       room: render_one(screening.room, RoomView, "lite_room.json"),
       movie: render_one(screening.movie, MovieView, "movie.json"),
       name: Screening.to_s(screening),
-      formatted_date: Screening.formatted_date(screening)}
+      formatted_date: Screening.formatted_date(screening)
+    }
   end
 end

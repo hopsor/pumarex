@@ -4,9 +4,9 @@ defmodule Pumarex.Theater.Room do
   alias Pumarex.Theater.Room
 
   schema "theater_rooms" do
-    field :name, :string
+    field(:name, :string)
 
-    has_many :seats, Pumarex.Theater.Seat
+    has_many(:seats, Pumarex.Theater.Seat)
 
     timestamps()
   end

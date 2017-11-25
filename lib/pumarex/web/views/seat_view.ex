@@ -11,8 +11,6 @@ defmodule Pumarex.Web.SeatView do
   end
 
   def render("seat.json", %{seat: seat}) do
-    %{id: seat.id,
-      row: seat.row,
-      column: seat.column}
+    %{id: seat.id, row: seat.row, column: seat.column}
   end
 end

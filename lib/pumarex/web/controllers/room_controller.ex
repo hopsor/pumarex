@@ -4,8 +4,12 @@ defmodule Pumarex.Web.RoomController do
   alias Pumarex.Theater
   alias Pumarex.Theater.Room
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: Pumarex.Web.FallbackController
-  action_fallback Pumarex.Web.FallbackController
+  plug(
+    Guardian.Plug.EnsureAuthenticated,
+    handler: Pumarex.Web.FallbackController
+  )
+
+  action_fallback(Pumarex.Web.FallbackController)
 
   def index(conn, _params) do
     rooms = Theater.list_rooms()
@@ -36,6 +40,7 @@ defmodule Pumarex.Web.RoomController do
 
   def delete(conn, %{"id" => id}) do
     room = Theater.get_room!(id)
+
     with {:ok, %Room{}} <- Theater.delete_room(room) do
       send_resp(conn, :no_content, "")
     end

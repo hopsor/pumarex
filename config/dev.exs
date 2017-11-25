@@ -11,8 +11,14 @@ config :pumarex, Pumarex.Web.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../assets", __DIR__)]]
+  watchers: [
+    node: [
+      "node_modules/brunch/bin/brunch",
+      "watch",
+      "--stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
 # ## SSL Support
 #
@@ -61,5 +67,4 @@ config :pumarex, Pumarex.Repo,
 config :guardian, Guardian,
   secret_key: "Vnb3td31GpsOsvY9Vbdk3ziLUX2Q+1PBSrPBIQh3wGzIGlfvIN0z0Ftseh85Y3Mp"
 
-config :pumarex, :websocket_url,
-  "ws://localhost:4000/socket/websocket"
+config :pumarex, :websocket_url, "ws://localhost:4000/socket/websocket"

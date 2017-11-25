@@ -4,8 +4,8 @@ defmodule Pumarex.Web.MovieController do
   alias Pumarex.Theater
   alias Pumarex.Theater.Movie
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: Pumarex.Web.FallbackController
-  action_fallback Pumarex.Web.FallbackController
+  plug(Guardian.Plug.EnsureAuthenticated, handler: Pumarex.Web.FallbackController)
+  action_fallback(Pumarex.Web.FallbackController)
 
   def index(conn, _params) do
     movies = Theater.list_movies()
@@ -36,6 +36,7 @@ defmodule Pumarex.Web.MovieController do
 
   def delete(conn, %{"id" => id}) do
     movie = Theater.get_movie!(id)
+
     with {:ok, %Movie{}} <- Theater.delete_movie(movie) do
       send_resp(conn, :no_content, "")
     end
