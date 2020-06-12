@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :pumarex, Pumarex.Web.Endpoint,
-  http: [port: 4000],
+  http: [port: System.get_env("PORT", "4000")],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -66,4 +66,4 @@ config :pumarex, Pumarex.Repo,
 config :guardian, Guardian,
   secret_key: "Vnb3td31GpsOsvY9Vbdk3ziLUX2Q+1PBSrPBIQh3wGzIGlfvIN0z0Ftseh85Y3Mp"
 
-config :pumarex, :websocket_url, "ws://localhost:4000/socket/websocket"
+config :pumarex, :websocket_url, "ws://localhost:#{System.get_env("PORT", "4000")}/socket/websocket"
