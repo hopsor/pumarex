@@ -1,3 +1,4 @@
+import '../css/application.scss';
 import Elm from './main';
 
 const elmDiv = document.getElementById('app')
@@ -11,7 +12,7 @@ if (elmDiv) {
     loggedIn: loggedIn,
     websocketUrl: window.websocketUrl
   };
-  
+
   const app = Elm.Main.embed(elmDiv, elmFlags);
 
   app.ports.storeSessionData.subscribe((sessionData) => {
